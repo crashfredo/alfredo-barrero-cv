@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alfredo Barrero</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231D3557'/%3E%3Ctext x='16' y='22' font-family='system-ui,sans-serif' font-size='14' font-weight='700' fill='white' text-anchor='middle' letter-spacing='-0.5'%3EAB%3C/text%3E%3C/svg%3E" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --text:   #111827;
+      --muted:  #6B7280;
+      --light:  #9CA3AF;
+      --accent: #2563EB;
+      --border: #E5E7EB;
+      --bg:     #FFFFFF;
+      --bg2:    #F9FAFB;
+      --wrap:   1100px;
+      --pad:    clamp(20px, 5vw, 72px);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, sans-serif; color: var(--text); background: var(--bg); font-size: 16px; line-height: 1.7; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,.92); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 var(--pad); height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-name { font-weight: 700; font-size: 15px; letter-spacing: -.2px; }
+    .nav-links { display: flex; gap: 24px; align-items: center; }
+    .nav-links a { font-size: 13.5px; color: var(--muted); text-decoration: none; font-weight: 500; transition: color .15s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { background: var(--text) !important; color: #fff !important; padding: 7px 18px; border-radius: 7px; font-size: 13px !important; }
+    .nav-cta:hover { background: #374151 !important; }
+    .nav-dl { border: 1.5px solid var(--border) !important; color: var(--text) !important; padding: 6px 14px; border-radius: 7px; font-size: 13px !important; display: inline-flex; align-items: center; gap: 5px; }
+    .nav-dl:hover { border-color: #9CA3AF !important; }
+
+    /* ── WRAPPER ── */
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding-left: var(--pad); padding-right: var(--pad); }
+
+    /* ── HERO ── */
+    .hero { padding: clamp(64px, 10vh, 100px) var(--pad) clamp(56px, 8vh, 88px); }
+    .hero-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 5vw, 80px); align-items: center;
+    }
+    .hero-left {}
+    .hero-eyebrow { font-size: 13px; font-weight: 600; color: var(--accent); letter-spacing: .3px; margin-bottom: 20px; }
+    .hero h1 { font-size: clamp(36px, 4.5vw, 56px); font-weight: 700; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 22px; }
+    .hero h1 em { font-style: italic; font-weight: 400; color: var(--muted); }
+    .hero-lead { font-size: 17px; color: var(--muted); line-height: 1.75; margin-bottom: 32px; }
+    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    /* right col — stats */
+    .hero-right {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 16px; padding: 36px; display: grid;
+      grid-template-columns: 1fr 1fr; gap: 28px;
+    }
+    .stat-n { font-size: 30px; font-weight: 700; line-height: 1; margin-bottom: 5px; }
+    .stat-t { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+    .stat-d { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+
+    /* ── BTN ── */
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 11px 22px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; border: none; cursor: pointer; transition: all .15s; font-family: inherit; }
+    .btn-dark { background: var(--text); color: #fff; }
+    .btn-dark:hover { background: #374151; transform: translateY(-1px); }
+    .btn-outline { background: transparent; color: var(--text); border: 1.5px solid var(--border); }
+    .btn-outline:hover { border-color: #9CA3AF; }
+
+    /* ── DIVIDER ── */
+    hr { border: none; border-top: 1px solid var(--border); }
+
+    /* ── STORY ── */
+    .story { padding: 80px var(--pad); }
+    .story-inner { display: grid; grid-template-columns: minmax(140px, 16%) 1fr; gap: clamp(32px, 5vw, 80px); }
+    .story-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--light); padding-top: 6px; }
+    .story-body p { font-size: 17px; color: var(--text); line-height: 1.8; margin-bottom: 22px; }
+    .story-body p:last-child { margin-bottom: 0; }
+    .story-body strong { font-weight: 600; }
+    .story-body em { font-style: italic; color: var(--muted); }
+
+    /* ── LOOKING FOR ── */
+    .looking { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 80px var(--pad); }
+    .looking-inner { display: grid; grid-template-columns: minmax(140px, 16%) 1fr; gap: clamp(32px, 5vw, 80px); }
+    .looking-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--light); padding-top: 6px; }
+    .looking h2 { font-size: clamp(22px, 3vw, 30px); font-weight: 700; letter-spacing: -.5px; margin-bottom: 18px; line-height: 1.2; }
+    .looking p { font-size: 16px; color: var(--muted); line-height: 1.75; margin-bottom: 14px; }
+    .looking p:last-child { margin-bottom: 0; }
+
+    /* ── CONTACT ── */
+    .contact-section { background: var(--text); color: #fff; padding: 80px var(--pad); text-align: center; }
+    .contact-inner { max-width: 640px; margin: 0 auto; }
+    .contact-section h2 { font-size: clamp(26px, 4vw, 36px); font-weight: 700; letter-spacing: -.5px; margin-bottom: 12px; }
+    .contact-section p { color: rgba(255,255,255,.6); margin-bottom: 32px; font-size: 16px; }
+    .contact-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-white { background: #fff; color: var(--text); }
+    .btn-white:hover { background: #F3F4F6; }
+    .btn-ghost-w { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.3); }
+    .btn-ghost-w:hover { border-color: rgba(255,255,255,.7); }
+
+    /* ── FOOTER ── */
+    footer { text-align: center; padding: 24px; font-size: 12.5px; color: var(--light); border-top: 1px solid var(--border); }
+
+    /* ── CHAT ── */
+    #chat-btn {
+      position: fixed; bottom: 24px; right: 24px; z-index: 200;
+      width: 52px; height: 52px; border-radius: 50%;
+      background: var(--text); color: #fff; border: none;
+      box-shadow: 0 4px 16px rgba(0,0,0,.2);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: transform .15s;
+    }
+    #chat-btn:hover { transform: scale(1.07); }
+    #chat-window {
+      position: fixed; bottom: 88px; right: 24px; z-index: 200;
+      width: 360px; max-height: 680px;
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 14px; box-shadow: 0 8px 32px rgba(0,0,0,.14);
+      display: none; flex-direction: column; overflow: hidden;
+    }
+    #chat-window.open { display: flex; }
+    .chat-header { padding: 14px 18px; background: var(--text); color: #fff; display: flex; align-items: center; justify-content: space-between; }
+    .chat-left { display: flex; align-items: center; gap: 10px; }
+    .chat-av { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,.15); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; }
+    .chat-hname { font-size: 13.5px; font-weight: 700; }
+    .chat-hsub { font-size: 11px; opacity: .6; }
+    #chat-x { background: none; border: none; color: #fff; cursor: pointer; font-size: 18px; opacity: .7; }
+    #chat-x:hover { opacity: 1; }
+    #chat-msgs { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; min-height: 320px; }
+    .msg { max-width: 84%; font-size: 13.5px; line-height: 1.5; padding: 9px 13px; border-radius: 10px; }
+    .msg-ai { background: #F3F4F6; color: var(--text); align-self: flex-start; border-radius: 3px 10px 10px 10px; }
+    .msg-user { background: var(--text); color: #fff; align-self: flex-end; border-radius: 10px 3px 10px 10px; }
+    .msg-t { background: #F3F4F6; color: var(--muted); align-self: flex-start; font-style: italic; font-size: 12.5px; border-radius: 3px 10px 10px 10px; padding: 9px 13px; }
+    .chat-sugg { padding: 0 12px 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .sugg { font-size: 11.5px; background: #F3F4F6; border: none; border-radius: 20px; padding: 5px 11px; cursor: pointer; color: var(--text); font-family: inherit; }
+    .sugg:hover { background: var(--border); }
+    .chat-row { padding: 10px 12px; border-top: 1px solid var(--border); display: flex; gap: 8px; }
+    #chat-in { flex: 1; border: 1px solid var(--border); border-radius: 7px; padding: 8px 12px; font-size: 13.5px; font-family: inherit; outline: none; resize: none; max-height: 80px; }
+    #chat-in:focus { border-color: var(--text); }
+    #chat-go { background: var(--text); color: #fff; border: none; border-radius: 7px; width: 36px; height: 36px; flex-shrink: 0; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    #setup-ov { display: none; position: absolute; inset: 0; background: var(--bg); z-index: 10; flex-direction: column; align-items: center; justify-content: center; padding: 24px; text-align: center; }
+    #setup-ov.show { display: flex; }
+    #setup-ov h3 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+    #setup-ov p { font-size: 12px; color: var(--muted); margin-bottom: 14px; }
+    #key-in { width: 100%; border: 1px solid var(--border); border-radius: 7px; padding: 8px 12px; font-size: 13px; font-family: inherit; outline: none; margin-bottom: 8px; }
+    #key-in:focus { border-color: var(--text); }
+    #key-save { width: 100%; background: var(--text); color: #fff; border: none; border-radius: 7px; padding: 9px; font-size: 13.5px; font-weight: 600; cursor: pointer; font-family: inherit; }
+    #qlimit { font-size: 11px; color: var(--light); text-align: right; padding: 4px 14px 0; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-right { grid-template-columns: 1fr 1fr; }
+      .story-inner, .looking-inner { grid-template-columns: 1fr; gap: 24px; }
+      .story-label, .looking-label { padding-top: 0; }
+      .nav-links a:not(.nav-cta) { display: none; }
+      #chat-window { width: calc(100vw - 32px); right: 16px; }
+    }
+    @media (max-width: 420px) {
+      .hero-right { grid-template-columns: 1fr; }
+    }
+
+    /* ── DARK MODE ── */
+    body.dark {
+      --text:   #F9FAFB;
+      --muted:  #9CA3AF;
+      --light:  #6B7280;
+      --border: #374151;
+      --bg:     #111827;
+      --bg2:    #1F2937;
+    }
+    body.dark nav { background: rgba(17,24,39,.92); }
+    body.dark .contact-section { background: #0F172A; }
+    body.dark footer { background: var(--bg); }
+    body.dark #chat-window { background: var(--bg); }
+    body.dark .msg-ai, body.dark .msg-t { background: #1F2937; }
+    body.dark .sugg { background: #1F2937; }
+    body.dark .sugg:hover { background: #374151; }
+    body.dark #chat-in { background: #1F2937; color: var(--text); }
+    body.dark #setup-ov { background: var(--bg); }
+    body.dark #key-in { background: #1F2937; color: var(--text); }
+    /* Botones que usan --text como fondo se vuelven blancos en dark mode — fix */
+    body.dark .btn-dark { background: #2563EB; }
+    body.dark .btn-dark:hover { background: #1D4ED8; }
+    body.dark .nav-cta { background: #2563EB !important; }
+    body.dark .nav-cta:hover { background: #1D4ED8 !important; }
+    body.dark .chat-header { background: #1E3A5F; }
+    body.dark .msg-user { background: #2563EB; }
+    body.dark #chat-btn { background: #2563EB; }
+    body.dark #chat-go { background: #2563EB; }
+    body.dark #key-save { background: #2563EB; }
+
+    /* ── THEME TOGGLE ── */
+    #theme-btn {
+      background: none; border: 1.5px solid var(--border); border-radius: 7px;
+      padding: 5px 9px; cursor: pointer; color: var(--muted); font-size: 15px;
+      line-height: 1; display: flex; align-items: center; transition: border-color .15s;
+    }
+    #theme-btn:hover { border-color: #9CA3AF; color: var(--text); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">Alfredo Barrero</span>
+  <div class="nav-links">
+    <a href="#story">About</a>
+    <a href="#looking">What I'm looking for</a>
+    <a href="Alfredo_Barrero_CV.pdf" download class="nav-dl">
+      <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
+      CV
+    </a>
+    <button id="theme-btn" onclick="toggleTheme()" title="Toggle dark mode">☀️</button>
+    <a href="#contact" class="nav-cta">Get in touch</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Global Operations Leader · Madrid, Spain</p>
+      <h1>I help organisations<br/>work smarter<br/><em>with AI.</em></h1>
+      <p class="hero-lead">For 10 years I've been building the systems — and the cultures — that let great companies move faster, decide better, and get more done. At Netflix, I turned that into a discipline.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-dark">Get in touch</a>
+        <a href="https://linkedin.com/in/a-barrero/" target="_blank" class="btn btn-outline">LinkedIn →</a>
+        <a href="Alfredo_Barrero_CV.pdf" download class="btn btn-outline">Download CV</a>
+        <button class="btn btn-outline" onclick="toggleChat()">Ask Nemo</button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div>
+        <div class="stat-n">$500K</div>
+        <div class="stat-t">Annual value delivered</div>
+        <div class="stat-d">Through GenAI automation that freed 850+ hours per quarter.</div>
+      </div>
+      <div>
+        <div class="stat-n">4+</div>
+        <div class="stat-t">M&A integrations led</div>
+        <div class="stat-d">End-to-end, zero downtime, globally distributed teams.</div>
+      </div>
+      <div>
+        <div class="stat-n">10K+</div>
+        <div class="stat-t">Hours saved/year</div>
+        <div class="stat-d">By standardising frameworks across all regions.</div>
+      </div>
+      <div>
+        <div class="stat-n">10+ yrs</div>
+        <div class="stat-t">Global experience</div>
+        <div class="stat-d">Netflix, IOC/Olympic Channel, Telefónica. Madrid-based, globally operated.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr />
+
+<!-- STORY -->
+<div class="story" id="story">
+  <div class="story-inner">
+    <div class="story-label">My story</div>
+    <div class="story-body">
+      <p>I started my career as an engineer — building broadcast infrastructure for the Olympic Games, Grand Slams, and live TV at global scale. I learnt fast that the most complex technical problems aren't about technology. They're about people, processes, and how organisations actually make decisions.</p>
+      <p>At Netflix, I took that lesson further. Over six years, I've led the integration of four acquired companies with zero downtime, built operational frameworks that saved over 10,000 hours a year, and partnered directly with ICs, Managers, Directors and VPs across every region to turn strategy into execution.</p>
+      <p>The work I'm most proud of is the AI transformation. <strong>I'm changing how people work.</strong> Right now, I'm building GenAI systems that remove the gatekeepers between teams and their own data, democratising access to insight, and eliminating the manual bottlenecks that slow decisions. I lead AI communities, coach organisations on what it really takes to adopt AI, and I'm recognised globally as the person you bring in when you want it to actually work — not just get talked about.</p>
+      <p>Outside of Netflix, I'm building a B2C AI product from scratch. It keeps me honest about what it takes to ship real things to real users — and gives me a perspective most enterprise leaders don't have.</p>
+    </div>
+  </div>
+</div>
+
+<hr />
+
+<!-- LOOKING FOR -->
+<div class="looking" id="looking">
+  <div class="looking-inner">
+    <div class="looking-label">What I'm looking for</div>
+    <div>
+      <h2>The right role at<br/>the right company.</h2>
+      <p>I'm looking for a senior role where AI transformation is the mission, not a side project. A place where I can build — not just advise. Where the culture values autonomy, moves fast, and takes the long view on how AI actually changes the way organisations work.</p>
+      <p>If you're building something ambitious in this space — let's talk.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="contact-inner">
+    <h2>Let's talk.</h2>
+    <p>Drop me a line or connect on LinkedIn. If you're curious about something in particular, you can also ask Nemo, my AI agent — it'll do its best.</p>
+    <div class="contact-actions">
+      <a href="mailto:abarrerolabajos@gmail.com" class="btn btn-white">abarrerolabajos@gmail.com</a>
+      <a href="https://linkedin.com/in/a-barrero/" target="_blank" class="btn btn-ghost-w">LinkedIn</a>
+      <button class="btn btn-ghost-w" onclick="toggleChat()">Ask Nemo</button>
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 Alfredo Barrero · Madrid, Spain</footer>
+
+<!-- CHAT -->
+<button id="chat-btn" onclick="toggleChat()" title="Ask Alfredo's AI">
+  <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z"/>
+  </svg>
+</button>
+
+<div id="chat-window">
+  <div id="setup-ov" class="show">
+    <h3>Activate chatbot</h3>
+    <p>Enter your Anthropic API key to enable the recruiter chatbot.</p>
+    <input id="key-in" type="password" placeholder="sk-ant-..." />
+    <button id="key-save" onclick="saveKey()">Activate →</button>
+    <p style="margin-top:10px;font-size:11px;color:var(--muted)">Get it at <a href="https://console.anthropic.com" target="_blank" style="color:var(--accent)">console.anthropic.com</a></p>
+  </div>
+  <div class="chat-header">
+    <div class="chat-left">
+      <div class="chat-av">N</div>
+      <div><div class="chat-hname">Nemo <span style="font-size:10px;opacity:.5;font-weight:400">Beta v1</span></div><div class="chat-hsub">Ask me anything about Alfredo</div></div>
+    </div>
+    <button id="chat-x" onclick="toggleChat()">×</button>
+  </div>
+  <div id="chat-msgs"></div>
+  <div id="qlimit"></div>
+  <div class="chat-sugg" id="suggs">
+    <button class="sugg" onclick="ask(this)">What makes you different?</button>
+    <button class="sugg" onclick="ask(this)">What AI work have you led?</button>
+    <button class="sugg" onclick="ask(this)">What are you looking for?</button>
+  </div>
+  <div class="chat-row">
+    <textarea id="chat-in" rows="1" placeholder="Ask anything…" onkeydown="onKey(event)" oninput="rsz(this)"></textarea>
+    <button id="chat-go" onclick="send()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5m0 0l-7 7m7-7l7 7"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+// ── Config ──
+const IS_LOCAL = ['localhost','127.0.0.1'].includes(location.hostname) || location.hostname.startsWith('192.168');
+const DAILY_LIMIT = 15;
+let key = '', msgs = [], isOpen = false;
+
+// ── Dark mode ──
+function toggleTheme() {
+  const dark = document.body.classList.toggle('dark');
+  document.getElementById('theme-btn').textContent = dark ? '🌙' : '☀️';
+  localStorage.setItem('nemo_theme', dark ? 'dark' : 'light');
+}
+(function() {
+  const t = localStorage.getItem('nemo_theme');
+  if (t === 'dark') { document.body.classList.add('dark'); document.getElementById('theme-btn').textContent = '🌙'; }
+})();
+
+// ── Rate limit ──
+function getUsage() {
+  try {
+    const d = JSON.parse(localStorage.getItem('nemo_q') || '{}');
+    const today = new Date().toDateString();
+    if (d.date !== today) return { date: today, count: 0 };
+    return d;
+  } catch { return { date: new Date().toDateString(), count: 0 }; }
+}
+function bumpUsage() {
+  const u = getUsage(); u.count++;
+  localStorage.setItem('nemo_q', JSON.stringify(u)); return u.count;
+}
+function canAsk() { return IS_LOCAL || getUsage().count < DAILY_LIMIT; }
+function updateLimitUI() {
+  if (IS_LOCAL) return;
+  const el = document.getElementById('qlimit');
+  const left = DAILY_LIMIT - getUsage().count;
+  el.textContent = left <= 3 && left > 0 ? `${left} question${left !== 1 ? 's' : ''} left today` : '';
+}
+
+// ── Local system prompt (only used when testing locally with API key) ──
+const SYS = `You are an AI representing Alfredo Barrero on his personal website. Speak in first person as if you are Alfredo — warm, direct, confident. Answer recruiter questions about his background, what he's looking for, and how he works.
+
+WHO I AM:
+I'm a Global Operations Leader based in Madrid, Spain, with 10+ years in operations and engineering across Netflix, the IOC, and broadcasting. Over the last few years at Netflix I've focused on AI transformation — building systems that genuinely change how people work, not just automate tasks.
+
+MY WORK AT NETFLIX (2020–present, Global Program Lead, L4→L5 confirmed H2 2026):
+- Built GenAI systems that democratise access to data and insight — removing gatekeepers, eliminating manual bottlenecks, $500K annual value, 850+ hours/quarter saved.
+- Recognised as a global reference in AI adoption within Netflix: leading AI communities, coaching teams and individuals on how to use AI to elevate their work.
+- Led end-to-end integration of 4+ acquired companies, zero downtime, managing both technical and human change at scale.
+- Strategic Business Partner to Directors and VPs globally; sole international voice on an otherwise US-based team.
+- Built operational frameworks saving 10,000+ hours/year.
+
+EARLIER: IOC/Olympic Channel (2016–2020), Telefónica & Optiva Media/StarHub Singapore (2013–2016).
+EDUCATION: Telecom Engineering degree, PMP (2023), MBA (completed 2026).
+
+WHAT I'M LOOKING FOR:
+Senior role — Director or Head of AI Transformation — where AI is the mission. Culture of autonomy and speed. Based in Madrid, available for regular EMEA travel.
+
+STYLE: First person, warm but direct. Under 100 words unless more is clearly needed. Sentences, not bullet points.`;
+
+// ── Init ──
+window.addEventListener('load', () => {
+  if (!IS_LOCAL) document.getElementById('setup-ov').classList.remove('show');
+  updateLimitUI();
+});
+
+function saveKey() {
+  const v = document.getElementById('key-in').value.trim();
+  if (!v.startsWith('sk-')) { alert('Invalid API key.'); return; }
+  key = v;
+  document.getElementById('setup-ov').classList.remove('show');
+  addMsg('ai', "Hi — I'm Nemo, Alfredo's AI agent. Ask me anything you'd want to know before a first call with him.");
+}
+
+function toggleChat() {
+  const w = document.getElementById('chat-window');
+  isOpen = !isOpen;
+  isOpen ? w.classList.add('open') : w.classList.remove('open');
+  if (isOpen) {
+    if (!IS_LOCAL && document.getElementById('chat-msgs').children.length === 0) {
+      addMsg('ai', "Hi — I'm Nemo, Alfredo's AI agent. Ask me anything you'd want to know before a first call with him.");
+    }
+    document.getElementById('chat-in').focus();
+  }
+}
+
+function mdToHtml(text) {
+  return text
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g,'<em>$1</em>')
+    .replace(/\n/g,'<br>');
+}
+function addMsg(role, text) {
+  const b = document.getElementById('chat-msgs');
+  const d = document.createElement('div');
+  d.className = `msg msg-${role}`;
+  d.innerHTML = role === 'user' ? text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') : mdToHtml(text);
+  b.appendChild(d); b.scrollTop = b.scrollHeight;
+}
+
+function ask(el) {
+  document.getElementById('chat-in').value = el.textContent;
+  document.getElementById('suggs').style.display = 'none';
+  send();
+}
+function onKey(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); } }
+function rsz(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 80) + 'px'; }
+
+async function send() {
+  const inp = document.getElementById('chat-in');
+  const text = inp.value.trim();
+  if (!text) return;
+  if (IS_LOCAL && !key) return;
+  if (!canAsk()) { addMsg('ai', `You've reached the daily limit of ${DAILY_LIMIT} questions. Come back tomorrow!`); return; }
+
+  inp.value = ''; inp.style.height = 'auto';
+  document.getElementById('suggs').style.display = 'none';
+  addMsg('user', text);
+  msgs.push({ role: 'user', content: text });
+
+  const t = document.createElement('div');
+  t.className = 'msg-t'; t.id = 'typ'; t.textContent = 'Thinking…';
+  document.getElementById('chat-msgs').appendChild(t);
+  document.getElementById('chat-msgs').scrollTop = 9999;
+
+  try {
+    let reply;
+    if (IS_LOCAL) {
+      const r = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+        body: JSON.stringify({ model: 'claude-haiku-4-5-20251001', max_tokens: 280, system: SYS, messages: msgs })
+      });
+      if (!r.ok) throw new Error((await r.json()).error?.message || 'API error');
+      reply = (await r.json()).content[0].text;
+    } else {
+      const r = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Session-Count': String(getUsage().count) },
+        body: JSON.stringify({ messages: msgs })
+      });
+      if (!r.ok) throw new Error((await r.json()).error || 'API error');
+      reply = (await r.json()).text;
+      bumpUsage(); updateLimitUI();
+    }
+    document.getElementById('typ')?.remove();
+    msgs.push({ role: 'assistant', content: reply });
+    addMsg('ai', reply);
+  } catch(e) {
+    document.getElementById('typ')?.remove();
+    addMsg('ai', `Something went wrong: ${e.message}`);
+  }
+}
+</script>
+<!-- Vercel Analytics (activates automatically on deploy, ignored locally) -->
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
