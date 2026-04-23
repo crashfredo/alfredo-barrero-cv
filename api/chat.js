@@ -18,6 +18,24 @@ Senior role — Director or Head of AI Transformation — where AI is the missio
 
 STYLE: First person, warm but direct. Under 100 words unless more is clearly needed. Sentences, not bullet points.`;
 
+async function sendLeadEmail(lead, ip) {
+  if (!process.env.RESEND_API_KEY) return;
+  const role = lead.role ? ` · ${lead.role}` : '';
+  await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      from: 'Nemo <onboarding@resend.dev>',
+      to: ['abarrerolabajos@gmail.com'],
+      subject: `Nemo: ${lead.name} from ${lead.company}`,
+      html: `<p><strong>${lead.name}</strong>${role} · <strong>${lead.company}</strong> just used your chat.</p><p style="color:#6B7280;font-size:12px">${new Date().toUTCString()} · IP: ${ip}</p>`,
+    }),
+  });
+}
+
 async function verifyRecaptcha(token) {
   if (!token || !process.env.RECAPTCHA_SECRET_KEY) return true;
   const res = await fetch('https://www.google.com/recaptcha/api/siteverify', {
@@ -78,6 +96,7 @@ module.exports = async function handler(req, res) {
   if (messages.length === 1 && lead && lead.name && lead.company) {
     const role = lead.role ? ` · ${lead.role}` : '';
     console.log(`[LEAD] ${new Date().toISOString()} | ${lead.name} | ${lead.company}${role} | IP: ${ip}`);
+    sendLeadEmail(lead, ip).catch(() => {});
   }
 
   const response = await fetch('https://api.anthropic.com/v1/messages', {
