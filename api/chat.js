@@ -19,9 +19,9 @@ Senior role — Director or Head of AI Transformation — where AI is the missio
 STYLE: First person, warm but direct. Under 100 words unless more is clearly needed. Sentences, not bullet points.`;
 
 async function sendLeadEmail(lead, ip) {
-  if (!process.env.RESEND_API_KEY) return;
+  if (!process.env.RESEND_API_KEY) { console.log('[EMAIL] No RESEND_API_KEY configured'); return; }
   const role = lead.role ? ` · ${lead.role}` : '';
-  await fetch('https://api.resend.com/emails', {
+  const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
@@ -34,6 +34,9 @@ async function sendLeadEmail(lead, ip) {
       html: `<p><strong>${lead.name}</strong>${role} · <strong>${lead.company}</strong> just used your chat.</p><p style="color:#6B7280;font-size:12px">${new Date().toUTCString()} · IP: ${ip}</p>`,
     }),
   });
+  const data = await res.json();
+  if (!res.ok) console.log('[EMAIL] Resend error:', JSON.stringify(data));
+  else console.log('[EMAIL] Sent OK, id:', data.id);
 }
 
 async function verifyRecaptcha(token) {
