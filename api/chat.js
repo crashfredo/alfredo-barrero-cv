@@ -18,7 +18,32 @@ Senior role — Director or Head of AI Transformation — where AI is the missio
 
 STYLE: First person, warm but direct. Under 100 words unless more is clearly needed. Sentences, not bullet points.`;
 
-const DAILY_LIMIT = 15;
+async function verifyRecaptcha(token) {
+  if (!token || !process.env.RECAPTCHA_SECRET_KEY) return true;
+  const res = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}`,
+  });
+  const data = await res.json();
+  return data.success && data.score >= 0.5;
+}
+
+// In-memory IP rate limit (best-effort: resets if the function instance restarts,
+// but catches the vast majority of abuse within a single warm instance)
+const IP_LIMIT = 15;
+const IP_WINDOW_MS = 24 * 60 * 60 * 1000;
+const ipLog = new Map();
+
+function checkIp(ip) {
+  const now = Date.now();
+  const entry = ipLog.get(ip) || { count: 0, resetAt: now + IP_WINDOW_MS };
+  if (now > entry.resetAt) { entry.count = 0; entry.resetAt = now + IP_WINDOW_MS; }
+  if (entry.count >= IP_LIMIT) return false;
+  entry.count++;
+  ipLog.set(ip, entry);
+  return true;
+}
 
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -28,16 +53,31 @@ module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const sessionCount = parseInt(req.headers['x-session-count'] || '0', 10);
-  if (sessionCount >= DAILY_LIMIT) return res.status(429).json({ error: 'Daily limit reached' });
+  const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'unknown';
 
-  const { messages } = req.body;
+  if (!checkIp(ip)) {
+    return res.status(429).json({ error: 'Rate limit exceeded. Please try again tomorrow.' });
+  }
+
+  const { messages, lead, recaptchaToken } = req.body;
+
+  const human = await verifyRecaptcha(recaptchaToken);
+  if (!human) {
+    return res.status(403).json({ error: 'reCAPTCHA verification failed. Please reload and try again.' });
+  }
+
   if (!messages || !Array.isArray(messages) || messages.length === 0) {
     return res.status(400).json({ error: 'Invalid messages' });
   }
 
   if (!process.env.ANTHROPIC_API_KEY) {
     return res.status(500).json({ error: 'API key not configured' });
+  }
+
+  // Log lead on first message so Alfredo can see who used the chat in Vercel logs
+  if (messages.length === 1 && lead && lead.name && lead.company) {
+    const role = lead.role ? ` · ${lead.role}` : '';
+    console.log(`[LEAD] ${new Date().toISOString()} | ${lead.name} | ${lead.company}${role} | IP: ${ip}`);
   }
 
   const response = await fetch('https://api.anthropic.com/v1/messages', {

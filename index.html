@@ -151,7 +151,15 @@
     #key-in { width: 100%; border: 1px solid var(--border); border-radius: 7px; padding: 8px 12px; font-size: 13px; font-family: inherit; outline: none; margin-bottom: 8px; }
     #key-in:focus { border-color: var(--text); }
     #key-save { width: 100%; background: var(--text); color: #fff; border: none; border-radius: 7px; padding: 9px; font-size: 13.5px; font-weight: 600; cursor: pointer; font-family: inherit; }
+    #lead-name, #lead-company, #lead-role { width: 100%; border: 1px solid var(--border); border-radius: 7px; padding: 8px 12px; font-size: 13px; font-family: inherit; outline: none; margin-bottom: 8px; background: var(--bg); color: var(--text); transition: border-color .15s; }
+    #lead-name:focus, #lead-company:focus, #lead-role:focus { border-color: var(--text); }
+    #lead-save { width: 100%; background: var(--text); color: #fff; border: none; border-radius: 7px; padding: 9px; font-size: 13.5px; font-weight: 600; cursor: pointer; font-family: inherit; margin-top: 2px; }
+    #lead-save:hover { opacity: .88; }
+    .lead-err { border-color: #EF4444 !important; }
     #qlimit { font-size: 11px; color: var(--light); text-align: right; padding: 4px 14px 0; }
+    #rcap-note { font-size: 10px; color: var(--light); text-align: center; padding: 0 14px 6px; display: none; }
+    #rcap-note a { color: inherit; }
+    .grecaptcha-badge { visibility: hidden; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
@@ -195,6 +203,8 @@
     body.dark #chat-btn { background: #2563EB; }
     body.dark #chat-go { background: #2563EB; }
     body.dark #key-save { background: #2563EB; }
+    body.dark #lead-name, body.dark #lead-company, body.dark #lead-role { background: #1F2937; color: var(--text); }
+    body.dark #lead-save { background: #2563EB; }
 
     /* ── THEME TOGGLE ── */
     #theme-btn {
@@ -313,11 +323,23 @@
 
 <div id="chat-window">
   <div id="setup-ov" class="show">
-    <h3>Activate chatbot</h3>
-    <p>Enter your Anthropic API key to enable the recruiter chatbot.</p>
-    <input id="key-in" type="password" placeholder="sk-ant-..." />
-    <button id="key-save" onclick="saveKey()">Activate →</button>
-    <p style="margin-top:10px;font-size:11px;color:var(--muted)">Get it at <a href="https://console.anthropic.com" target="_blank" style="color:var(--accent)">console.anthropic.com</a></p>
+    <!-- LOCAL: API key -->
+    <div id="mode-key">
+      <h3>Activate chatbot</h3>
+      <p>Enter your Anthropic API key to enable the recruiter chatbot.</p>
+      <input id="key-in" type="password" placeholder="sk-ant-..." />
+      <button id="key-save" onclick="saveKey()">Activate →</button>
+      <p style="margin-top:10px;font-size:11px;color:var(--muted)">Get it at <a href="https://console.anthropic.com" target="_blank" style="color:var(--accent)">console.anthropic.com</a></p>
+    </div>
+    <!-- PRODUCTION: Lead capture -->
+    <div id="mode-lead" style="display:none;width:100%">
+      <h3>Before we start</h3>
+      <p>Tell Nemo who you are so Alfredo can follow up with the right context.</p>
+      <input id="lead-name" type="text" placeholder="Your name *" autocomplete="name" />
+      <input id="lead-company" type="text" placeholder="Company *" autocomplete="organization" />
+      <input id="lead-role" type="text" placeholder="Your role (optional)" autocomplete="organization-title" />
+      <button id="lead-save" onclick="saveLead()">Start chatting →</button>
+    </div>
   </div>
   <div class="chat-header">
     <div class="chat-left">
@@ -328,6 +350,7 @@
   </div>
   <div id="chat-msgs"></div>
   <div id="qlimit"></div>
+  <div id="rcap-note">Protected by <a href="https://policies.google.com/privacy" target="_blank">reCAPTCHA</a></div>
   <div class="chat-sugg" id="suggs">
     <button class="sugg" onclick="ask(this)">What makes you different?</button>
     <button class="sugg" onclick="ask(this)">What AI work have you led?</button>
@@ -344,8 +367,20 @@
 <script>
 // ── Config ──
 const IS_LOCAL = ['localhost','127.0.0.1'].includes(location.hostname) || location.hostname.startsWith('192.168');
-const DAILY_LIMIT = 15;
-let key = '', msgs = [], isOpen = false;
+const SESSION_LIMIT = 5;
+const THROTTLE_MS = 4000;
+const MIN_MSG_LEN = 3;
+const JUNK_THRESHOLD = 3;
+const RECAPTCHA_SITE_KEY = '6Lfj58YsAAAAALiVPMfll1Lfq83IDmNkXTBNmqLD';
+let key = '', msgs = [], isOpen = false, lead = null;
+let sessionCount = 0, lastSendTime = 0, junkCount = 0, sessionBlocked = false;
+
+if (!IS_LOCAL) {
+  const s = document.createElement('script');
+  s.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`;
+  s.onload = () => { document.getElementById('rcap-note').style.display = ''; };
+  document.head.appendChild(s);
+}
 
 // ── Dark mode ──
 function toggleTheme() {
@@ -358,25 +393,19 @@ function toggleTheme() {
   if (t === 'dark') { document.body.classList.add('dark'); document.getElementById('theme-btn').textContent = '🌙'; }
 })();
 
-// ── Rate limit ──
-function getUsage() {
-  try {
-    const d = JSON.parse(localStorage.getItem('nemo_q') || '{}');
-    const today = new Date().toDateString();
-    if (d.date !== today) return { date: today, count: 0 };
-    return d;
-  } catch { return { date: new Date().toDateString(), count: 0 }; }
-}
-function bumpUsage() {
-  const u = getUsage(); u.count++;
-  localStorage.setItem('nemo_q', JSON.stringify(u)); return u.count;
-}
-function canAsk() { return IS_LOCAL || getUsage().count < DAILY_LIMIT; }
+// ── Rate limit (session-based, in-memory) ──
+function canAsk() { return IS_LOCAL || (!sessionBlocked && sessionCount < SESSION_LIMIT); }
 function updateLimitUI() {
   if (IS_LOCAL) return;
   const el = document.getElementById('qlimit');
-  const left = DAILY_LIMIT - getUsage().count;
-  el.textContent = left <= 3 && left > 0 ? `${left} question${left !== 1 ? 's' : ''} left today` : '';
+  const left = SESSION_LIMIT - sessionCount;
+  el.textContent = left <= 3 && left > 0 ? `${left} question${left !== 1 ? 's' : ''} left` : '';
+}
+function getRecaptchaToken() {
+  return new Promise(resolve => {
+    if (IS_LOCAL || !window.grecaptcha) { resolve(null); return; }
+    grecaptcha.ready(() => grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'chat' }).then(resolve));
+  });
 }
 
 // ── Local system prompt (only used when testing locally with API key) ──
@@ -402,7 +431,12 @@ STYLE: First person, warm but direct. Under 100 words unless more is clearly nee
 
 // ── Init ──
 window.addEventListener('load', () => {
-  if (!IS_LOCAL) document.getElementById('setup-ov').classList.remove('show');
+  if (IS_LOCAL) {
+    document.getElementById('mode-lead').style.display = 'none';
+  } else {
+    document.getElementById('mode-key').style.display = 'none';
+    document.getElementById('mode-lead').style.display = '';
+  }
   updateLimitUI();
 });
 
@@ -414,13 +448,27 @@ function saveKey() {
   addMsg('ai', "Hi — I'm Nemo, Alfredo's AI agent. Ask me anything you'd want to know before a first call with him.");
 }
 
+function saveLead() {
+  const nameEl = document.getElementById('lead-name');
+  const companyEl = document.getElementById('lead-company');
+  const name = nameEl.value.trim();
+  const company = companyEl.value.trim();
+  const role = document.getElementById('lead-role').value.trim();
+  nameEl.classList.toggle('lead-err', !name);
+  companyEl.classList.toggle('lead-err', !company);
+  if (!name || !company) return;
+  lead = { name, company, role };
+  document.getElementById('setup-ov').classList.remove('show');
+  addMsg('ai', `Hi ${name} — I'm Nemo, Alfredo's AI agent. Ask me anything you'd want to know before a first call with him.`);
+}
+
 function toggleChat() {
   const w = document.getElementById('chat-window');
   isOpen = !isOpen;
   isOpen ? w.classList.add('open') : w.classList.remove('open');
   if (isOpen) {
-    if (!IS_LOCAL && document.getElementById('chat-msgs').children.length === 0) {
-      addMsg('ai', "Hi — I'm Nemo, Alfredo's AI agent. Ask me anything you'd want to know before a first call with him.");
+    if (!IS_LOCAL && lead && document.getElementById('chat-msgs').children.length === 0) {
+      addMsg('ai', `Hi ${lead.name} — I'm Nemo, Alfredo's AI agent. Ask me anything you'd want to know before a first call with him.`);
     }
     document.getElementById('chat-in').focus();
   }
@@ -454,7 +502,32 @@ async function send() {
   const text = inp.value.trim();
   if (!text) return;
   if (IS_LOCAL && !key) return;
-  if (!canAsk()) { addMsg('ai', `You've reached the daily limit of ${DAILY_LIMIT} questions. Come back tomorrow!`); return; }
+
+  if (!IS_LOCAL) {
+    if (sessionBlocked) {
+      addMsg('ai', "This session has been blocked. Please reload the page to continue.");
+      return;
+    }
+    if (text.length < MIN_MSG_LEN) {
+      if (++junkCount >= JUNK_THRESHOLD) {
+        sessionBlocked = true;
+        addMsg('ai', "This session has been blocked due to unusual activity.");
+      }
+      inp.value = ''; inp.style.height = 'auto';
+      return;
+    }
+    const now = Date.now();
+    if (now - lastSendTime < THROTTLE_MS) {
+      addMsg('ai', "Please wait a few seconds before sending another message.");
+      inp.value = ''; inp.style.height = 'auto';
+      return;
+    }
+    if (!canAsk()) {
+      addMsg('ai', "You've reached the limit of 5 questions for this session.");
+      return;
+    }
+    lastSendTime = now;
+  }
 
   inp.value = ''; inp.style.height = 'auto';
   document.getElementById('suggs').style.display = 'none';
@@ -477,14 +550,15 @@ async function send() {
       if (!r.ok) throw new Error((await r.json()).error?.message || 'API error');
       reply = (await r.json()).content[0].text;
     } else {
+      const recaptchaToken = await getRecaptchaToken();
       const r = await fetch('/api/chat', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'X-Session-Count': String(getUsage().count) },
-        body: JSON.stringify({ messages: msgs })
+        headers: { 'Content-Type': 'application/json', 'X-Session-Count': String(sessionCount) },
+        body: JSON.stringify({ messages: msgs, lead, recaptchaToken })
       });
       if (!r.ok) throw new Error((await r.json()).error || 'API error');
       reply = (await r.json()).text;
-      bumpUsage(); updateLimitUI();
+      sessionCount++; updateLimitUI();
     }
     document.getElementById('typ')?.remove();
     msgs.push({ role: 'assistant', content: reply });
