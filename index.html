@@ -906,9 +906,13 @@
       }
 
       #chat-window {
-        width: calc(100vw - 32px);
-        right: 16px;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        width: 100%; max-height: 100dvh;
+        border-radius: 0;
+        z-index: 300;
       }
+      #chat-btn { bottom: 16px; right: 16px; }
     }
 
     @media (max-width: 420px) {
