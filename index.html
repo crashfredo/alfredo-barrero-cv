@@ -871,6 +871,39 @@
       visibility: hidden;
     }
 
+    /* ── HAMBURGER ── */
+    #hamburger {
+      display: none;
+      flex-direction: column; justify-content: center; align-items: center;
+      gap: 5px; width: 36px; height: 36px;
+      background: none; border: none; cursor: pointer; padding: 4px;
+    }
+    #hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--text); border-radius: 2px;
+      transition: all .2s;
+    }
+    #hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    #hamburger.open span:nth-child(2) { opacity: 0; }
+    #hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    #mobile-menu {
+      display: none;
+      position: fixed; top: 56px; left: 0; right: 0;
+      background: rgba(255,255,255,.97); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 20px 20px; z-index: 99;
+      flex-direction: column; gap: 4px;
+    }
+    #mobile-menu a {
+      font-size: 16px; font-weight: 500; color: var(--text);
+      text-decoration: none; padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    #mobile-menu a:last-child { border-bottom: none; }
+    #mobile-menu a:hover { color: var(--accent); }
+    body.dark #mobile-menu { background: rgba(17,24,39,.97); }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       .services-grid {
@@ -903,12 +936,16 @@
         padding-top: 0;
       }
 
-      .nav-links a:not(.nav-cta) {
+      .nav-links a:not(.nav-cta):not(.nav-dl) {
         display: none;
       }
       .nav-links { gap: 10px; }
       .nav-cta { padding: 7px 12px; font-size: 12px !important; }
+      .nav-dl { display: none !important; }
       nav { padding: 0 16px; }
+      #hamburger { display: flex; }
+      #mobile-menu { display: block; }
+      #mobile-menu.closed { display: none; }
 
       #chat-window {
         position: fixed;
@@ -1089,8 +1126,19 @@
       </a>
       <button id="theme-btn" onclick="toggleTheme()" title="Toggle dark mode">☀️</button>
       <a href="#contact" class="nav-cta">Get in touch</a>
+      <button id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
+
+  <div id="mobile-menu" class="closed">
+    <a href="#services" onclick="closeMenu()">Work with me</a>
+    <a href="#projects" onclick="closeMenu()">Projects</a>
+    <a href="#story" onclick="closeMenu()">About</a>
+    <a href="#looking" onclick="closeMenu()">Also open to</a>
+    <a href="#contact" onclick="closeMenu()">Get in touch</a>
+  </div>
 
   <!-- HERO -->
   <div class="hero">
@@ -1356,7 +1404,30 @@
       document.head.appendChild(s);
     }
 
-    // ── Dark mode ──
+    // ── Mobile menu ──
+function toggleMenu() {
+  const menu = document.getElementById('mobile-menu');
+  const btn = document.getElementById('hamburger');
+  const isOpen = !menu.classList.contains('closed');
+  if (isOpen) {
+    menu.classList.add('closed');
+    menu.style.display = 'none';
+    btn.classList.remove('open');
+  } else {
+    menu.classList.remove('closed');
+    menu.style.display = 'flex';
+    btn.classList.add('open');
+  }
+}
+function closeMenu() {
+  const menu = document.getElementById('mobile-menu');
+  const btn = document.getElementById('hamburger');
+  menu.classList.add('closed');
+  menu.style.display = 'none';
+  btn.classList.remove('open');
+}
+
+// ── Dark mode ──
     function toggleTheme() {
       const dark = document.body.classList.toggle('dark');
       document.getElementById('theme-btn').textContent = dark ? '🌙' : '☀️';
