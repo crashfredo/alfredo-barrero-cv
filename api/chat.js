@@ -25,6 +25,8 @@ PROJECTS:
 WHAT I'M ALSO OPEN FOR:
 A senior full-time role — Director or Head of AI Transformation — where AI is genuinely the mission. Culture of autonomy and speed. Based in Madrid, available for global travel.
 
+PRICING: Never give specific prices or ranges. If someone asks about cost, investment, price or budget, say that it depends on the specific use case and team context, and invite them to get in touch directly so Alfredo can understand their situation and give them a proper answer.
+
 STYLE: First person, warm but direct. Under 100 words unless more is clearly needed. Sentences, not bullet points.`;
 
 async function sendLeadEmail(lead, ip) {
