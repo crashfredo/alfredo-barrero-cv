@@ -955,8 +955,22 @@
         width: 100%; height: 100dvh; max-height: 100dvh;
         border-radius: 0; border: none;
         z-index: 300; overflow: hidden;
+        display: none;
+        flex-direction: column;
       }
-      #chat-msgs { min-height: 0; }
+      #chat-window.open { display: flex; }
+      .chat-header { flex-shrink: 0; }
+      #chat-msgs { flex: 1; min-height: 0; overflow-y: auto; }
+      .chat-sugg { flex-shrink: 0; }
+      .chat-row { flex-shrink: 0; }
+      #setup-ov {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        z-index: 30;
+        justify-content: center;
+        padding: 32px 24px;
+        overflow-y: auto;
+      }
       #chat-btn { bottom: 16px; right: 16px; }
     }
 
@@ -1497,14 +1511,28 @@ STYLE: First person, warm but direct. Under 100 words unless more is clearly nee
         document.getElementById('mode-lead').style.display = '';
       }
       updateLimitUI();
+      setSetupMode(true); // setup overlay is shown by default
     });
+
+    function setSetupMode(active) {
+      const inp = document.getElementById('chat-in');
+      if (active) {
+        inp.disabled = true;
+        inp.setAttribute('tabindex', '-1');
+      } else {
+        inp.disabled = false;
+        inp.removeAttribute('tabindex');
+      }
+    }
 
     function saveKey() {
       const v = document.getElementById('key-in').value.trim();
       if (!v.startsWith('sk-')) { alert('Invalid API key.'); return; }
       key = v;
       document.getElementById('setup-ov').classList.remove('show');
+      setSetupMode(false);
       addMsg('ai', "Hi — I'm Nemo, Alfredo's AI agent. Ask me anything about his work, services, or projects.");
+      document.getElementById('chat-in').focus();
     }
 
     function saveLead() {
@@ -1518,7 +1546,9 @@ STYLE: First person, warm but direct. Under 100 words unless more is clearly nee
       if (!name || !company) return;
       lead = { name, company, role };
       document.getElementById('setup-ov').classList.remove('show');
+      setSetupMode(false);
       addMsg('ai', `Hi ${name} — I'm Nemo, Alfredo's AI agent. Ask me anything about his work, services, or projects.`);
+      document.getElementById('chat-in').focus();
     }
 
     function toggleChat() {
@@ -1526,10 +1556,12 @@ STYLE: First person, warm but direct. Under 100 words unless more is clearly nee
       isOpen = !isOpen;
       isOpen ? w.classList.add('open') : w.classList.remove('open');
       if (isOpen) {
+        const setupShowing = document.getElementById('setup-ov').classList.contains('show');
+        setSetupMode(setupShowing);
         if (!IS_LOCAL && lead && document.getElementById('chat-msgs').children.length === 0) {
           addMsg('ai', `Hi ${lead.name} — I'm Nemo, Alfredo's AI agent. Ask me anything about his work, services, or projects.`);
         }
-        document.getElementById('chat-in').focus();
+        if (!setupShowing) document.getElementById('chat-in').focus();
       }
     }
 
