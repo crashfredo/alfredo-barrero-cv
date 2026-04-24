@@ -1,422 +1,1388 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Alfredo Barrero</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231D3557'/%3E%3Ctext x='16' y='22' font-family='system-ui,sans-serif' font-size='14' font-weight='700' fill='white' text-anchor='middle' letter-spacing='-0.5'%3EAB%3C/text%3E%3C/svg%3E" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231D3557'/%3E%3Ctext x='16' y='22' font-family='system-ui,sans-serif' font-size='14' font-weight='700' fill='white' text-anchor='middle' letter-spacing='-0.5'%3EAB%3C/text%3E%3C/svg%3E" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+    rel="stylesheet" />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --text:   #111827;
-      --muted:  #6B7280;
-      --light:  #9CA3AF;
-      --accent: #2563EB;
-      --border: #E5E7EB;
-      --bg:     #FFFFFF;
-      --bg2:    #F9FAFB;
-      --wrap:   1100px;
-      --pad:    clamp(20px, 5vw, 72px);
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', system-ui, sans-serif; color: var(--text); background: var(--bg); font-size: 16px; line-height: 1.7; }
+    :root {
+      --text: #111827;
+      --muted: #6B7280;
+      --light: #9CA3AF;
+      --accent: #2563EB;
+      --border: #E5E7EB;
+      --bg: #FFFFFF;
+      --bg2: #F9FAFB;
+      --wrap: 1100px;
+      --pad: clamp(20px, 5vw, 72px);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      font-size: 16px;
+      line-height: 1.7;
+    }
 
     /* ── NAV ── */
     nav {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(255,255,255,.92); backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, .92);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
-      padding: 0 var(--pad); height: 56px;
-      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 var(--pad);
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
-    .nav-name { font-weight: 700; font-size: 15px; letter-spacing: -.2px; }
-    .nav-links { display: flex; gap: 24px; align-items: center; }
-    .nav-links a { font-size: 13.5px; color: var(--muted); text-decoration: none; font-weight: 500; transition: color .15s; }
-    .nav-links a:hover { color: var(--text); }
-    .nav-cta { background: var(--text) !important; color: #fff !important; padding: 7px 18px; border-radius: 7px; font-size: 13px !important; }
-    .nav-cta:hover { background: #374151 !important; }
-    .nav-dl { border: 1.5px solid var(--border) !important; color: var(--text) !important; padding: 6px 14px; border-radius: 7px; font-size: 13px !important; display: inline-flex; align-items: center; gap: 5px; }
-    .nav-dl:hover { border-color: #9CA3AF !important; }
+
+    .nav-name {
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: -.2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 13.5px;
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color .15s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-cta {
+      background: var(--text) !important;
+      color: #fff !important;
+      padding: 7px 18px;
+      border-radius: 7px;
+      font-size: 13px !important;
+    }
+
+    .nav-cta:hover {
+      background: #374151 !important;
+    }
+
+    .nav-dl {
+      border: 1.5px solid var(--border) !important;
+      color: var(--text) !important;
+      padding: 6px 14px;
+      border-radius: 7px;
+      font-size: 13px !important;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .nav-dl:hover {
+      border-color: #9CA3AF !important;
+    }
 
     /* ── WRAPPER ── */
-    .wrap { max-width: var(--wrap); margin: 0 auto; padding-left: var(--pad); padding-right: var(--pad); }
+    .wrap {
+      max-width: var(--wrap);
+      margin: 0 auto;
+      padding-left: var(--pad);
+      padding-right: var(--pad);
+    }
 
     /* ── HERO ── */
-    .hero { padding: clamp(64px, 10vh, 100px) var(--pad) clamp(56px, 8vh, 88px); }
-    .hero-inner {
-      display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 5vw, 80px); align-items: center;
+    .hero {
+      padding: clamp(64px, 10vh, 100px) var(--pad) clamp(56px, 8vh, 88px);
     }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(40px, 5vw, 80px);
+      align-items: center;
+    }
+
     .hero-left {}
-    .hero-eyebrow { font-size: 13px; font-weight: 600; color: var(--accent); letter-spacing: .3px; margin-bottom: 20px; }
-    .hero h1 { font-size: clamp(36px, 4.5vw, 56px); font-weight: 700; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 22px; }
-    .hero h1 em { font-style: italic; font-weight: 400; color: var(--muted); }
-    .hero-lead { font-size: 17px; color: var(--muted); line-height: 1.75; margin-bottom: 32px; }
-    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    .hero-eyebrow {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: .3px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 4.5vw, 56px);
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--muted);
+    }
+
+    .hero-lead {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 32px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
 
     /* right col — stats */
     .hero-right {
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 16px; padding: 36px; display: grid;
-      grid-template-columns: 1fr 1fr; gap: 28px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
     }
-    .stat-n { font-size: 30px; font-weight: 700; line-height: 1; margin-bottom: 5px; }
-    .stat-t { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
-    .stat-d { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+
+    .stat-n {
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+
+    .stat-t {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .stat-d {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
 
     /* ── BTN ── */
-    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 11px 22px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; border: none; cursor: pointer; transition: all .15s; font-family: inherit; }
-    .btn-dark { background: var(--text); color: #fff; }
-    .btn-dark:hover { background: #374151; transform: translateY(-1px); }
-    .btn-outline { background: transparent; color: var(--text); border: 1.5px solid var(--border); }
-    .btn-outline:hover { border-color: #9CA3AF; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 11px 22px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all .15s;
+      font-family: inherit;
+    }
+
+    .btn-dark {
+      background: var(--text);
+      color: #fff;
+    }
+
+    .btn-dark:hover {
+      background: #374151;
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1.5px solid var(--border);
+    }
+
+    .btn-outline:hover {
+      border-color: #9CA3AF;
+    }
+
+    .btn-accent {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-accent:hover {
+      background: #1D4ED8;
+      transform: translateY(-1px);
+    }
 
     /* ── DIVIDER ── */
-    hr { border: none; border-top: 1px solid var(--border); }
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── SERVICES ── */
+    .services {
+      padding: 80px var(--pad);
+    }
+
+    .section-header {
+      margin-bottom: 48px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--light);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 700;
+      letter-spacing: -.5px;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .section-sub {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 560px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .service-card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 32px;
+      background: var(--bg);
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    .service-card:hover {
+      border-color: #9CA3AF;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .06);
+    }
+
+    .service-icon {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 20px;
+      color: var(--accent);
+    }
+
+    .service-title {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -.2px;
+    }
+
+    .service-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .service-tag {
+      display: inline-block;
+      font-size: 11.5px;
+      font-weight: 600;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 11px;
+      color: var(--muted);
+    }
+
+    /* ── PROJECTS ── */
+    .projects {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 80px var(--pad);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .project-card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 32px;
+      background: var(--bg);
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    .project-card:hover {
+      border-color: #9CA3AF;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .06);
+    }
+
+    .project-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .3px;
+      text-transform: uppercase;
+      background: #EFF6FF;
+      color: var(--accent);
+      border-radius: 20px;
+      padding: 4px 11px;
+      margin-bottom: 16px;
+    }
+
+    .project-badge.green {
+      background: #F0FDF4;
+      color: #16A34A;
+    }
+
+    .project-title {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: -.3px;
+      margin-bottom: 10px;
+    }
+
+    .project-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .project-stack {
+      margin-top: 20px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .stack-tag {
+      font-size: 11.5px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 3px 9px;
+      color: var(--muted);
+      font-weight: 500;
+    }
 
     /* ── STORY ── */
-    .story { padding: 80px var(--pad); }
-    .story-inner { display: grid; grid-template-columns: minmax(140px, 16%) 1fr; gap: clamp(32px, 5vw, 80px); }
-    .story-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--light); padding-top: 6px; }
-    .story-body p { font-size: 17px; color: var(--text); line-height: 1.8; margin-bottom: 22px; }
-    .story-body p:last-child { margin-bottom: 0; }
-    .story-body strong { font-weight: 600; }
-    .story-body em { font-style: italic; color: var(--muted); }
+    .story {
+      padding: 80px var(--pad);
+    }
+
+    .story-inner {
+      display: grid;
+      grid-template-columns: minmax(140px, 16%) 1fr;
+      gap: clamp(32px, 5vw, 80px);
+    }
+
+    .story-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--light);
+      padding-top: 6px;
+    }
+
+    .story-body p {
+      font-size: 17px;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.8;
+      margin-bottom: 22px;
+    }
+
+    .story-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .story-body strong {
+      font-weight: 600;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    .story-body em {
+      font-style: italic;
+      color: var(--muted);
+      font-family: 'Inter', system-ui, sans-serif;
+    }
 
     /* ── LOOKING FOR ── */
-    .looking { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 80px var(--pad); }
-    .looking-inner { display: grid; grid-template-columns: minmax(140px, 16%) 1fr; gap: clamp(32px, 5vw, 80px); }
-    .looking-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--light); padding-top: 6px; }
-    .looking h2 { font-size: clamp(22px, 3vw, 30px); font-weight: 700; letter-spacing: -.5px; margin-bottom: 18px; line-height: 1.2; }
-    .looking p { font-size: 16px; color: var(--muted); line-height: 1.75; margin-bottom: 14px; }
-    .looking p:last-child { margin-bottom: 0; }
+    .looking {
+      padding: 80px var(--pad);
+      border-top: 1px solid var(--border);
+    }
+
+    .looking-inner {
+      display: grid;
+      grid-template-columns: minmax(140px, 16%) 1fr;
+      gap: clamp(32px, 5vw, 80px);
+    }
+
+    .looking-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--light);
+      padding-top: 6px;
+    }
+
+    .looking h2 {
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 700;
+      letter-spacing: -.5px;
+      margin-bottom: 18px;
+      line-height: 1.2;
+    }
+
+    .looking p {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 14px;
+    }
+
+    .looking p:last-child {
+      margin-bottom: 0;
+    }
 
     /* ── CONTACT ── */
-    .contact-section { background: var(--text); color: #fff; padding: 80px var(--pad); text-align: center; }
-    .contact-inner { max-width: 640px; margin: 0 auto; }
-    .contact-section h2 { font-size: clamp(26px, 4vw, 36px); font-weight: 700; letter-spacing: -.5px; margin-bottom: 12px; }
-    .contact-section p { color: rgba(255,255,255,.6); margin-bottom: 32px; font-size: 16px; }
-    .contact-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .btn-white { background: #fff; color: var(--text); }
-    .btn-white:hover { background: #F3F4F6; }
-    .btn-ghost-w { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.3); }
-    .btn-ghost-w:hover { border-color: rgba(255,255,255,.7); }
+    .contact-section {
+      background: var(--text);
+      color: #fff;
+      padding: 80px var(--pad);
+      text-align: center;
+    }
+
+    .contact-inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .contact-section h2 {
+      font-size: clamp(26px, 4vw, 36px);
+      font-weight: 700;
+      letter-spacing: -.5px;
+      margin-bottom: 12px;
+    }
+
+    .contact-section p {
+      color: rgba(255, 255, 255, .6);
+      margin-bottom: 32px;
+      font-size: 16px;
+    }
+
+    .contact-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-white {
+      background: #fff;
+      color: var(--text);
+    }
+
+    .btn-white:hover {
+      background: #F3F4F6;
+    }
+
+    .btn-ghost-w {
+      background: transparent;
+      color: #fff;
+      border: 1.5px solid rgba(255, 255, 255, .3);
+    }
+
+    .btn-ghost-w:hover {
+      border-color: rgba(255, 255, 255, .7);
+    }
 
     /* ── FOOTER ── */
-    footer { text-align: center; padding: 24px; font-size: 12.5px; color: var(--light); border-top: 1px solid var(--border); }
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 12.5px;
+      color: var(--light);
+      border-top: 1px solid var(--border);
+    }
 
     /* ── CHAT ── */
     #chat-btn {
-      position: fixed; bottom: 24px; right: 24px; z-index: 200;
-      width: 52px; height: 52px; border-radius: 50%;
-      background: var(--text); color: #fff; border: none;
-      box-shadow: 0 4px 16px rgba(0,0,0,.2);
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 200;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--text);
+      color: #fff;
+      border: none;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, .2);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       transition: transform .15s;
     }
-    #chat-btn:hover { transform: scale(1.07); }
-    #chat-window {
-      position: fixed; bottom: 88px; right: 24px; z-index: 200;
-      width: 360px; max-height: 680px;
-      background: var(--bg); border: 1px solid var(--border);
-      border-radius: 14px; box-shadow: 0 8px 32px rgba(0,0,0,.14);
-      display: none; flex-direction: column; overflow: hidden;
+
+    #chat-btn:hover {
+      transform: scale(1.07);
     }
-    #chat-window.open { display: flex; }
-    .chat-header { padding: 14px 18px; background: var(--text); color: #fff; display: flex; align-items: center; justify-content: space-between; }
-    .chat-left { display: flex; align-items: center; gap: 10px; }
-    .chat-av { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,.15); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; }
-    .chat-hname { font-size: 13.5px; font-weight: 700; }
-    .chat-hsub { font-size: 11px; opacity: .6; }
-    #chat-x { background: none; border: none; color: #fff; cursor: pointer; font-size: 18px; opacity: .7; }
-    #chat-x:hover { opacity: 1; }
-    #chat-msgs { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; min-height: 320px; }
-    .msg { max-width: 84%; font-size: 13.5px; line-height: 1.5; padding: 9px 13px; border-radius: 10px; }
-    .msg-ai { background: #F3F4F6; color: var(--text); align-self: flex-start; border-radius: 3px 10px 10px 10px; }
-    .msg-user { background: var(--text); color: #fff; align-self: flex-end; border-radius: 10px 3px 10px 10px; }
-    .msg-t { background: #F3F4F6; color: var(--muted); align-self: flex-start; font-style: italic; font-size: 12.5px; border-radius: 3px 10px 10px 10px; padding: 9px 13px; }
-    .chat-sugg { padding: 0 12px 10px; display: flex; flex-wrap: wrap; gap: 6px; }
-    .sugg { font-size: 11.5px; background: #F3F4F6; border: none; border-radius: 20px; padding: 5px 11px; cursor: pointer; color: var(--text); font-family: inherit; }
-    .sugg:hover { background: var(--border); }
-    .chat-row { padding: 10px 12px; border-top: 1px solid var(--border); display: flex; gap: 8px; }
-    #chat-in { flex: 1; border: 1px solid var(--border); border-radius: 7px; padding: 8px 12px; font-size: 13.5px; font-family: inherit; outline: none; resize: none; max-height: 80px; }
-    #chat-in:focus { border-color: var(--text); }
-    #chat-go { background: var(--text); color: #fff; border: none; border-radius: 7px; width: 36px; height: 36px; flex-shrink: 0; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-    #setup-ov { display: none; position: absolute; inset: 0; background: var(--bg); z-index: 10; flex-direction: column; align-items: center; justify-content: center; padding: 24px; text-align: center; }
-    #setup-ov.show { display: flex; }
-    #setup-ov h3 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
-    #setup-ov p { font-size: 12px; color: var(--muted); margin-bottom: 14px; }
-    #key-in { width: 100%; border: 1px solid var(--border); border-radius: 7px; padding: 8px 12px; font-size: 13px; font-family: inherit; outline: none; margin-bottom: 8px; }
-    #key-in:focus { border-color: var(--text); }
-    #key-save { width: 100%; background: var(--text); color: #fff; border: none; border-radius: 7px; padding: 9px; font-size: 13.5px; font-weight: 600; cursor: pointer; font-family: inherit; }
-    #lead-name, #lead-company, #lead-role { width: 100%; border: 1px solid var(--border); border-radius: 7px; padding: 8px 12px; font-size: 13px; font-family: inherit; outline: none; margin-bottom: 8px; background: var(--bg); color: var(--text); transition: border-color .15s; }
-    #lead-name:focus, #lead-company:focus, #lead-role:focus { border-color: var(--text); }
-    #lead-save { width: 100%; background: var(--text); color: #fff; border: none; border-radius: 7px; padding: 9px; font-size: 13.5px; font-weight: 600; cursor: pointer; font-family: inherit; margin-top: 2px; }
-    #lead-save:hover { opacity: .88; }
-    .lead-err { border-color: #EF4444 !important; }
-    #qlimit { font-size: 11px; color: var(--light); text-align: right; padding: 4px 14px 0; }
-    #rcap-note { font-size: 10px; color: var(--light); text-align: center; padding: 0 14px 6px; display: none; }
-    #rcap-note a { color: inherit; }
-    .grecaptcha-badge { visibility: hidden; }
+
+    #chat-window {
+      position: fixed;
+      bottom: 88px;
+      right: 24px;
+      z-index: 200;
+      width: 360px;
+      max-height: 680px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, .14);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    #chat-window.open {
+      display: flex;
+    }
+
+    .chat-header {
+      padding: 14px 18px;
+      background: var(--text);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .chat-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chat-av {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .chat-hname {
+      font-size: 13.5px;
+      font-weight: 700;
+    }
+
+    .chat-hsub {
+      font-size: 11px;
+      opacity: .6;
+    }
+
+    #chat-x {
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      font-size: 18px;
+      opacity: .7;
+    }
+
+    #chat-x:hover {
+      opacity: 1;
+    }
+
+    #chat-msgs {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 320px;
+    }
+
+    .msg {
+      max-width: 84%;
+      font-size: 13.5px;
+      line-height: 1.5;
+      padding: 9px 13px;
+      border-radius: 10px;
+    }
+
+    .msg-ai {
+      background: #F3F4F6;
+      color: var(--text);
+      align-self: flex-start;
+      border-radius: 3px 10px 10px 10px;
+    }
+
+    .msg-user {
+      background: var(--text);
+      color: #fff;
+      align-self: flex-end;
+      border-radius: 10px 3px 10px 10px;
+    }
+
+    .msg-t {
+      background: #F3F4F6;
+      color: var(--muted);
+      align-self: flex-start;
+      font-style: italic;
+      font-size: 12.5px;
+      border-radius: 3px 10px 10px 10px;
+      padding: 9px 13px;
+    }
+
+    .chat-sugg {
+      padding: 0 12px 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .sugg {
+      font-size: 11.5px;
+      background: #F3F4F6;
+      border: none;
+      border-radius: 20px;
+      padding: 5px 11px;
+      cursor: pointer;
+      color: var(--text);
+      font-family: inherit;
+    }
+
+    .sugg:hover {
+      background: var(--border);
+    }
+
+    .chat-row {
+      padding: 10px 12px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 8px;
+    }
+
+    #chat-in {
+      flex: 1;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 8px 12px;
+      font-size: 13.5px;
+      font-family: inherit;
+      outline: none;
+      resize: none;
+      max-height: 80px;
+    }
+
+    #chat-in:focus {
+      border-color: var(--text);
+    }
+
+    #chat-go {
+      background: var(--text);
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #setup-ov {
+      display: none;
+      position: absolute;
+      inset: 0;
+      background: var(--bg);
+      z-index: 10;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+    }
+
+    #setup-ov.show {
+      display: flex;
+    }
+
+    #setup-ov h3 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    #setup-ov p {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    #key-in {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 8px 12px;
+      font-size: 13px;
+      font-family: inherit;
+      outline: none;
+      margin-bottom: 8px;
+    }
+
+    #key-in:focus {
+      border-color: var(--text);
+    }
+
+    #key-save {
+      width: 100%;
+      background: var(--text);
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 9px;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    #lead-name,
+    #lead-company,
+    #lead-role {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 8px 12px;
+      font-size: 13px;
+      font-family: inherit;
+      outline: none;
+      margin-bottom: 8px;
+      background: var(--bg);
+      color: var(--text);
+      transition: border-color .15s;
+    }
+
+    #lead-name:focus,
+    #lead-company:focus,
+    #lead-role:focus {
+      border-color: var(--text);
+    }
+
+    #lead-save {
+      width: 100%;
+      background: var(--text);
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 9px;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      margin-top: 2px;
+    }
+
+    #lead-save:hover {
+      opacity: .88;
+    }
+
+    .lead-err {
+      border-color: #EF4444 !important;
+    }
+
+    #qlimit {
+      font-size: 11px;
+      color: var(--light);
+      text-align: right;
+      padding: 4px 14px 0;
+    }
+
+    #rcap-note {
+      font-size: 10px;
+      color: var(--light);
+      text-align: center;
+      padding: 0 14px 6px;
+      display: none;
+    }
+
+    #rcap-note a {
+      color: inherit;
+    }
+
+    .grecaptcha-badge {
+      visibility: hidden;
+    }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
-      .hero-right { grid-template-columns: 1fr 1fr; }
-      .story-inner, .looking-inner { grid-template-columns: 1fr; gap: 24px; }
-      .story-label, .looking-label { padding-top: 0; }
-      .nav-links a:not(.nav-cta) { display: none; }
-      #chat-window { width: calc(100vw - 32px); right: 16px; }
+    @media (max-width: 900px) {
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
     }
+
+    @media (max-width: 768px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .hero-right {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .story-inner,
+      .looking-inner {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .story-label,
+      .looking-label {
+        padding-top: 0;
+      }
+
+      .nav-links a:not(.nav-cta) {
+        display: none;
+      }
+
+      #chat-window {
+        width: calc(100vw - 32px);
+        right: 16px;
+      }
+    }
+
     @media (max-width: 420px) {
-      .hero-right { grid-template-columns: 1fr; }
+      .hero-right {
+        grid-template-columns: 1fr;
+      }
     }
 
     /* ── DARK MODE ── */
     body.dark {
-      --text:   #F9FAFB;
-      --muted:  #9CA3AF;
-      --light:  #6B7280;
+      --text: #F9FAFB;
+      --muted: #9CA3AF;
+      --light: #6B7280;
       --border: #374151;
-      --bg:     #111827;
-      --bg2:    #1F2937;
+      --bg: #111827;
+      --bg2: #1F2937;
     }
-    body.dark nav { background: rgba(17,24,39,.92); }
-    body.dark .contact-section { background: #0F172A; }
-    body.dark footer { background: var(--bg); }
-    body.dark #chat-window { background: var(--bg); }
-    body.dark .msg-ai, body.dark .msg-t { background: #1F2937; }
-    body.dark .sugg { background: #1F2937; }
-    body.dark .sugg:hover { background: #374151; }
-    body.dark #chat-in { background: #1F2937; color: var(--text); }
-    body.dark #setup-ov { background: var(--bg); }
-    body.dark #key-in { background: #1F2937; color: var(--text); }
-    /* Botones que usan --text como fondo se vuelven blancos en dark mode — fix */
-    body.dark .btn-dark { background: #2563EB; }
-    body.dark .btn-dark:hover { background: #1D4ED8; }
-    body.dark .nav-cta { background: #2563EB !important; }
-    body.dark .nav-cta:hover { background: #1D4ED8 !important; }
-    body.dark .chat-header { background: #1E3A5F; }
-    body.dark .msg-user { background: #2563EB; }
-    body.dark #chat-btn { background: #2563EB; }
-    body.dark #chat-go { background: #2563EB; }
-    body.dark #key-save { background: #2563EB; }
-    body.dark #lead-name, body.dark #lead-company, body.dark #lead-role { background: #1F2937; color: var(--text); }
-    body.dark #lead-save { background: #2563EB; }
+
+    body.dark nav {
+      background: rgba(17, 24, 39, .92);
+    }
+
+    body.dark .contact-section {
+      background: #0F172A;
+    }
+
+    body.dark footer {
+      background: var(--bg);
+    }
+
+    body.dark #chat-window {
+      background: var(--bg);
+    }
+
+    body.dark .msg-ai,
+    body.dark .msg-t {
+      background: #1F2937;
+    }
+
+    body.dark .sugg {
+      background: #1F2937;
+    }
+
+    body.dark .sugg:hover {
+      background: #374151;
+    }
+
+    body.dark #chat-in {
+      background: #1F2937;
+      color: var(--text);
+    }
+
+    body.dark #setup-ov {
+      background: var(--bg);
+    }
+
+    body.dark #key-in {
+      background: #1F2937;
+      color: var(--text);
+    }
+
+    body.dark .btn-dark {
+      background: #2563EB;
+    }
+
+    body.dark .btn-dark:hover {
+      background: #1D4ED8;
+    }
+
+    body.dark .contact-section .btn-white {
+      background: #F9FAFB;
+      color: #111827;
+    }
+
+    body.dark .contact-section .btn-white:hover {
+      background: #E5E7EB;
+    }
+
+    body.dark .nav-cta {
+      background: #2563EB !important;
+    }
+
+    body.dark .nav-cta:hover {
+      background: #1D4ED8 !important;
+    }
+
+    body.dark .chat-header {
+      background: #1E3A5F;
+    }
+
+    body.dark .msg-user {
+      background: #2563EB;
+    }
+
+    body.dark #chat-btn {
+      background: #2563EB;
+    }
+
+    body.dark #chat-go {
+      background: #2563EB;
+    }
+
+    body.dark #key-save {
+      background: #2563EB;
+    }
+
+    body.dark #lead-name,
+    body.dark #lead-company,
+    body.dark #lead-role {
+      background: #1F2937;
+      color: var(--text);
+    }
+
+    body.dark #lead-save {
+      background: #2563EB;
+    }
+
+    body.dark .service-card,
+    body.dark .project-card {
+      background: #1F2937;
+    }
+
+    body.dark .project-badge {
+      background: #1E3A5F;
+    }
+
+    body.dark .project-badge.green {
+      background: #14532D;
+      color: #4ADE80;
+    }
 
     /* ── THEME TOGGLE ── */
     #theme-btn {
-      background: none; border: 1.5px solid var(--border); border-radius: 7px;
-      padding: 5px 9px; cursor: pointer; color: var(--muted); font-size: 15px;
-      line-height: 1; display: flex; align-items: center; transition: border-color .15s;
+      background: none;
+      border: 1.5px solid var(--border);
+      border-radius: 7px;
+      padding: 5px 9px;
+      cursor: pointer;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      transition: border-color .15s;
     }
-    #theme-btn:hover { border-color: #9CA3AF; color: var(--text); }
+
+    #theme-btn:hover {
+      border-color: #9CA3AF;
+      color: var(--text);
+    }
   </style>
 </head>
+
 <body>
 
-<nav>
-  <span class="nav-name">Alfredo Barrero</span>
-  <div class="nav-links">
-    <a href="#story">About</a>
-    <a href="#looking">What I'm open for</a>
-    <a href="Alfredo_Barrero_CV.pdf" download class="nav-dl">
-      <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
-      CV
-    </a>
-    <button id="theme-btn" onclick="toggleTheme()" title="Toggle dark mode">☀️</button>
-    <a href="#contact" class="nav-cta">Get in touch</a>
-  </div>
-</nav>
+  <nav>
+    <span class="nav-name">Alfredo Barrero</span>
+    <div class="nav-links">
+      <a href="#services">Work with me</a>
+      <a href="#projects">Projects</a>
+      <a href="#story">About</a>
+      <a href="Alfredo_Barrero_CV.pdf" download class="nav-dl">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor" stroke-width="2.2">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3" />
+        </svg>
+        CV
+      </a>
+      <button id="theme-btn" onclick="toggleTheme()" title="Toggle dark mode">☀️</button>
+      <a href="#contact" class="nav-cta">Get in touch</a>
+    </div>
+  </nav>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-inner">
-    <div class="hero-left">
-      <p class="hero-eyebrow">Global Operations Leader · Madrid, Spain</p>
-      <h1>I help organisations<br/>work smarter<br/><em>with AI.</em></h1>
-      <p class="hero-lead">For 10 years I've been building the systems — and the cultures — that let great companies move faster, decide better, and get more done. At Netflix, I turned that into a discipline.</p>
-      <div class="hero-actions">
-        <a href="#contact" class="btn btn-dark">Get in touch</a>
-        <a href="https://linkedin.com/in/a-barrero/" target="_blank" class="btn btn-outline">LinkedIn →</a>
-        <a href="Alfredo_Barrero_CV.pdf" download class="btn btn-outline">Download CV</a>
-        <button class="btn btn-outline" onclick="toggleChat()">Ask Nemo</button>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <p class="hero-eyebrow">Global Operations Leader · Madrid, Spain</p>
+        <h1>I help organisations<br />work smarter<br /><em>with AI.</em></h1>
+        <p class="hero-lead">For 10 years I've been building the systems — and the cultures — that let great companies
+          move faster, decide better, and get more done. At Netflix, I turned that into a discipline. Now I bring it to
+          others.</p>
+        <div class="hero-actions">
+          <a href="#services" class="btn btn-dark">Work with me</a>
+          <a href="#contact" class="btn btn-outline">Get in touch</a>
+          <a href="https://linkedin.com/in/a-barrero/" target="_blank" class="btn btn-outline">LinkedIn →</a>
+          <button class="btn btn-outline" onclick="toggleChat()">Ask Nemo</button>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div>
+          <div class="stat-n">$500K</div>
+          <div class="stat-t">Annual value delivered</div>
+          <div class="stat-d">Built systems saving 850+ hours per quarter, enabling teams to focus on what really
+            matters.</div>
+        </div>
+        <div>
+          <div class="stat-n">4+</div>
+          <div class="stat-t">M&A integrations led</div>
+          <div class="stat-d">End-to-end, zero downtime, globally distributed teams.</div>
+        </div>
+        <div>
+          <div class="stat-n">10K+</div>
+          <div class="stat-t">Hours saved/year</div>
+          <div class="stat-d">By standardising frameworks and automating decisions across all regions.</div>
+        </div>
+        <div>
+          <div class="stat-n">10+ yrs</div>
+          <div class="stat-t">Global experience</div>
+          <div class="stat-d">Tech, Broadcast & AI transformation. Cross-cultural global leadership.</div>
+        </div>
       </div>
     </div>
-    <div class="hero-right">
+  </div>
+
+  <hr />
+
+  <!-- WORK WITH ME -->
+  <div class="services" id="services">
+    <div class="section-header">
+      <div class="section-label">Work with me</div>
+      <div class="section-title">Three ways I can help<br />your team right now.</div>
+      <p class="section-sub">I work with a small number of organisations and individuals at a time. If you're serious
+        about AI transformation, let's talk.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+        </svg>
+        <div class="service-title">AI Workshop for Teams</div>
+        <div class="service-desc">A half-day or full-day intensive for teams of 8–15 people. We go from zero to actually
+          using AI in your workflows — Claude, NotebookLM, agents, automation. No theory. Real tools, real use cases,
+          your context.</div>
+        <span class="service-tag">Half-day · Full-day · On-site or remote</span>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
+        </svg>
+        <div class="service-title">AI Acceleration Programme</div>
+        <div class="service-desc">A 6–8 week cohort for professionals who want to genuinely transform how they work with
+          AI. Weekly live sessions, async support, and hands-on implementation. You leave with systems that run — not
+          slides you'll never open again.</div>
+        <span class="service-tag">6–8 weeks · Small cohort · Weekly sessions</span>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+        <div class="service-title">AI Implementation Consulting</div>
+        <div class="service-desc">I come in, diagnose your operations, and build something real. Dashboards, agents,
+          decision intelligence systems — the kind that remove bottlenecks and surface insight automatically. I've done
+          it at scale. Now I do it for you.</div>
+        <span class="service-tag">Project-based · Bespoke · End-to-end</span>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- PROJECTS -->
+  <div class="projects" id="projects">
+    <div class="section-header">
+      <div class="section-label">Projects</div>
+      <div class="section-title">Things I'm building.</div>
+      <p class="section-sub">I don't just advise on AI — I ship. These are the products I'm building outside of Netflix.
+      </p>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-badge">In development</div>
+        <div class="project-title">Decision Intelligence Dashboard</div>
+        <div class="project-desc">A React + Node application with an embedded AI agent that surfaces insights from
+          operational data automatically — eliminating the human bias of manual analysis and redirecting analyst energy
+          from searching to interpreting. The goal: make good decisions faster, without gatekeepers.</div>
+        <div class="project-stack">
+          <span class="stack-tag">React</span>
+          <span class="stack-tag">Node.js</span>
+          <span class="stack-tag">Claude API</span>
+          <span class="stack-tag">AI Agents</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-badge green">Live · Real users</div>
+        <div class="project-title">FuelUp</div>
+        <div class="project-desc">A B2C app I built from scratch, currently live with real users. Building FuelUp keeps
+          me honest about what it actually takes to ship a product — from zero to production, end-to-end. It gives me a
+          perspective most enterprise leaders simply don't have.</div>
+        <div class="project-stack">
+          <span class="stack-tag">B2C</span>
+          <span class="stack-tag">Mobile</span>
+          <span class="stack-tag">Full-stack</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STORY -->
+  <div class="story" id="story">
+    <div class="story-inner">
+      <div class="story-label">My story</div>
+      <div class="story-body">
+        <p>I started my career as an engineer — building broadcast infrastructure for the Olympic Games, Grand Slams,
+          and live TV at global scale. I learnt fast that the most complex technical problems aren't about technology.
+          They're about people, processes, and how organisations actually make decisions.</p>
+        <p>I took that lesson further over six years at one of the world's most innovative tech companies. I led the
+          integration of four acquired companies with zero downtime, built operational frameworks that saved over 10,000
+          hours a year, and partnered directly with ICs, Managers, Directors and VPs across every region to turn
+          strategy into execution.</p>
+        <p>The work I'm most proud of is the AI transformation. <strong>I'm changing how people work.</strong> Right
+          now, I'm building GenAI systems that remove the gatekeepers between teams and their own data, democratising
+          access to insight, and eliminating the manual bottlenecks that slow decisions. I lead AI communities, coach
+          organisations on what it really takes to adopt AI, and I'm recognised globally as the person you bring in when
+          you want it to actually work — not just get talked about.</p>
+        <p>Outside of my day job, I build. A B2C product. An AI dashboard. I train teams and individuals on how to use
+          AI tools for real. That combination — builder, operator, teacher — is what I bring to every engagement.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- LOOKING FOR -->
+  <div class="looking" id="looking">
+    <div class="looking-inner">
+      <div class="looking-label">Also open to</div>
       <div>
-        <div class="stat-n">$500K</div>
-        <div class="stat-t">Annual value delivered</div>
-        <div class="stat-d">Built systems saving 850+ hours per quarter, enabling individuals and teams to focus on what really matters.</div>
-      </div>
-      <div>
-        <div class="stat-n">4+</div>
-        <div class="stat-t">M&A integrations led</div>
-        <div class="stat-d">End-to-end, zero downtime, globally distributed teams.</div>
-      </div>
-      <div>
-        <div class="stat-n">10K+</div>
-        <div class="stat-t">Hours saved/year</div>
-        <div class="stat-d">By standardising frameworks across all regions.</div>
-      </div>
-      <div>
-        <div class="stat-n">10+ yrs</div>
-        <div class="stat-t">Global experience</div>
-        <div class="stat-d">Netflix, IOC/Olympic Channel, Telefónica. Madrid-based, globally operated.</div>
+        <h2>The right full-time<br />opportunity.</h2>
+        <p>If you're building something ambitious around AI transformation and need someone who's done it at scale — not
+          just advised on it — I'm open to the conversation. A senior role where AI is genuinely the mission, not a side
+          project. Culture of autonomy and speed. Based in Madrid, available for global travel.</p>
+        <p>If that sounds like you, let's talk.</p>
       </div>
     </div>
   </div>
-</div>
 
-<hr />
-
-<!-- STORY -->
-<div class="story" id="story">
-  <div class="story-inner">
-    <div class="story-label">My story</div>
-    <div class="story-body">
-      <p>I started my career as an engineer — building broadcast infrastructure for the Olympic Games, Grand Slams, and live TV at global scale. I learnt fast that the most complex technical problems aren't about technology. They're about people, processes, and how organisations actually make decisions.</p>
-      <p>At Netflix, I took that lesson further. Over six years, I've led the integration of four acquired companies with zero downtime, built operational frameworks that saved over 10,000 hours a year, and partnered directly with ICs, Managers, Directors and VPs across every region to turn strategy into execution.</p>
-      <p>The work I'm most proud of is the AI transformation. <strong>I'm changing how people work.</strong> Right now, I'm building GenAI systems that remove the gatekeepers between teams and their own data, democratising access to insight, and eliminating the manual bottlenecks that slow decisions. I lead AI communities, coach organisations on what it really takes to adopt AI, and I'm recognised globally as the person you bring in when you want it to actually work — not just get talked about.</p>
-      <p>Outside of Netflix, I'm building a B2C AI product from scratch. It keeps me honest about what it takes to ship real things to real users — and gives me a perspective most enterprise leaders don't have.</p>
+  <!-- CONTACT -->
+  <div class="contact-section" id="contact">
+    <div class="contact-inner">
+      <h2>Let's talk.</h2>
+      <p>Drop me a line or connect on LinkedIn. If you're curious about something in particular, you can also ask Nemo,
+        my AI agent — it'll do its best.</p>
+      <div class="contact-actions">
+        <a href="mailto:abarrerolabajos@gmail.com" class="btn btn-white">abarrerolabajos@gmail.com</a>
+        <a href="https://linkedin.com/in/a-barrero/" target="_blank" class="btn btn-ghost-w">LinkedIn</a>
+        <button class="btn btn-ghost-w" onclick="toggleChat()">Ask Nemo</button>
+      </div>
     </div>
   </div>
-</div>
 
-<hr />
+  <footer>© 2026 Alfredo Barrero · Madrid, Spain</footer>
 
-<!-- LOOKING FOR -->
-<div class="looking" id="looking">
-  <div class="looking-inner">
-    <div class="looking-label">What I'm open for</div>
-    <div>
-      <h2>Open to the right<br/>opportunity.</h2>
-      <p>What excites me is a senior role where AI transformation is the mission, not a side project. A place where I can build — not just advise. Where the culture values autonomy, moves fast, and takes the long view on how AI actually changes the way organisations work.</p>
-      <p>If you're building something ambitious in this space — let's talk.</p>
+  <!-- CHAT -->
+  <button id="chat-btn" onclick="toggleChat()" title="Ask Alfredo's AI">
+    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+      stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round"
+        d="M8 10h.01M12 10h.01M16 10h.01M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z" />
+    </svg>
+  </button>
+
+  <div id="chat-window">
+    <div id="setup-ov" class="show">
+      <!-- LOCAL: API key -->
+      <div id="mode-key">
+        <h3>Activate chatbot</h3>
+        <p>Enter your Anthropic API key to enable the recruiter chatbot.</p>
+        <input id="key-in" type="password" placeholder="sk-ant-..." />
+        <button id="key-save" onclick="saveKey()">Activate →</button>
+        <p style="margin-top:10px;font-size:11px;color:var(--muted)">Get it at <a href="https://console.anthropic.com"
+            target="_blank" style="color:var(--accent)">console.anthropic.com</a></p>
+      </div>
+      <!-- PRODUCTION: Lead capture -->
+      <div id="mode-lead" style="display:none;width:100%">
+        <h3>Before we start</h3>
+        <p>Tell Nemo who you are so Alfredo can follow up with the right context.</p>
+        <input id="lead-name" type="text" placeholder="Your name *" autocomplete="name" />
+        <input id="lead-company" type="text" placeholder="Company *" autocomplete="organization" />
+        <input id="lead-role" type="text" placeholder="Your role (optional)" autocomplete="organization-title" />
+        <button id="lead-save" onclick="saveLead()">Start chatting →</button>
+      </div>
+    </div>
+    <div class="chat-header">
+      <div class="chat-left">
+        <div class="chat-av">N</div>
+        <div>
+          <div class="chat-hname">Nemo <span style="font-size:10px;opacity:.5;font-weight:400">Beta v1</span></div>
+          <div class="chat-hsub">Ask me anything about Alfredo</div>
+        </div>
+      </div>
+      <button id="chat-x" onclick="toggleChat()">×</button>
+    </div>
+    <div id="chat-msgs"></div>
+    <div id="qlimit"></div>
+    <div id="rcap-note">Protected by <a href="https://policies.google.com/privacy" target="_blank">reCAPTCHA</a></div>
+    <div class="chat-sugg" id="suggs">
+      <button class="sugg" onclick="ask(this)">What makes you different?</button>
+      <button class="sugg" onclick="ask(this)">What AI work have you led?</button>
+      <button class="sugg" onclick="ask(this)">How can you help my team?</button>
+    </div>
+    <div class="chat-row">
+      <textarea id="chat-in" rows="1" placeholder="Ask anything…" onkeydown="onKey(event)"
+        oninput="rsz(this)"></textarea>
+      <button id="chat-go" onclick="send()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5m0 0l-7 7m7-7l7 7" />
+        </svg>
+      </button>
     </div>
   </div>
-</div>
 
-<!-- CONTACT -->
-<div class="contact-section" id="contact">
-  <div class="contact-inner">
-    <h2>Let's talk.</h2>
-    <p>Drop me a line or connect on LinkedIn. If you're curious about something in particular, you can also ask Nemo, my AI agent — it'll do its best.</p>
-    <div class="contact-actions">
-      <a href="mailto:abarrerolabajos@gmail.com" class="btn btn-white">abarrerolabajos@gmail.com</a>
-      <a href="https://linkedin.com/in/a-barrero/" target="_blank" class="btn btn-ghost-w">LinkedIn</a>
-      <button class="btn btn-ghost-w" onclick="toggleChat()">Ask Nemo</button>
-    </div>
-  </div>
-</div>
+  <script>
+    // ── Config ──
+    const IS_LOCAL = ['localhost', '127.0.0.1'].includes(location.hostname) || location.hostname.startsWith('192.168');
+    const SESSION_LIMIT = 5;
+    const THROTTLE_MS = 4000;
+    const MIN_MSG_LEN = 3;
+    const JUNK_THRESHOLD = 3;
+    const RECAPTCHA_SITE_KEY = '6Lfj58YsAAAAALiVPMfll1Lfq83IDmNkXTBNmqLD';
+    let key = '', msgs = [], isOpen = false, lead = null;
+    let sessionCount = 0, lastSendTime = 0, junkCount = 0, sessionBlocked = false;
 
-<footer>© 2026 Alfredo Barrero · Madrid, Spain</footer>
+    if (!IS_LOCAL) {
+      const s = document.createElement('script');
+      s.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`;
+      s.onload = () => { document.getElementById('rcap-note').style.display = ''; };
+      document.head.appendChild(s);
+    }
 
-<!-- CHAT -->
-<button id="chat-btn" onclick="toggleChat()" title="Ask Alfredo's AI">
-  <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-    <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z"/>
-  </svg>
-</button>
+    // ── Dark mode ──
+    function toggleTheme() {
+      const dark = document.body.classList.toggle('dark');
+      document.getElementById('theme-btn').textContent = dark ? '🌙' : '☀️';
+      localStorage.setItem('nemo_theme', dark ? 'dark' : 'light');
+    }
+    (function () {
+      const t = localStorage.getItem('nemo_theme');
+      if (t === 'dark') { document.body.classList.add('dark'); document.getElementById('theme-btn').textContent = '🌙'; }
+    })();
 
-<div id="chat-window">
-  <div id="setup-ov" class="show">
-    <!-- LOCAL: API key -->
-    <div id="mode-key">
-      <h3>Activate chatbot</h3>
-      <p>Enter your Anthropic API key to enable the recruiter chatbot.</p>
-      <input id="key-in" type="password" placeholder="sk-ant-..." />
-      <button id="key-save" onclick="saveKey()">Activate →</button>
-      <p style="margin-top:10px;font-size:11px;color:var(--muted)">Get it at <a href="https://console.anthropic.com" target="_blank" style="color:var(--accent)">console.anthropic.com</a></p>
-    </div>
-    <!-- PRODUCTION: Lead capture -->
-    <div id="mode-lead" style="display:none;width:100%">
-      <h3>Before we start</h3>
-      <p>Tell Nemo who you are so Alfredo can follow up with the right context.</p>
-      <input id="lead-name" type="text" placeholder="Your name *" autocomplete="name" />
-      <input id="lead-company" type="text" placeholder="Company *" autocomplete="organization" />
-      <input id="lead-role" type="text" placeholder="Your role (optional)" autocomplete="organization-title" />
-      <button id="lead-save" onclick="saveLead()">Start chatting →</button>
-    </div>
-  </div>
-  <div class="chat-header">
-    <div class="chat-left">
-      <div class="chat-av">N</div>
-      <div><div class="chat-hname">Nemo <span style="font-size:10px;opacity:.5;font-weight:400">Beta v1</span></div><div class="chat-hsub">Ask me anything about Alfredo</div></div>
-    </div>
-    <button id="chat-x" onclick="toggleChat()">×</button>
-  </div>
-  <div id="chat-msgs"></div>
-  <div id="qlimit"></div>
-  <div id="rcap-note">Protected by <a href="https://policies.google.com/privacy" target="_blank">reCAPTCHA</a></div>
-  <div class="chat-sugg" id="suggs">
-    <button class="sugg" onclick="ask(this)">What makes you different?</button>
-    <button class="sugg" onclick="ask(this)">What AI work have you led?</button>
-    <button class="sugg" onclick="ask(this)">What are you looking for?</button>
-  </div>
-  <div class="chat-row">
-    <textarea id="chat-in" rows="1" placeholder="Ask anything…" onkeydown="onKey(event)" oninput="rsz(this)"></textarea>
-    <button id="chat-go" onclick="send()">
-      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5m0 0l-7 7m7-7l7 7"/></svg>
-    </button>
-  </div>
-</div>
+    // ── Rate limit (session-based, in-memory) ──
+    function canAsk() { return IS_LOCAL || (!sessionBlocked && sessionCount < SESSION_LIMIT); }
+    function updateLimitUI() {
+      if (IS_LOCAL) return;
+      const el = document.getElementById('qlimit');
+      const left = SESSION_LIMIT - sessionCount;
+      el.textContent = left <= 3 && left > 0 ? `${left} question${left !== 1 ? 's' : ''} left` : '';
+    }
+    function getRecaptchaToken() {
+      return new Promise(resolve => {
+        if (IS_LOCAL || !window.grecaptcha) { resolve(null); return; }
+        grecaptcha.ready(() => grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'chat' }).then(resolve));
+      });
+    }
 
-<script>
-// ── Config ──
-const IS_LOCAL = ['localhost','127.0.0.1'].includes(location.hostname) || location.hostname.startsWith('192.168');
-const SESSION_LIMIT = 5;
-const THROTTLE_MS = 4000;
-const MIN_MSG_LEN = 3;
-const JUNK_THRESHOLD = 3;
-const RECAPTCHA_SITE_KEY = '6Lfj58YsAAAAALiVPMfll1Lfq83IDmNkXTBNmqLD';
-let key = '', msgs = [], isOpen = false, lead = null;
-let sessionCount = 0, lastSendTime = 0, junkCount = 0, sessionBlocked = false;
-
-if (!IS_LOCAL) {
-  const s = document.createElement('script');
-  s.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`;
-  s.onload = () => { document.getElementById('rcap-note').style.display = ''; };
-  document.head.appendChild(s);
-}
-
-// ── Dark mode ──
-function toggleTheme() {
-  const dark = document.body.classList.toggle('dark');
-  document.getElementById('theme-btn').textContent = dark ? '🌙' : '☀️';
-  localStorage.setItem('nemo_theme', dark ? 'dark' : 'light');
-}
-(function() {
-  const t = localStorage.getItem('nemo_theme');
-  if (t === 'dark') { document.body.classList.add('dark'); document.getElementById('theme-btn').textContent = '🌙'; }
-})();
-
-// ── Rate limit (session-based, in-memory) ──
-function canAsk() { return IS_LOCAL || (!sessionBlocked && sessionCount < SESSION_LIMIT); }
-function updateLimitUI() {
-  if (IS_LOCAL) return;
-  const el = document.getElementById('qlimit');
-  const left = SESSION_LIMIT - sessionCount;
-  el.textContent = left <= 3 && left > 0 ? `${left} question${left !== 1 ? 's' : ''} left` : '';
-}
-function getRecaptchaToken() {
-  return new Promise(resolve => {
-    if (IS_LOCAL || !window.grecaptcha) { resolve(null); return; }
-    grecaptcha.ready(() => grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'chat' }).then(resolve));
-  });
-}
-
-// ── Local system prompt (only used when testing locally with API key) ──
-const SYS = `You are an AI representing Alfredo Barrero on his personal website. Speak in first person as if you are Alfredo — warm, direct, confident. Answer recruiter questions about his background, what he's open for, and how he works.
+    // ── Local system prompt ──
+    const SYS = `You are an AI representing Alfredo Barrero on his personal website. Speak in first person as if you are Alfredo — warm, direct, confident. Answer questions about his background, services, projects, and what he's open for.
 
 WHO I AM:
-I'm a Global Operations Leader based in Madrid, Spain, with 10+ years in operations and engineering across Netflix, the IOC, and broadcasting. Over the last few years at Netflix I've focused on AI transformation — building systems that genuinely change how people work, not just automate tasks.
+I'm a Global Operations Leader based in Madrid, Spain, with 10+ years in operations and engineering across streaming, broadcasting, and the Olympic Games. Over the last several years I've focused on AI transformation — building systems that genuinely change how people work, not just automate tasks.
 
-MY WORK AT NETFLIX (2020–present, Global Program Lead, L4→L5 confirmed H2 2026):
-- Built GenAI systems that democratise access to data and insight — removing gatekeepers, eliminating manual bottlenecks, $500K annual value; saving 850+ hours per quarter and enabling individuals and teams to focus on what really matters.
-- Recognised as a global reference in AI adoption within Netflix: leading AI communities, coaching teams and individuals on how to use AI to elevate their work.
+MY CURRENT ROLE (Global Program Lead, 2020–present):
+- Built GenAI systems that democratise access to data and insight — removing gatekeepers, eliminating manual bottlenecks, $500K annual value, 850+ hours/quarter saved.
+- Recognised as a global reference in AI adoption: leading AI communities, coaching teams and individuals on how to use AI to elevate their work.
 - Led end-to-end integration of 4+ acquired companies, zero downtime, managing both technical and human change at scale.
 - Strategic Business Partner to Directors and VPs globally; sole international voice on an otherwise US-based team.
 - Built operational frameworks saving 10,000+ hours/year.
@@ -424,152 +1390,162 @@ MY WORK AT NETFLIX (2020–present, Global Program Lead, L4→L5 confirmed H2 20
 EARLIER: IOC/Olympic Channel (2016–2020), Telefónica & Optiva Media/StarHub Singapore (2013–2016).
 EDUCATION: Telecom Engineering degree, PMP (2023), MBA (completed 2026).
 
-WHAT I'M OPEN FOR:
-If the right opportunity came along — a senior role like Director or Head of AI Transformation where AI is genuinely the mission — that would be interesting. Culture of autonomy and speed matters a lot. Based in Madrid, available for regular EMEA travel.
+SERVICES I OFFER:
+1. AI Workshop for Teams — half-day or full-day intensive for teams of 8–15. Real tools (Claude, NotebookLM, agents), real use cases, your context. On-site or remote.
+2. AI Acceleration Programme — 6–8 week cohort for professionals who want to genuinely transform how they work with AI. Weekly live sessions, async support, hands-on implementation.
+3. AI Implementation Consulting — I come in, diagnose your operations, and build something real: dashboards, agents, decision intelligence systems. Project-based, bespoke, end-to-end.
+
+PROJECTS:
+- Decision Intelligence Dashboard: React + Node app with embedded AI agent that surfaces insights automatically, eliminating human bias in data analysis.
+- FuelUp: B2C app I built from scratch, currently live with real users.
+
+WHAT I'M ALSO OPEN FOR:
+A senior full-time role — Director or Head of AI Transformation — where AI is genuinely the mission. Culture of autonomy and speed. Based in Madrid, available for global travel.
 
 STYLE: First person, warm but direct. Under 100 words unless more is clearly needed. Sentences, not bullet points.`;
 
-// ── Init ──
-window.addEventListener('load', () => {
-  if (IS_LOCAL) {
-    document.getElementById('mode-lead').style.display = 'none';
-  } else {
-    document.getElementById('mode-key').style.display = 'none';
-    document.getElementById('mode-lead').style.display = '';
-  }
-  updateLimitUI();
-});
-
-function saveKey() {
-  const v = document.getElementById('key-in').value.trim();
-  if (!v.startsWith('sk-')) { alert('Invalid API key.'); return; }
-  key = v;
-  document.getElementById('setup-ov').classList.remove('show');
-  addMsg('ai', "Hi — I'm Nemo, Alfredo's AI agent. Ask me anything you'd want to know before a first call with him.");
-}
-
-function saveLead() {
-  const nameEl = document.getElementById('lead-name');
-  const companyEl = document.getElementById('lead-company');
-  const name = nameEl.value.trim();
-  const company = companyEl.value.trim();
-  const role = document.getElementById('lead-role').value.trim();
-  nameEl.classList.toggle('lead-err', !name);
-  companyEl.classList.toggle('lead-err', !company);
-  if (!name || !company) return;
-  lead = { name, company, role };
-  document.getElementById('setup-ov').classList.remove('show');
-  addMsg('ai', `Hi ${name} — I'm Nemo, Alfredo's AI agent. Ask me anything you'd want to know before a first call with him.`);
-}
-
-function toggleChat() {
-  const w = document.getElementById('chat-window');
-  isOpen = !isOpen;
-  isOpen ? w.classList.add('open') : w.classList.remove('open');
-  if (isOpen) {
-    if (!IS_LOCAL && lead && document.getElementById('chat-msgs').children.length === 0) {
-      addMsg('ai', `Hi ${lead.name} — I'm Nemo, Alfredo's AI agent. Ask me anything you'd want to know before a first call with him.`);
-    }
-    document.getElementById('chat-in').focus();
-  }
-}
-
-function mdToHtml(text) {
-  return text
-    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
-    .replace(/\*(.+?)\*/g,'<em>$1</em>')
-    .replace(/\n/g,'<br>');
-}
-function addMsg(role, text) {
-  const b = document.getElementById('chat-msgs');
-  const d = document.createElement('div');
-  d.className = `msg msg-${role}`;
-  d.innerHTML = role === 'user' ? text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') : mdToHtml(text);
-  b.appendChild(d); b.scrollTop = b.scrollHeight;
-}
-
-function ask(el) {
-  document.getElementById('chat-in').value = el.textContent;
-  document.getElementById('suggs').style.display = 'none';
-  send();
-}
-function onKey(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); } }
-function rsz(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 80) + 'px'; }
-
-async function send() {
-  const inp = document.getElementById('chat-in');
-  const text = inp.value.trim();
-  if (!text) return;
-  if (IS_LOCAL && !key) return;
-
-  if (!IS_LOCAL) {
-    if (sessionBlocked) {
-      addMsg('ai', "This session has been blocked. Please reload the page to continue.");
-      return;
-    }
-    if (text.length < MIN_MSG_LEN) {
-      if (++junkCount >= JUNK_THRESHOLD) {
-        sessionBlocked = true;
-        addMsg('ai', "This session has been blocked due to unusual activity.");
+    // ── Init ──
+    window.addEventListener('load', () => {
+      if (IS_LOCAL) {
+        document.getElementById('mode-lead').style.display = 'none';
+      } else {
+        document.getElementById('mode-key').style.display = 'none';
+        document.getElementById('mode-lead').style.display = '';
       }
+      updateLimitUI();
+    });
+
+    function saveKey() {
+      const v = document.getElementById('key-in').value.trim();
+      if (!v.startsWith('sk-')) { alert('Invalid API key.'); return; }
+      key = v;
+      document.getElementById('setup-ov').classList.remove('show');
+      addMsg('ai', "Hi — I'm Nemo, Alfredo's AI agent. Ask me anything about his work, services, or projects.");
+    }
+
+    function saveLead() {
+      const nameEl = document.getElementById('lead-name');
+      const companyEl = document.getElementById('lead-company');
+      const name = nameEl.value.trim();
+      const company = companyEl.value.trim();
+      const role = document.getElementById('lead-role').value.trim();
+      nameEl.classList.toggle('lead-err', !name);
+      companyEl.classList.toggle('lead-err', !company);
+      if (!name || !company) return;
+      lead = { name, company, role };
+      document.getElementById('setup-ov').classList.remove('show');
+      addMsg('ai', `Hi ${name} — I'm Nemo, Alfredo's AI agent. Ask me anything about his work, services, or projects.`);
+    }
+
+    function toggleChat() {
+      const w = document.getElementById('chat-window');
+      isOpen = !isOpen;
+      isOpen ? w.classList.add('open') : w.classList.remove('open');
+      if (isOpen) {
+        if (!IS_LOCAL && lead && document.getElementById('chat-msgs').children.length === 0) {
+          addMsg('ai', `Hi ${lead.name} — I'm Nemo, Alfredo's AI agent. Ask me anything about his work, services, or projects.`);
+        }
+        document.getElementById('chat-in').focus();
+      }
+    }
+
+    function mdToHtml(text) {
+      return text
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.+?)\*/g, '<em>$1</em>')
+        .replace(/\n/g, '<br>');
+    }
+    function addMsg(role, text) {
+      const b = document.getElementById('chat-msgs');
+      const d = document.createElement('div');
+      d.className = `msg msg-${role}`;
+      d.innerHTML = role === 'user' ? text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') : mdToHtml(text);
+      b.appendChild(d); b.scrollTop = b.scrollHeight;
+    }
+
+    function ask(el) {
+      document.getElementById('chat-in').value = el.textContent;
+      document.getElementById('suggs').style.display = 'none';
+      send();
+    }
+    function onKey(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); } }
+    function rsz(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 80) + 'px'; }
+
+    async function send() {
+      const inp = document.getElementById('chat-in');
+      const text = inp.value.trim();
+      if (!text) return;
+      if (IS_LOCAL && !key) return;
+
+      if (!IS_LOCAL) {
+        if (sessionBlocked) {
+          addMsg('ai', "This session has been blocked. Please reload the page to continue.");
+          return;
+        }
+        if (text.length < MIN_MSG_LEN) {
+          if (++junkCount >= JUNK_THRESHOLD) {
+            sessionBlocked = true;
+            addMsg('ai', "This session has been blocked due to unusual activity.");
+          }
+          inp.value = ''; inp.style.height = 'auto';
+          return;
+        }
+        const now = Date.now();
+        if (now - lastSendTime < THROTTLE_MS) {
+          addMsg('ai', "Please wait a few seconds before sending another message.");
+          inp.value = ''; inp.style.height = 'auto';
+          return;
+        }
+        if (!canAsk()) {
+          addMsg('ai', "You've reached the limit of 5 questions for this session.");
+          return;
+        }
+        lastSendTime = now;
+      }
+
       inp.value = ''; inp.style.height = 'auto';
-      return;
-    }
-    const now = Date.now();
-    if (now - lastSendTime < THROTTLE_MS) {
-      addMsg('ai', "Please wait a few seconds before sending another message.");
-      inp.value = ''; inp.style.height = 'auto';
-      return;
-    }
-    if (!canAsk()) {
-      addMsg('ai', "You've reached the limit of 5 questions for this session.");
-      return;
-    }
-    lastSendTime = now;
-  }
+      document.getElementById('suggs').style.display = 'none';
+      addMsg('user', text);
+      msgs.push({ role: 'user', content: text });
 
-  inp.value = ''; inp.style.height = 'auto';
-  document.getElementById('suggs').style.display = 'none';
-  addMsg('user', text);
-  msgs.push({ role: 'user', content: text });
+      const t = document.createElement('div');
+      t.className = 'msg-t'; t.id = 'typ'; t.textContent = 'Thinking…';
+      document.getElementById('chat-msgs').appendChild(t);
+      document.getElementById('chat-msgs').scrollTop = 9999;
 
-  const t = document.createElement('div');
-  t.className = 'msg-t'; t.id = 'typ'; t.textContent = 'Thinking…';
-  document.getElementById('chat-msgs').appendChild(t);
-  document.getElementById('chat-msgs').scrollTop = 9999;
-
-  try {
-    let reply;
-    if (IS_LOCAL) {
-      const r = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
-        body: JSON.stringify({ model: 'claude-haiku-4-5-20251001', max_tokens: 280, system: SYS, messages: msgs })
-      });
-      if (!r.ok) throw new Error((await r.json()).error?.message || 'API error');
-      reply = (await r.json()).content[0].text;
-    } else {
-      const recaptchaToken = await getRecaptchaToken();
-      const r = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'X-Session-Count': String(sessionCount) },
-        body: JSON.stringify({ messages: msgs, lead, recaptchaToken })
-      });
-      if (!r.ok) throw new Error((await r.json()).error || 'API error');
-      reply = (await r.json()).text;
-      sessionCount++; updateLimitUI();
+      try {
+        let reply;
+        if (IS_LOCAL) {
+          const r = await fetch('https://api.anthropic.com/v1/messages', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+            body: JSON.stringify({ model: 'claude-haiku-4-5-20251001', max_tokens: 280, system: SYS, messages: msgs })
+          });
+          if (!r.ok) throw new Error((await r.json()).error?.message || 'API error');
+          reply = (await r.json()).content[0].text;
+        } else {
+          const recaptchaToken = await getRecaptchaToken();
+          const r = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'X-Session-Count': String(sessionCount) },
+            body: JSON.stringify({ messages: msgs, lead, recaptchaToken })
+          });
+          if (!r.ok) throw new Error((await r.json()).error || 'API error');
+          reply = (await r.json()).text;
+          sessionCount++; updateLimitUI();
+        }
+        document.getElementById('typ')?.remove();
+        msgs.push({ role: 'assistant', content: reply });
+        addMsg('ai', reply);
+      } catch (e) {
+        document.getElementById('typ')?.remove();
+        addMsg('ai', `Something went wrong: ${e.message}`);
+      }
     }
-    document.getElementById('typ')?.remove();
-    msgs.push({ role: 'assistant', content: reply });
-    addMsg('ai', reply);
-  } catch(e) {
-    document.getElementById('typ')?.remove();
-    addMsg('ai', `Something went wrong: ${e.message}`);
-  }
-}
-</script>
-<!-- Vercel Analytics (activates automatically on deploy, ignored locally) -->
-<script defer src="/_vercel/insights/script.js"></script>
+  </script>
+  <!-- Vercel Analytics -->
+  <script defer src="/_vercel/insights/script.js"></script>
 </body>
+
 </html>
