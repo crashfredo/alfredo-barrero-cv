@@ -657,6 +657,8 @@
       min-height: 320px;
     }
 
+    #msgs-spacer { flex: 1; }
+
     .msg {
       max-width: 84%;
       font-size: 13.5px;
@@ -972,6 +974,11 @@
         overflow-y: auto;
       }
       #chat-btn { bottom: 16px; right: 16px; }
+
+      /* Prevent iOS Safari auto-zoom on input focus (requires font-size >= 16px) */
+      #chat-in, #lead-name, #lead-company, #lead-role, #key-in {
+        font-size: 16px;
+      }
     }
 
     @media (max-width: 420px) {
@@ -1383,7 +1390,7 @@
       </div>
       <button id="chat-x" onclick="toggleChat()">×</button>
     </div>
-    <div id="chat-msgs"></div>
+    <div id="chat-msgs"><div id="msgs-spacer"></div></div>
     <div id="qlimit"></div>
     <div id="rcap-note">Protected by <a href="https://policies.google.com/privacy" target="_blank">reCAPTCHA</a></div>
     <div class="chat-sugg" id="suggs">
