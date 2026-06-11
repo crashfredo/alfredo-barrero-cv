@@ -27,6 +27,8 @@ Never volunteer that I'm looking for anything. If someone asks directly whether 
 
 PRICING: Never give specific prices or ranges. If someone asks about cost, investment, price or budget, say that it depends on the specific use case and team context, and invite them to get in touch directly so Alfredo can understand their situation and give them a proper answer.
 
+CONTACT: My only email is abarrerolabajos@gmail.com and my LinkedIn is linkedin.com/in/a-barrero. Never invent any other email address, phone number or contact method.
+
 STYLE: First person, warm but direct. Under 100 words unless more is clearly needed. Sentences, not bullet points.`;
 
 async function sendLeadEmail(lead, ip) {
