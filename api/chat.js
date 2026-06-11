@@ -31,9 +31,13 @@ CONTACT: My only email is abarrerolabajos@gmail.com and my LinkedIn is linkedin.
 
 STYLE: First person, warm but direct. Under 100 words unless more is clearly needed. Sentences, not bullet points.`;
 
+function escHtml(s) {
+  return String(s).slice(0, 80).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
 async function sendLeadEmail(lead, ip) {
   if (!process.env.RESEND_API_KEY) { console.log('[EMAIL] No RESEND_API_KEY configured'); return; }
-  const role = lead.role ? ` · ${lead.role}` : '';
+  const role = lead.role ? ` · ${escHtml(lead.role)}` : '';
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: {
@@ -43,8 +47,8 @@ async function sendLeadEmail(lead, ip) {
     body: JSON.stringify({
       from: 'Nemo <onboarding@resend.dev>',
       to: ['abarrerolabajos@gmail.com'],
-      subject: `Nemo: ${lead.name} from ${lead.company}`,
-      html: `<p><strong>${lead.name}</strong>${role} · <strong>${lead.company}</strong> just used your chat.</p><p style="color:#6B7280;font-size:12px">${new Date().toUTCString()} · IP: ${ip}</p>`,
+      subject: `Nemo: ${String(lead.name).slice(0, 80)} from ${String(lead.company).slice(0, 80)}`,
+      html: `<p><strong>${escHtml(lead.name)}</strong>${role} · <strong>${escHtml(lead.company)}</strong> just used your chat.</p><p style="color:#6B7280;font-size:12px">${new Date().toUTCString()} · IP: ${ip}</p>`,
     }),
   });
   const data = await res.json();
@@ -54,7 +58,8 @@ async function sendLeadEmail(lead, ip) {
 
 async function verifyRecaptcha(token) {
   console.log('[RECAPTCHA] token?', !!token, 'secret?', !!process.env.RECAPTCHA_SECRET_KEY);
-  if (!token || !process.env.RECAPTCHA_SECRET_KEY) return true;
+  if (!process.env.RECAPTCHA_SECRET_KEY) return true; // can't verify without secret
+  if (!token) return false; // fail closed: no token, no answer
   const res = await fetch('https://www.google.com/recaptcha/api/siteverify', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -102,19 +107,24 @@ module.exports = async function handler(req, res) {
     return res.status(403).json({ error: 'reCAPTCHA verification failed. Please reload and try again.' });
   }
 
+  // Lead registration: log + email whenever a lead is provided.
+  // The frontend sends it once (lead-only request, empty messages) after the gate.
+  const hasLead = lead && lead.name && lead.company;
+  if (hasLead) {
+    const role = lead.role ? ` · ${lead.role}` : '';
+    console.log(`[LEAD] ${new Date().toISOString()} | ${lead.name} | ${lead.company}${role} | IP: ${ip}`);
+    sendLeadEmail(lead, ip).catch(() => {});
+  }
+  if (hasLead && (!messages || messages.length === 0)) {
+    return res.status(200).json({ ok: true });
+  }
+
   if (!messages || !Array.isArray(messages) || messages.length === 0) {
     return res.status(400).json({ error: 'Invalid messages' });
   }
 
   if (!process.env.ANTHROPIC_API_KEY) {
     return res.status(500).json({ error: 'API key not configured' });
-  }
-
-  // Log lead on first message so Alfredo can see who used the chat in Vercel logs
-  if (messages.length === 1 && lead && lead.name && lead.company) {
-    const role = lead.role ? ` · ${lead.role}` : '';
-    console.log(`[LEAD] ${new Date().toISOString()} | ${lead.name} | ${lead.company}${role} | IP: ${ip}`);
-    sendLeadEmail(lead, ip).catch(() => {});
   }
 
   const response = await fetch('https://api.anthropic.com/v1/messages', {

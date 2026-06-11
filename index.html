@@ -379,6 +379,18 @@
       transition: border-color .15s, color .15s;
     }
     .sugg:hover { border-color: var(--accent); color: var(--accent); }
+    .lead-form { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+    .lead-form input {
+      border: 1px solid var(--line); background: var(--paper); color: var(--ink);
+      padding: 8px 12px; font-size: 13px; font-family: var(--sans); outline: none;
+    }
+    .lead-form input:focus { border-color: var(--accent); }
+    .lead-form button {
+      background: var(--ink); color: var(--paper); border: none; cursor: pointer;
+      font-family: var(--mono); font-size: 11px; letter-spacing: .8px; text-transform: uppercase;
+      padding: 9px 14px; align-self: flex-start;
+    }
+    .lead-form button:hover { background: var(--accent); }
     .chat-row { padding: 10px 12px; border-top: 1px solid var(--line); display: flex; gap: 8px; }
     #chat-in {
       flex: 1; border: 1px solid var(--line); padding: 8px 12px;
@@ -769,6 +781,12 @@
         story_anchors_label: 'Built at scale at',
         contact_title: 'Let\'s talk.',
         contact_sub: 'Drop me a line or connect on LinkedIn. Or ask Nemo, my AI agent — it\'ll do its best.',
+        lead_gate: 'Happy to keep going — quick intro first: who am I talking to?',
+        lead_name: 'Your name',
+        lead_company: 'Company',
+        lead_btn: 'Continue',
+        lead_thanks: 'Thanks, {name} — go ahead, ask away.',
+        lead_missing: 'I just need both fields to continue.',
       },
       es: {
         nav_work: 'Trabaja conmigo', nav_projects: 'Proyectos', nav_about: 'Sobre mí',
@@ -811,6 +829,12 @@
         story_anchors_label: 'Construido a escala en',
         contact_title: 'Hablemos.',
         contact_sub: 'Escríbeme o conéctate en LinkedIn. O pregunta a Nemo, mi agente de IA — hará lo que pueda.',
+        lead_gate: 'Encantado de seguir — antes, una presentación rápida: ¿con quién hablo?',
+        lead_name: 'Tu nombre',
+        lead_company: 'Empresa',
+        lead_btn: 'Continuar',
+        lead_thanks: 'Gracias, {name} — pregunta lo que quieras.',
+        lead_missing: 'Necesito ambos campos para continuar.',
       }
     };
 
@@ -837,7 +861,20 @@
 
     window.addEventListener('DOMContentLoaded', () => { applyLang(currentLang); });
 
-    // ── Rate limit ──
+    // ── Rate limit (persisted per day so a refresh doesn't reset it) ──
+    const QKEY = 'nemo_qcount';
+    function loadCount() {
+      try {
+        const o = JSON.parse(localStorage.getItem(QKEY));
+        if (o && o.d === new Date().toDateString()) return o.n;
+      } catch (e) {}
+      return 0;
+    }
+    function saveCount() {
+      try { localStorage.setItem(QKEY, JSON.stringify({ d: new Date().toDateString(), n: sessionCount })); } catch (e) {}
+    }
+    sessionCount = loadCount();
+
     function canAsk() { return IS_LOCAL || (!sessionBlocked && sessionCount < SESSION_LIMIT); }
     function updateLimitUI() {
       if (IS_LOCAL) return;
@@ -916,11 +953,67 @@ STYLE: First person, warm but direct. Under 100 words unless more is clearly nee
       b.appendChild(d); b.scrollTop = b.scrollHeight;
     }
 
+    // ── Lead gate: after the first answer, ask who we're talking to ──
+    let leadGateActive = false;
+    function getStoredLead() {
+      try { return JSON.parse(localStorage.getItem('nemo_lead')); } catch (e) { return null; }
+    }
+    function setChatEnabled(on) {
+      document.getElementById('chat-in').disabled = !on;
+      document.getElementById('chat-go').disabled = !on;
+    }
+    function showLeadGate() {
+      leadGateActive = true;
+      setChatEnabled(false);
+      const L = T[currentLang];
+      const wrapEl = document.createElement('div');
+      wrapEl.className = 'msg msg-ai'; wrapEl.id = 'lead-gate';
+      const txt = document.createElement('div');
+      txt.textContent = L.lead_gate;
+      const form = document.createElement('div');
+      form.className = 'lead-form';
+      const nameIn = document.createElement('input');
+      nameIn.id = 'lead-name'; nameIn.placeholder = L.lead_name; nameIn.maxLength = 80; nameIn.autocomplete = 'name';
+      const compIn = document.createElement('input');
+      compIn.id = 'lead-company'; compIn.placeholder = L.lead_company; compIn.maxLength = 80; compIn.autocomplete = 'organization';
+      const btn = document.createElement('button');
+      btn.textContent = L.lead_btn; btn.onclick = submitLead;
+      compIn.onkeydown = nameIn.onkeydown = (e) => { if (e.key === 'Enter') submitLead(); };
+      form.append(nameIn, compIn, btn);
+      wrapEl.append(txt, form);
+      const b = document.getElementById('chat-msgs');
+      b.appendChild(wrapEl); b.scrollTop = b.scrollHeight;
+      nameIn.focus();
+    }
+    async function submitLead() {
+      const L = T[currentLang];
+      const name = document.getElementById('lead-name').value.trim();
+      const company = document.getElementById('lead-company').value.trim();
+      if (!name || !company) { addMsg('ai', L.lead_missing); return; }
+      const lead = { name, company };
+      try { localStorage.setItem('nemo_lead', JSON.stringify(lead)); } catch (e) {}
+      document.getElementById('lead-gate')?.remove();
+      leadGateActive = false;
+      setChatEnabled(true);
+      addMsg('ai', L.lead_thanks.replace('{name}', name));
+      document.getElementById('chat-in').focus();
+      gtag('event', 'lead_captured', { event_category: 'engagement', event_label: company });
+      try {
+        const recaptchaToken = await getRecaptchaToken();
+        await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ messages: [], lead, recaptchaToken })
+        });
+      } catch (e) { /* lead stays in localStorage; don't block the visitor */ }
+    }
+
     function ask(el) { document.getElementById('chat-in').value = el.textContent; document.getElementById('suggs').style.display = 'none'; send(); }
     function onKey(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); } }
     function rsz(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 80) + 'px'; }
 
     async function send() {
+      if (leadGateActive) return;
       const inp = document.getElementById('chat-in');
       const text = inp.value.trim();
       if (!text) return;
@@ -967,13 +1060,18 @@ STYLE: First person, warm but direct. Under 100 words unless more is clearly nee
           });
           if (!r.ok) throw new Error((await r.json()).error || 'API error');
           reply = (await r.json()).text;
-          sessionCount++; updateLimitUI();
+          sessionCount++; saveCount(); updateLimitUI();
         }
         document.getElementById('typ')?.remove();
         msgs.push({ role: 'assistant', content: reply });
         addMsg('ai', reply);
+        const aiCount = msgs.filter(m => m.role === 'assistant').length;
+        // Lead gate after the first answer (once per visitor)
+        if (!IS_LOCAL && aiCount === 1 && !getStoredLead()) {
+          setTimeout(showLeadGate, 600);
+        }
         // Soft prompt after 3rd exchange
-        if (msgs.filter(m => m.role === 'assistant').length === 3) {
+        if (aiCount === 3) {
           setTimeout(() => addMsg('ai', "If you'd like to continue the conversation with Alfredo directly, drop him a line at abarrerolabajos@gmail.com or connect on LinkedIn."), 800);
         }
       } catch (e) {
