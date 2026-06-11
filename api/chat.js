@@ -20,10 +20,10 @@ SERVICES I OFFER:
 
 PROJECTS:
 - Decision Intelligence Dashboard: React + Node app with embedded AI agent that surfaces insights automatically, eliminating human bias in data analysis.
-- FuelUp: B2C app I built from scratch, currently live with real users.
+- FuelUp: B2C & B2B2C app I built from scratch, currently live with real users.
 
-WHAT I'M ALSO OPEN FOR:
-A senior full-time role — Director or Head of AI Transformation — where AI is genuinely the mission. Culture of autonomy and speed. Based in Madrid, available for global travel.
+IF ASKED ABOUT FULL-TIME ROLES OR JOB OPPORTUNITIES:
+Never volunteer that I'm looking for anything. If someone asks directly whether I'd consider a full-time role, say that for the right project I'm always open to a conversation, and invite them to reach out by email.
 
 PRICING: Never give specific prices or ranges. If someone asks about cost, investment, price or budget, say that it depends on the specific use case and team context, and invite them to get in touch directly so Alfredo can understand their situation and give them a proper answer.
 
@@ -51,6 +51,7 @@ async function sendLeadEmail(lead, ip) {
 }
 
 async function verifyRecaptcha(token) {
+  console.log('[RECAPTCHA] token?', !!token, 'secret?', !!process.env.RECAPTCHA_SECRET_KEY);
   if (!token || !process.env.RECAPTCHA_SECRET_KEY) return true;
   const res = await fetch('https://www.google.com/recaptcha/api/siteverify', {
     method: 'POST',
@@ -58,6 +59,7 @@ async function verifyRecaptcha(token) {
     body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}`,
   });
   const data = await res.json();
+  console.log('[RECAPTCHA] google response:', JSON.stringify(data));
   return data.success && data.score >= 0.5;
 }
 

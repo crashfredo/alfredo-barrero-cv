@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Alfredo Barrero</title>
   <link rel="icon" type="image/svg+xml"
-    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231D3557'/%3E%3Ctext x='16' y='22' font-family='system-ui,sans-serif' font-size='14' font-weight='700' fill='white' text-anchor='middle' letter-spacing='-0.5'%3EAB%3C/text%3E%3C/svg%3E" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F4EFE6'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='16' font-weight='600' fill='%231A150F' text-anchor='middle'%3EAB%3C/text%3E%3C/svg%3E" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Spline+Sans+Mono:wght@400;500;600&display=swap"
     rel="stylesheet" />
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-MEF17T9Q13"></script>
@@ -18,280 +18,436 @@
     gtag('config', 'G-MEF17T9Q13');
   </script>
   <style>
-    *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+    /* ── RESET ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    /* ── TOKENS — paper & ink ── */
     :root {
-      --text: #111827;
-      --muted: #6B7280;
-      --light: #9CA3AF;
-      --accent: #2563EB;
-      --border: #E5E7EB;
-      --bg: #FFFFFF;
-      --bg2: #F9FAFB;
-      --wrap: 1100px;
-      --pad: clamp(20px, 5vw, 72px);
+      --paper: #F4EFE6;
+      --paper2: #EDE6D8;
+      --ink: #1A150F;
+      --muted: #6E6759;
+      --faint: #A89F8E;
+      --accent: #9E3B23;
+      --line: rgba(26,21,15,0.16);
+      --line-strong: rgba(26,21,15,0.55);
+      --wrap: 1180px;
+      --pad: clamp(20px, 5vw, 64px);
+      --serif: 'Fraunces', Georgia, serif;
+      --sans: 'Hanken Grotesk', system-ui, sans-serif;
+      --mono: 'Spline Sans Mono', ui-monospace, monospace;
+    }
+
+    /* ── INK MODE (dark) ── */
+    body.ink {
+      --paper: #16120D;
+      --paper2: #1E1913;
+      --ink: #EFE7D6;
+      --muted: #9C9283;
+      --faint: #6B6356;
+      --accent: #D2693F;
+      --line: rgba(239,231,214,0.16);
+      --line-strong: rgba(239,231,214,0.55);
     }
 
     html { scroll-behavior: smooth; overflow-x: hidden; }
-    body { font-family: 'Inter', system-ui, sans-serif; color: var(--text); background: var(--bg); font-size: 16px; overflow-x: hidden; line-height: 1.7; }
+    body {
+      font-family: var(--sans);
+      color: var(--ink); background: var(--paper);
+      font-size: 16.5px; line-height: 1.7; overflow-x: hidden;
+      transition: background .3s, color .3s;
+    }
+    ::selection { background: var(--accent); color: var(--paper); }
+
+    /* grain */
+    body::after {
+      content: ''; position: fixed; inset: 0; z-index: 999; pointer-events: none;
+      opacity: .05;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    .mono { font-family: var(--mono); }
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding-left: var(--pad); padding-right: var(--pad); }
+
+    /* ── ENTRY / REVEAL ── */
+    @keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+    .hero-main > * { animation: rise .7s ease both; }
+    .hero-main > *:nth-child(1) { animation-delay: .05s; }
+    .hero-main > *:nth-child(2) { animation-delay: .15s; }
+    .hero-main > *:nth-child(3) { animation-delay: .25s; }
+    .hero-main > *:nth-child(4) { animation-delay: .35s; }
+    .hero-main > *:nth-child(5) { animation-delay: .45s; }
+    .hero-figure { animation: rise .8s .3s ease both; }
+    .ledger { animation: rise .8s .55s ease both; }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-main > *, .hero-figure, .ledger { animation: none; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
 
     /* ── NAV ── */
     nav {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(255,255,255,.92); backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 var(--pad); height: 56px;
+      background: color-mix(in srgb, var(--paper) 92%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+      height: 60px; padding: 0 var(--pad);
       display: flex; align-items: center; justify-content: space-between;
     }
-    .nav-name { font-weight: 700; font-size: 15px; letter-spacing: -.2px; }
-    .nav-links { display: flex; gap: 16px; align-items: center; }
-    .nav-links a { font-size: 13.5px; color: var(--muted); text-decoration: none; font-weight: 500; transition: color .15s; }
-    .nav-links a:hover { color: var(--text); }
-    .nav-cta { background: var(--text) !important; color: #fff !important; padding: 7px 18px; border-radius: 7px; font-size: 13px !important; }
-    .nav-cta:hover { background: #374151 !important; }
-
-    /* ── LANG + THEME TOGGLES ── */
-    .nav-icon-btn {
-      background: none; border: 1.5px solid var(--border); border-radius: 7px;
-      padding: 5px 9px; cursor: pointer; color: var(--muted); font-size: 13px;
-      font-weight: 600; line-height: 1; display: flex; align-items: center;
-      transition: border-color .15s; font-family: inherit;
+    .nav-name {
+      font-family: var(--serif); font-weight: 600; font-size: 17px;
+      color: var(--ink); text-decoration: none; letter-spacing: -.2px;
     }
-    .nav-icon-btn:hover { border-color: #9CA3AF; color: var(--text); }
+    .nav-links { display: flex; gap: 26px; align-items: center; }
+    .nav-links > a {
+      font-family: var(--mono); font-size: 12px; letter-spacing: .4px;
+      color: var(--muted); text-decoration: none; text-transform: uppercase;
+      transition: color .15s;
+    }
+    .nav-links > a:hover { color: var(--accent); }
+    .nav-links .nv { color: var(--accent); margin-right: 2px; }
+    .nav-cta {
+      color: var(--ink) !important; border-bottom: 1.5px solid var(--accent);
+      padding-bottom: 2px;
+    }
+    .nav-cta:hover { color: var(--accent) !important; }
+    .nav-icon-btn {
+      background: none; border: 1px solid var(--line); border-radius: 0;
+      padding: 5px 10px; cursor: pointer; color: var(--muted);
+      font-family: var(--mono); font-size: 12px; line-height: 1;
+      transition: border-color .15s, color .15s;
+    }
+    .nav-icon-btn:hover { border-color: var(--line-strong); color: var(--ink); }
 
-    /* ── WRAPPER ── */
-    .wrap { max-width: var(--wrap); margin: 0 auto; padding-left: var(--pad); padding-right: var(--pad); }
+    #hamburger { display: none; flex-direction: column; justify-content: center; align-items: center; gap: 5px; width: 36px; height: 36px; background: none; border: none; cursor: pointer; padding: 4px; }
+    #hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); transition: all .2s; }
+    #hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    #hamburger.open span:nth-child(2) { opacity: 0; }
+    #hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    #mobile-menu {
+      display: none; position: fixed; top: 60px; left: 0; right: 0;
+      background: var(--paper); border-bottom: 1px solid var(--line);
+      padding: 16px 20px 20px; z-index: 99; flex-direction: column;
+    }
+    #mobile-menu a { font-family: var(--mono); font-size: 14px; text-transform: uppercase; letter-spacing: .5px; color: var(--ink); text-decoration: none; padding: 13px 0; border-bottom: 1px solid var(--line); }
+    #mobile-menu a:last-child { border-bottom: none; }
+    #mobile-menu a:hover { color: var(--accent); }
 
     /* ── HERO ── */
-    .hero { padding: clamp(40px, 6vh, 64px) var(--pad) clamp(36px, 5vh, 56px); }
-    .hero-inner { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(28px, 4vw, 56px); align-items: center; }
-
-    .hero-photo {
-      width: 180px; height: 180px;
-      border-radius: 14px; object-fit: cover; object-position: center top;
-      margin-bottom: 24px; display: block;
-      box-shadow: 0 6px 24px rgba(0,0,0,.12);
+    .hero { padding: clamp(56px, 9vh, 110px) var(--pad) 0; }
+    .hero-grid {
+      max-width: var(--wrap); margin: 0 auto;
+      display: grid; grid-template-columns: 1.35fr .85fr;
+      gap: clamp(32px, 5vw, 72px); align-items: start;
     }
-    .hero-eyebrow { font-size: 13px; font-weight: 600; color: var(--accent); letter-spacing: .3px; margin-bottom: 16px; }
-    .hero h1 { font-size: clamp(36px, 4.5vw, 56px); font-weight: 700; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 20px; }
-    .hero h1 em { font-style: italic; font-weight: 400; color: var(--muted); }
-    .hero-lead { font-size: 16px; color: var(--muted); line-height: 1.75; margin-bottom: 14px; }
+    .hero-eyebrow {
+      font-family: var(--mono); font-size: 12px; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 30px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .hero-eyebrow::before { content: ''; width: 42px; height: 1px; background: var(--accent); flex-shrink: 0; }
+    .hero h1 {
+      font-family: var(--serif); font-weight: 560;
+      font-size: clamp(40px, 5.8vw, 74px);
+      line-height: 1.06; letter-spacing: -1px; margin-bottom: 30px;
+      text-wrap: balance;
+    }
+    .hero h1 em { font-style: italic; font-weight: 440; color: var(--accent); }
+    .hero-lead { font-size: 18px; color: var(--muted); line-height: 1.75; max-width: 54ch; margin-bottom: 18px; }
     .hero-creds {
-      font-size: 13px; color: var(--light); font-weight: 500;
-      letter-spacing: .2px; margin-bottom: 28px;
+      font-family: var(--mono); font-size: 12px; letter-spacing: .6px;
+      color: var(--faint); text-transform: uppercase; margin-bottom: 40px;
     }
-    .hero-creds strong { color: var(--text); font-weight: 600; }
-    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .hero-creds strong { color: var(--ink); font-weight: 500; }
+    .hero-actions { display: flex; gap: 26px; align-items: center; flex-wrap: wrap; }
 
-    /* right col — stats */
-    .hero-right {
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 16px; padding: 28px;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    .btn-ink {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--ink); color: var(--paper);
+      font-family: var(--mono); font-size: 13px; letter-spacing: .5px; text-transform: uppercase;
+      padding: 14px 28px; text-decoration: none; border: 1px solid var(--ink);
+      cursor: pointer; transition: background .2s, color .2s;
     }
-    .stat-n { font-size: 28px; font-weight: 700; line-height: 1; margin-bottom: 5px; }
-    .stat-t { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
-    .stat-d { font-size: 12px; color: var(--muted); line-height: 1.5; }
-
-    /* ── BTN ── */
-    .btn {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 11px 22px; border-radius: 8px; font-size: 14px;
-      font-weight: 600; text-decoration: none; border: none; cursor: pointer;
-      transition: all .15s; font-family: inherit;
+    .btn-ink:hover { background: var(--accent); border-color: var(--accent); color: #F4EFE6; }
+    .link-und {
+      font-family: var(--mono); font-size: 13px; letter-spacing: .5px; text-transform: uppercase;
+      color: var(--ink); text-decoration: none;
+      border-bottom: 1.5px solid var(--accent); padding-bottom: 3px;
+      transition: color .15s; cursor: pointer; background: none; border-top: none; border-left: none; border-right: none;
     }
-    .btn-dark { background: var(--text); color: #fff; }
-    .btn-dark:hover { background: #374151; transform: translateY(-1px); }
-    .btn-outline { background: transparent; color: var(--text); border: 1.5px solid var(--border); }
-    .btn-outline:hover { border-color: #9CA3AF; }
-    .btn-accent { background: var(--accent); color: #fff; }
-    .btn-accent:hover { background: #1D4ED8; transform: translateY(-1px); }
+    .link-und:hover { color: var(--accent); }
 
-    /* ── DIVIDER ── */
-    hr { border: none; border-top: 1px solid var(--border); }
+    .hero-figure { position: relative; margin-top: 14px; }
+    .hero-figure img {
+      width: 100%; max-width: 360px; display: block; margin-left: auto;
+      filter: grayscale(1) contrast(1.05);
+      border: 1px solid var(--line-strong);
+    }
+    .hero-figure::before {
+      content: ''; position: absolute; top: 14px; right: -14px;
+      width: 100%; max-width: 360px; height: 100%;
+      border: 1px solid var(--accent); z-index: -1;
+    }
+    .hero-figure figcaption {
+      font-family: var(--mono); font-size: 11px; color: var(--faint);
+      letter-spacing: .8px; text-transform: uppercase;
+      text-align: right; margin-top: 12px;
+    }
 
-    /* ── SERVICES ── */
-    .services { padding: 52px var(--pad); }
-    .section-header { margin-bottom: 32px; }
-    .section-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--light); margin-bottom: 12px; }
-    .section-title { font-size: clamp(24px, 3vw, 32px); font-weight: 700; letter-spacing: -.5px; line-height: 1.2; margin-bottom: 12px; }
-    .section-sub { font-size: 16px; color: var(--muted); max-width: 560px; }
-    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .service-card { border: 1px solid var(--border); border-radius: 14px; padding: 24px; background: var(--bg); transition: border-color .2s, box-shadow .2s; }
-    .service-card:hover { border-color: #9CA3AF; box-shadow: 0 4px 20px rgba(0,0,0,.06); }
-    .service-icon { width: 40px; height: 40px; margin-bottom: 20px; color: var(--accent); }
-    .service-title { font-size: 17px; font-weight: 700; margin-bottom: 8px; letter-spacing: -.2px; }
-    .service-desc { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
-    .service-tag { display: inline-block; font-size: 11.5px; font-weight: 600; background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; padding: 4px 11px; color: var(--muted); }
-    .service-cta { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 600; color: var(--accent); text-decoration: none; margin-top: 16px; transition: gap .15s; }
-    .service-cta:hover { gap: 8px; }
+    /* ── LEDGER (stats) ── */
+    .ledger {
+      max-width: var(--wrap); margin: clamp(56px, 9vh, 96px) auto 0;
+      border-top: 1px solid var(--line-strong); border-bottom: 1px solid var(--line-strong);
+      display: grid; grid-template-columns: repeat(4, 1fr);
+    }
+    .stat { padding: 30px 26px 32px 0; border-right: 1px solid var(--line); }
+    .stat:last-child { border-right: none; }
+    .stat + .stat { padding-left: 26px; }
+    .stat-n {
+      font-family: var(--serif); font-weight: 560; font-size: clamp(30px, 3vw, 40px);
+      line-height: 1; color: var(--accent); margin-bottom: 12px;
+      font-variant-numeric: lining-nums;
+    }
+    .stat-t {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--ink); margin-bottom: 8px;
+    }
+    .stat-d { font-size: 13px; color: var(--muted); line-height: 1.6; }
 
-    /* ── PROJECTS ── */
-    .projects { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 52px var(--pad); }
-    .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    @media (max-width: 768px) { .projects-grid { grid-template-columns: 1fr; } }
-    .project-card { border: 1px solid var(--border); border-radius: 14px; padding: 24px; background: var(--bg); transition: border-color .2s, box-shadow .2s; }
-    .project-card:hover { border-color: #9CA3AF; box-shadow: 0 4px 20px rgba(0,0,0,.06); }
-    .project-badge { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .3px; text-transform: uppercase; background: #EFF6FF; color: var(--accent); border-radius: 20px; padding: 4px 11px; margin-bottom: 16px; }
-    .project-badge.green { background: #F0FDF4; color: #16A34A; }
-    .project-title { font-size: 19px; font-weight: 700; letter-spacing: -.3px; margin-bottom: 10px; }
-    .project-desc { font-size: 14px; color: var(--muted); line-height: 1.75; }
-    .project-stack { margin-top: 20px; display: flex; gap: 8px; flex-wrap: wrap; }
-    .stack-tag { font-size: 11.5px; background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 3px 9px; color: var(--muted); font-weight: 500; }
+    /* ── SECTION SCAFFOLD ── */
+    section { padding: clamp(64px, 10vh, 110px) var(--pad) 0; }
+    .sec-inner { max-width: var(--wrap); margin: 0 auto; }
+    .sec-head {
+      display: grid; grid-template-columns: 110px 1fr; gap: 18px;
+      padding-top: 22px; border-top: 1px solid var(--line-strong);
+      margin-bottom: clamp(36px, 5vh, 56px);
+    }
+    .sec-no { font-family: var(--mono); font-size: 13px; color: var(--accent); letter-spacing: 1px; }
+    .sec-no::after { content: ' /'; color: var(--faint); }
+    .sec-title {
+      font-family: var(--serif); font-weight: 600;
+      font-size: clamp(28px, 3.4vw, 44px); line-height: 1.12; letter-spacing: -.4px;
+      margin-bottom: 14px;
+    }
+    .sec-sub { font-size: 16px; color: var(--muted); max-width: 58ch; }
+
+    /* ── SERVICES — index rows ── */
+    .svc-list { border-top: 1px solid var(--line); }
+    .svc-row {
+      display: grid; grid-template-columns: 110px 1.1fr 1fr auto;
+      gap: 18px; align-items: baseline;
+      padding: 30px 18px 32px 0; border-bottom: 1px solid var(--line);
+      text-decoration: none; color: inherit; position: relative;
+      transition: background .25s, color .25s, padding-left .25s;
+    }
+    .svc-row:hover { background: var(--ink); color: var(--paper); padding-left: 18px; }
+    .svc-no { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: 1px; }
+    .svc-row h3 {
+      font-family: var(--serif); font-weight: 600; font-size: clamp(20px, 2.2vw, 27px);
+      letter-spacing: -.2px; line-height: 1.2; margin-bottom: 10px;
+    }
+    .svc-row p { font-size: 14.5px; color: var(--muted); line-height: 1.7; max-width: 52ch; transition: color .25s; }
+    .svc-row:hover p { color: color-mix(in srgb, var(--paper) 75%, transparent); }
+    .svc-meta { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+    .svc-tag {
+      font-family: var(--mono); font-size: 11px; letter-spacing: .8px; text-transform: uppercase;
+      color: var(--muted); transition: color .25s;
+    }
+    .svc-row:hover .svc-tag { color: color-mix(in srgb, var(--paper) 70%, transparent); }
+    .svc-arrow {
+      font-family: var(--serif); font-size: 26px; line-height: 1; color: var(--accent);
+      transition: transform .25s; align-self: center;
+    }
+    .svc-row:hover .svc-arrow { transform: translateX(8px); }
+
+    /* ── PROJECTS — editorial grid ── */
+    .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid var(--line); }
+    .proj {
+      padding: 36px 36px 40px 0; border-bottom: 1px solid var(--line);
+      display: flex; flex-direction: column;
+    }
+    .proj.feature { grid-column: 1 / -1; border-bottom: 1px solid var(--line); }
+    .proj + .proj:not(.feature) { padding-left: 36px; border-left: 1px solid var(--line); }
+    .proj-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 14px; flex-wrap: wrap; }
+    .proj h3 {
+      font-family: var(--serif); font-weight: 600; font-size: clamp(24px, 2.6vw, 34px);
+      letter-spacing: -.3px;
+    }
+    .proj-badge {
+      font-family: var(--mono); font-size: 10.5px; letter-spacing: 1.2px; text-transform: uppercase;
+      color: var(--accent); border: 1px solid currentColor; padding: 4px 10px;
+    }
+    .proj p { font-size: 15px; color: var(--muted); line-height: 1.75; max-width: 72ch; }
+    .proj-stack { margin-top: 22px; display: flex; gap: 0; flex-wrap: wrap; }
+    .stack-tag {
+      font-family: var(--mono); font-size: 11px; letter-spacing: .5px;
+      color: var(--muted); padding: 4px 12px; border: 1px solid var(--line);
+      margin: 0 -1px -1px 0;
+    }
 
     /* ── STORY ── */
-    .story { padding: 52px var(--pad); }
-    .story-inner { display: grid; grid-template-columns: minmax(140px, 16%) 1fr; gap: clamp(32px, 5vw, 80px); }
-    .story-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--light); padding-top: 6px; }
-    .story-body p { font-size: 16px; font-family: 'Inter', system-ui, sans-serif; font-weight: 400; color: var(--text); line-height: 1.75; margin-bottom: 16px; }
-    .story-body p:last-child { margin-bottom: 0; }
-    .story-body strong { font-weight: 600; }
+    .story-grid { display: grid; grid-template-columns: 110px 1fr; gap: 18px; }
+    .story-body { max-width: 70ch; }
+    .story-body p { font-size: 17.5px; line-height: 1.85; margin-bottom: 22px; }
+    .story-body p:first-child::first-letter {
+      font-family: var(--serif); font-weight: 600; font-size: 64px; line-height: .82;
+      float: left; padding: 8px 12px 0 0; color: var(--accent);
+    }
+    .story-body strong { font-weight: 700; }
     .story-body em { font-style: italic; color: var(--muted); }
     .story-anchors {
-      margin-top: 36px; padding-top: 28px;
-      border-top: 1px solid var(--border);
-      display: flex; align-items: center; gap: 40px; flex-wrap: wrap;
+      margin-top: 44px; padding-top: 26px; border-top: 1px solid var(--line);
+      display: flex; align-items: center; gap: 44px; flex-wrap: wrap;
     }
-    .story-anchor {
-      height: 42px; width: auto; opacity: .9;
-      transition: opacity .2s;
-    }
-    .story-anchor:hover { opacity: 1; }
-
-    /* ── LOOKING FOR ── */
-    .looking { padding: 52px var(--pad); border-top: 1px solid var(--border); }
-    .looking-inner { display: grid; grid-template-columns: minmax(140px, 16%) 1fr; gap: clamp(32px, 5vw, 80px); }
-    .looking-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--light); padding-top: 6px; }
-    .looking h2 { font-size: clamp(22px, 3vw, 30px); font-weight: 700; letter-spacing: -.5px; margin-bottom: 18px; line-height: 1.2; }
-    .looking p { font-size: 16px; color: var(--muted); line-height: 1.75; margin-bottom: 14px; }
-    .looking p:last-child { margin-bottom: 0; }
+    .story-anchor { height: 32px; width: auto; opacity: .5; transition: opacity .2s; filter: grayscale(1) brightness(0.25); }
+    body.ink .story-anchor { filter: grayscale(1) brightness(0) invert(.9); }
+    .story-anchor:hover { opacity: .85; }
 
     /* ── CONTACT ── */
-    .contact-section { background: var(--text); color: #fff; padding: 52px var(--pad); text-align: center; }
-    .contact-inner { max-width: 640px; margin: 0 auto; }
-    .contact-section h2 { font-size: clamp(26px, 4vw, 36px); font-weight: 700; letter-spacing: -.5px; margin-bottom: 12px; }
-    .contact-section p { color: rgba(255,255,255,.6); margin-bottom: 32px; font-size: 16px; }
-    .contact-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .btn-white { background: #fff; color: var(--text); }
-    .btn-white:hover { background: #F3F4F6; }
-    .btn-ghost-w { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.3); }
-    .btn-ghost-w:hover { border-color: rgba(255,255,255,.7); }
+    .contact-section { padding: clamp(72px, 12vh, 130px) var(--pad); text-align: center; }
+    .contact-inner { max-width: 760px; margin: 0 auto; }
+    .contact-section h2 {
+      font-family: var(--serif); font-weight: 560;
+      font-size: clamp(48px, 9vw, 104px); line-height: 1; letter-spacing: -2px;
+      margin-bottom: 26px;
+    }
+    .contact-section > .contact-inner > p { color: var(--muted); margin-bottom: 44px; font-size: 16px; }
+    .contact-mail {
+      display: inline-block; font-family: var(--serif); font-weight: 500;
+      font-size: clamp(18px, 2.6vw, 28px); color: var(--ink); text-decoration: none;
+      border-bottom: 2px solid var(--accent); padding-bottom: 4px; margin-bottom: 36px;
+      transition: color .2s;
+    }
+    .contact-mail:hover { color: var(--accent); }
+    .contact-actions { display: flex; gap: 26px; justify-content: center; flex-wrap: wrap; }
 
-    /* ── FOOTER ── */
-    footer { text-align: center; padding: 24px; font-size: 12.5px; color: var(--light); border-top: 1px solid var(--border); }
+    footer {
+      text-align: center; padding: 26px var(--pad);
+      font-family: var(--mono); font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--faint); border-top: 1px solid var(--line);
+    }
 
     /* ── CHAT ── */
     #chat-btn {
       position: fixed; bottom: 24px; right: 24px; z-index: 200;
-      width: 52px; height: 52px; border-radius: 50%;
-      background: var(--text); color: #fff; border: none;
-      box-shadow: 0 4px 16px rgba(0,0,0,.2); cursor: pointer;
-      display: flex; align-items: center; justify-content: center; transition: transform .15s;
+      width: 54px; height: 54px; border-radius: 50%;
+      background: var(--ink); color: var(--paper); border: 1px solid var(--ink);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: transform .15s, background .2s;
+      animation: chatPulse 2.4s ease-out 1.5s 4;
     }
-    #chat-btn:hover { transform: scale(1.07); }
+    #chat-btn:hover { transform: scale(1.07); background: var(--accent); border-color: var(--accent); }
+    @keyframes chatPulse {
+      0% { box-shadow: 0 0 0 0 rgba(158,59,35,0.4); }
+      100% { box-shadow: 0 0 0 18px rgba(158,59,35,0); }
+    }
+    @media (prefers-reduced-motion: reduce) { #chat-btn { animation: none; } }
     #chat-window {
-      position: fixed; bottom: 88px; right: 24px; z-index: 200;
-      width: 360px; max-height: 520px;
-      background: var(--bg); border: 1px solid var(--border);
-      border-radius: 14px; box-shadow: 0 8px 32px rgba(0,0,0,.14);
+      position: fixed; bottom: 92px; right: 24px; z-index: 200;
+      width: 370px; max-height: 540px;
+      background: var(--paper); border: 1px solid var(--line-strong);
+      box-shadow: 10px 10px 0 0 var(--accent);
       overflow: hidden; display: none; flex-direction: column;
     }
     #chat-window.open { display: flex; }
-    .chat-header { padding: 14px 18px; background: var(--text); color: #fff; display: flex; align-items: center; justify-content: space-between; }
+    .chat-header {
+      padding: 14px 18px; background: var(--ink); color: var(--paper);
+      display: flex; align-items: center; justify-content: space-between;
+    }
     .chat-left { display: flex; align-items: center; gap: 10px; }
-    .chat-av { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,.15); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; }
+    .chat-av {
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 1px solid var(--accent); color: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif); font-weight: 600; font-size: 14px;
+    }
     .chat-hname { font-size: 13.5px; font-weight: 700; }
-    .chat-hsub { font-size: 11px; opacity: .6; }
-    #chat-x { background: none; border: none; color: #fff; cursor: pointer; font-size: 18px; opacity: .7; }
+    .chat-hsub { font-size: 11px; opacity: .65; }
+    #chat-x { background: none; border: none; color: inherit; cursor: pointer; font-size: 18px; opacity: .7; }
     #chat-x:hover { opacity: 1; }
     #chat-msgs { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; min-height: 240px; }
     #msgs-spacer { flex: 1; }
-    .msg { max-width: 84%; font-size: 13.5px; line-height: 1.5; padding: 9px 13px; border-radius: 10px; }
-    .msg-ai { background: #F3F4F6; color: var(--text); align-self: flex-start; border-radius: 3px 10px 10px 10px; }
-    .msg-user { background: var(--text); color: #fff; align-self: flex-end; border-radius: 10px 3px 10px 10px; }
-    .msg-t { background: #F3F4F6; color: var(--muted); align-self: flex-start; font-style: italic; font-size: 12.5px; border-radius: 3px 10px 10px 10px; padding: 9px 13px; }
+    .msg { max-width: 86%; font-size: 13.5px; line-height: 1.55; padding: 10px 14px; }
+    .msg-ai { background: var(--paper2); color: var(--ink); align-self: flex-start; border: 1px solid var(--line); }
+    .msg-user { background: var(--ink); color: var(--paper); align-self: flex-end; }
+    .msg-t { background: var(--paper2); color: var(--muted); align-self: flex-start; font-style: italic; font-size: 12.5px; padding: 10px 14px; border: 1px solid var(--line); }
     .chat-sugg { padding: 0 12px 10px; display: flex; flex-wrap: wrap; gap: 6px; }
-    .sugg { font-size: 11.5px; background: #F3F4F6; border: none; border-radius: 20px; padding: 5px 11px; cursor: pointer; color: var(--text); font-family: inherit; }
-    .sugg:hover { background: var(--border); }
-    .chat-row { padding: 10px 12px; border-top: 1px solid var(--border); display: flex; gap: 8px; }
-    #chat-in { flex: 1; border: 1px solid var(--border); border-radius: 7px; padding: 8px 12px; font-size: 13.5px; font-family: inherit; outline: none; resize: none; max-height: 80px; }
-    #chat-in:focus { border-color: var(--text); }
-    #chat-go { background: var(--text); color: #fff; border: none; border-radius: 7px; width: 36px; height: 36px; flex-shrink: 0; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-    #qlimit { font-size: 11px; color: var(--light); text-align: right; padding: 4px 14px 0; }
-    #rcap-note { font-size: 10px; color: var(--light); text-align: center; padding: 0 14px 6px; display: none; }
+    .sugg {
+      font-family: var(--mono); font-size: 11px; background: none; border: 1px solid var(--line);
+      padding: 5px 11px; cursor: pointer; color: var(--muted);
+      transition: border-color .15s, color .15s;
+    }
+    .sugg:hover { border-color: var(--accent); color: var(--accent); }
+    .chat-row { padding: 10px 12px; border-top: 1px solid var(--line); display: flex; gap: 8px; }
+    #chat-in {
+      flex: 1; border: 1px solid var(--line); padding: 8px 12px;
+      font-size: 13.5px; font-family: var(--sans);
+      background: var(--paper); color: var(--ink);
+      outline: none; resize: none; max-height: 80px;
+    }
+    #chat-in:focus { border-color: var(--accent); }
+    #chat-go {
+      background: var(--ink); color: var(--paper); border: none;
+      width: 36px; height: 36px; flex-shrink: 0; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+    #chat-go:hover { background: var(--accent); }
+    #qlimit { font-family: var(--mono); font-size: 10.5px; color: var(--faint); text-align: right; padding: 4px 14px 0; }
+    #rcap-note { font-size: 10px; color: var(--faint); text-align: center; padding: 0 14px 6px; display: none; }
     #rcap-note a { color: inherit; }
     .grecaptcha-badge { visibility: hidden; }
 
-    /* ── HAMBURGER ── */
-    #hamburger { display: none; flex-direction: column; justify-content: center; align-items: center; gap: 5px; width: 36px; height: 36px; background: none; border: none; cursor: pointer; padding: 4px; }
-    #hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all .2s; }
-    #hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    #hamburger.open span:nth-child(2) { opacity: 0; }
-    #hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-    #mobile-menu { display: none; position: fixed; top: 56px; left: 0; right: 0; background: rgba(255,255,255,.97); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); padding: 16px 20px 20px; z-index: 99; flex-direction: column; gap: 4px; }
-    #mobile-menu a { font-size: 16px; font-weight: 500; color: var(--text); text-decoration: none; padding: 12px 0; border-bottom: 1px solid var(--border); }
-    #mobile-menu a:last-child { border-bottom: none; }
-    #mobile-menu a:hover { color: var(--accent); }
-    body.dark #mobile-menu { background: rgba(17,24,39,.97); }
-
     /* ── RESPONSIVE ── */
-    @media (max-width: 900px) { .services-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 980px) {
+      .ledger { grid-template-columns: 1fr 1fr; }
+      .stat { border-right: none; border-bottom: 1px solid var(--line); padding-left: 0 !important; }
+      .stat:nth-child(odd) { border-right: 1px solid var(--line); padding-right: 26px; }
+      .stat:nth-child(even) { padding-left: 26px !important; }
+      .stat:nth-child(3), .stat:nth-child(4) { border-bottom: none; }
+      .svc-row { grid-template-columns: 70px 1fr; }
+      .svc-arrow { display: none; }
+      .svc-meta { grid-column: 2; }
+    }
     @media (max-width: 768px) {
-      .hero-inner { grid-template-columns: 1fr; gap: 32px; }
-      .hero-right { grid-template-columns: 1fr 1fr; }
-      .story-inner, .looking-inner { grid-template-columns: 1fr; gap: 24px; }
-      .story-label, .looking-label { padding-top: 0; }
-      .nav-links a:not(.nav-cta):not(.nav-dl) { display: none; }
-      .nav-links { gap: 8px; }
-      .nav-cta { padding: 7px 12px; font-size: 12px !important; }
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-figure { order: -1; margin-top: 0; }
+      .hero-figure img { margin-left: 0; max-width: 240px; }
+      .hero-figure::before { max-width: 240px; }
+      .hero-figure figcaption { text-align: left; }
+      .sec-head, .story-grid { grid-template-columns: 1fr; gap: 10px; }
+      .svc-row { grid-template-columns: 1fr; gap: 10px; padding-right: 0; }
+      .svc-arrow { display: none; }
+      .proj-grid { grid-template-columns: 1fr; }
+      .proj { padding-right: 0; }
+      .proj + .proj:not(.feature) { padding-left: 0; border-left: none; }
+      .nav-links > a:not(.nav-cta) { display: none; }
+      .nav-links { gap: 10px; }
       nav { padding: 0 16px; }
       #hamburger { display: flex; }
-      #mobile-menu { display: block; }
+      #mobile-menu { display: flex; }
       #mobile-menu.closed { display: none; }
-      #chat-window { position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100dvh; max-height: 100dvh; border-radius: 0; border: none; z-index: 300; }
-      #chat-window.open { display: flex; }
+      #chat-window { position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100dvh; max-height: 100dvh; border: none; box-shadow: none; z-index: 300; }
       #chat-btn { bottom: 16px; right: 16px; }
       #chat-in { font-size: 16px; }
     }
-    @media (max-width: 420px) { .hero-right { grid-template-columns: 1fr; } }
-
-    /* ── DARK MODE ── */
-    body.dark { --text: #F9FAFB; --muted: #9CA3AF; --light: #6B7280; --border: #374151; --bg: #111827; --bg2: #1F2937; }
-    body.dark nav { background: rgba(17,24,39,.92); }
-    body.dark .contact-section { background: #0F172A; }
-    body.dark footer { background: var(--bg); }
-    body.dark #chat-window { background: var(--bg); }
-    body.dark .msg-ai, body.dark .msg-t { background: #1F2937; }
-    body.dark .sugg { background: #1F2937; }
-    body.dark .sugg:hover { background: #374151; }
-    body.dark #chat-in { background: #1F2937; color: var(--text); }
-    body.dark .btn-dark { background: #2563EB; }
-    body.dark .btn-dark:hover { background: #1D4ED8; }
-    body.dark .contact-section .btn-white { background: #F9FAFB; color: #111827; }
-    body.dark .contact-section .btn-white:hover { background: #E5E7EB; }
-    body.dark .nav-cta { background: #2563EB !important; }
-    body.dark .nav-cta:hover { background: #1D4ED8 !important; }
-    body.dark .chat-header { background: #1E3A5F; }
-    body.dark .msg-user { background: #2563EB; }
-    body.dark #chat-btn, body.dark #chat-go { background: #2563EB; }
-    body.dark .service-card, body.dark .project-card { background: #1F2937; }
-    body.dark .project-badge { background: #1E3A5F; }
-    body.dark .project-badge.green { background: #14532D; color: #4ADE80; }
-    body.dark .nav-icon-btn { color: var(--muted); }
-    body.dark .nav-icon-btn:hover { color: var(--text); }
-    body.dark #mobile-menu { background: rgba(17,24,39,.97); }
+    @media (max-width: 460px) {
+      .ledger { grid-template-columns: 1fr; }
+      .stat { border-right: none !important; border-bottom: 1px solid var(--line); padding: 24px 0 !important; }
+      .stat:last-child { border-bottom: none; }
+    }
   </style>
 </head>
 
 <body>
 
   <nav>
-    <span class="nav-name">Alfredo Barrero</span>
+    <a class="nav-name" href="#top">Alfredo Barrero</a>
     <div class="nav-links">
-      <a href="#services" data-i18n="nav_work">Work with me</a>
-      <a href="#projects" data-i18n="nav_projects">Projects</a>
-      <a href="#story" data-i18n="nav_about">About</a>
-      <button class="nav-icon-btn" id="theme-btn" onclick="toggleTheme()" title="Toggle dark mode">☀️</button>
+      <a href="#services"><span class="nv">01</span> <span data-i18n="nav_work">Work with me</span></a>
+      <a href="#projects"><span class="nv">02</span> <span data-i18n="nav_projects">Projects</span></a>
+      <a href="#story"><span class="nv">03</span> <span data-i18n="nav_about">About</span></a>
+      <button class="nav-icon-btn" id="theme-btn" onclick="toggleTheme()" title="Toggle ink mode">☾</button>
       <button class="nav-icon-btn" id="lang-btn" onclick="toggleLang()" title="Switch language">ES</button>
       <a href="#contact" class="nav-cta" data-i18n="nav_cta">Get in touch</a>
       <button id="hamburger" onclick="toggleMenu()" aria-label="Menu">
@@ -304,175 +460,187 @@
     <a href="#services" onclick="closeMenu()" data-i18n="nav_work">Work with me</a>
     <a href="#projects" onclick="closeMenu()" data-i18n="nav_projects">Projects</a>
     <a href="#story" onclick="closeMenu()" data-i18n="nav_about">About</a>
-    <a href="#looking" onclick="closeMenu()" data-i18n="nav_open">Open to</a>
     <a href="#contact" onclick="closeMenu()" data-i18n="nav_cta">Get in touch</a>
   </div>
 
   <!-- HERO -->
-  <div class="hero">
-    <div class="hero-inner">
-      <div class="hero-left">
-        <img src="pic.jpeg" alt="Alfredo Barrero" class="hero-photo" />
+  <header class="hero" id="top">
+    <div class="hero-grid">
+      <div class="hero-main">
         <p class="hero-eyebrow" data-i18n="hero_eyebrow">AI Transformation @ Netflix · Madrid, Spain</p>
         <h1 data-i18n-html="hero_h1">I lead AI transformation<br />that actually changes<br /><em>how teams work.</em></h1>
         <p class="hero-lead" data-i18n="hero_lead">Ten years inside global operations, shaping the systems — and the way teams work around them — at scale, in production, every day.</p>
         <p class="hero-creds" data-i18n-html="hero_creds"><strong>Spain's Top Talent 2025</strong> · MBA · Founder @ FuelUp</p>
         <div class="hero-actions">
-          <a href="#services" class="btn btn-dark" data-i18n="btn_work">Work with me</a>
-          <a href="#contact" class="btn btn-outline" data-i18n="btn_contact">Get in touch</a>
+          <a href="#services" class="btn-ink" data-i18n="btn_work">Work with me</a>
+          <a href="#contact" class="link-und" data-i18n="btn_contact">Get in touch</a>
         </div>
       </div>
-      <div class="hero-right">
+      <figure class="hero-figure">
+        <img src="pic.jpeg" alt="Alfredo Barrero" />
+        <figcaption>Madrid · 40.4168° N, 3.7038° W</figcaption>
+      </figure>
+    </div>
+
+    <div class="ledger">
+      <div class="stat">
+        <div class="stat-n">+3,400h</div>
+        <div class="stat-t" data-i18n="stat1_t">Returned to the business / year</div>
+        <p class="stat-d" data-i18n="stat1_d">Built NSights, a production AI platform democratizing data and insights — freeing 850+ hours per quarter for high-impact work.</p>
+      </div>
+      <div class="stat">
+        <div class="stat-n">6+</div>
+        <div class="stat-t" data-i18n="stat2_t">M&amp;A integrations led</div>
+        <p class="stat-d" data-i18n="stat2_d">End-to-end, zero downtime, globally distributed teams.</p>
+      </div>
+      <div class="stat">
+        <div class="stat-n">10K+</div>
+        <div class="stat-t" data-i18n="stat3_t">Hours saved/year</div>
+        <p class="stat-d" data-i18n="stat3_d">Frameworks aligning Games, Animation, VFX and Enterprise ops with centralized engineering — globally.</p>
+      </div>
+      <div class="stat">
+        <div class="stat-n">10+ yrs</div>
+        <div class="stat-t" data-i18n="stat4_t">Global experience</div>
+        <p class="stat-d" data-i18n="stat4_d">Tech, Broadcast & AI transformation. Cross-cultural global leadership.</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- 01 WORK WITH ME -->
+  <section id="services">
+    <div class="sec-inner">
+      <div class="sec-head reveal">
+        <span class="sec-no">01</span>
         <div>
-          <div class="stat-n">+3,400h</div>
-          <div class="stat-t" data-i18n="stat1_t">Returned to the business / year</div>
-          <div class="stat-d" data-i18n="stat1_d">Built NSights, a production AI platform democratizing data and insights — freeing 850+ hours per quarter for high-impact work.</div>
+          <h2 class="sec-title" data-i18n-html="svc_title">Three ways I can help<br />your team right now.</h2>
+          <p class="sec-sub" data-i18n="svc_sub">I work with a small number of organisations and individuals at a time. If you're serious about AI transformation, let's talk.</p>
         </div>
+      </div>
+      <div class="svc-list">
+        <a href="#contact" class="svc-row reveal">
+          <span class="svc-no">01.1</span>
+          <div>
+            <h3 data-i18n="svc1_title">AI Workshop for Teams</h3>
+            <p data-i18n="svc1_desc">A half-day or full-day intensive for teams of 8–15 people. We go from zero to actually using AI in your workflows — Claude, NotebookLM, agents, automation. No theory. Real tools, real use cases, your context.</p>
+          </div>
+          <div class="svc-meta">
+            <span class="svc-tag" data-i18n="svc1_tag">Half-day · Full-day · On-site or remote</span>
+          </div>
+          <span class="svc-arrow">→</span>
+        </a>
+        <a href="#contact" class="svc-row reveal">
+          <span class="svc-no">01.2</span>
+          <div>
+            <h3 data-i18n="svc2_title">AI Acceleration Programme</h3>
+            <p data-i18n="svc2_desc">A 6–8 week cohort for professionals who want to genuinely transform how they work with AI. Weekly live sessions, async support, and hands-on implementation. You leave with systems that run — not slides you'll never open again.</p>
+          </div>
+          <div class="svc-meta">
+            <span class="svc-tag" data-i18n="svc2_tag">6–8 weeks · Small cohort · Weekly sessions</span>
+          </div>
+          <span class="svc-arrow">→</span>
+        </a>
+        <a href="#contact" class="svc-row reveal">
+          <span class="svc-no">01.3</span>
+          <div>
+            <h3 data-i18n="svc3_title">AI Implementation Consulting</h3>
+            <p data-i18n="svc3_desc">I come in, diagnose your operations, and build something real. Dashboards, agents, decision intelligence systems — the kind that remove bottlenecks and surface insight automatically. I've done it at scale. Now I do it for you.</p>
+          </div>
+          <div class="svc-meta">
+            <span class="svc-tag" data-i18n="svc3_tag">Project-based · Bespoke · End-to-end</span>
+          </div>
+          <span class="svc-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 PROJECTS -->
+  <section id="projects">
+    <div class="sec-inner">
+      <div class="sec-head reveal">
+        <span class="sec-no">02</span>
         <div>
-          <div class="stat-n">6+</div>
-          <div class="stat-t" data-i18n="stat2_t">M&amp;A integrations led</div>
-          <div class="stat-d" data-i18n="stat2_d">End-to-end, zero downtime, globally distributed teams.</div>
+          <h2 class="sec-title" data-i18n="proj_title">Things I'm building.</h2>
+          <p class="sec-sub" data-i18n="proj_sub">I don't just advise on AI — I ship. This is what I'm building outside of my day job.</p>
         </div>
+      </div>
+      <div class="proj-grid">
+        <article class="proj feature reveal">
+          <div class="proj-head">
+            <h3>NSights</h3>
+            <span class="proj-badge" data-i18n="proj2_badge">Internal</span>
+          </div>
+          <p data-i18n="proj2_desc">Conversational analytics platform built autonomously at Netflix. Teams query operational data in natural language and get grounded answers within seconds — democratizing data insights. Returns 850+ hours per quarter back to global teams.</p>
+          <div class="proj-stack">
+            <span class="stack-tag">Claude Agent SDK</span>
+            <span class="stack-tag">MCP Server</span>
+            <span class="stack-tag">RAG</span>
+            <span class="stack-tag">Trino/Presto</span>
+            <span class="stack-tag">React + TypeScript</span>
+          </div>
+        </article>
+        <article class="proj reveal">
+          <div class="proj-head">
+            <h3>Folia</h3>
+            <span class="proj-badge" data-i18n="proj3_badge">Building now</span>
+          </div>
+          <p data-i18n="proj3_desc">A mobile app to collect and care for your plants like Pokémon. Each plant gets its own Pokédex-style card. AI identifies the species from camera and gives personalised watering and light recommendations. Daily care is gamified — plants level up, you earn badges.</p>
+          <div class="proj-stack">
+            <span class="stack-tag">Next.js</span>
+            <span class="stack-tag">AI vision</span>
+            <span class="stack-tag">iOS & Android</span>
+          </div>
+        </article>
+        <article class="proj reveal">
+          <div class="proj-head">
+            <h3>FuelUp</h3>
+            <span class="proj-badge" data-i18n="proj1_badge">Live · Real users</span>
+          </div>
+          <p data-i18n="proj1_desc">A B2C &amp; B2B2C app I built from scratch, currently live with real users. Building FuelUp keeps me honest about what it actually takes to ship a product — from zero to production, end-to-end. It gives me a perspective most enterprise leaders simply don't have.</p>
+          <div class="proj-stack">
+            <span class="stack-tag">B2C · B2B2C</span>
+            <span class="stack-tag">Mobile</span>
+            <span class="stack-tag">Full-stack</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 STORY -->
+  <section id="story">
+    <div class="sec-inner">
+      <div class="sec-head reveal">
+        <span class="sec-no">03</span>
         <div>
-          <div class="stat-n">10K+</div>
-          <div class="stat-t" data-i18n="stat3_t">Hours saved/year</div>
-          <div class="stat-d" data-i18n="stat3_d">Frameworks aligning Games, Animation, VFX and Enterprise ops with centralized engineering — globally.</div>
-        </div>
-        <div>
-          <div class="stat-n">10+ yrs</div>
-          <div class="stat-t" data-i18n="stat4_t">Global experience</div>
-          <div class="stat-d" data-i18n="stat4_d">Tech, Broadcast & AI transformation. Cross-cultural global leadership.</div>
+          <h2 class="sec-title" data-i18n="story_label">My story</h2>
         </div>
       </div>
-    </div>
-  </div>
-
-  <hr />
-
-  <!-- WORK WITH ME -->
-  <div class="services" id="services">
-    <div class="section-header">
-      <div class="section-label" data-i18n="nav_work">Work with me</div>
-      <div class="section-title" data-i18n-html="svc_title">Three ways I can help<br />your team right now.</div>
-      <p class="section-sub" data-i18n="svc_sub">I work with a small number of organisations and individuals at a time. If you're serious about AI transformation, let's talk.</p>
-    </div>
-    <div class="services-grid">
-      <div class="service-card">
-        <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
-        </svg>
-        <div class="service-title" data-i18n="svc1_title">AI Workshop for Teams</div>
-        <div class="service-desc" data-i18n="svc1_desc">A half-day or full-day intensive for teams of 8–15 people. We go from zero to actually using AI in your workflows — Claude, NotebookLM, agents, automation. No theory. Real tools, real use cases, your context.</div>
-        <span class="service-tag" data-i18n="svc1_tag">Half-day · Full-day · On-site or remote</span>
-        <br/><a href="#contact" class="service-cta" data-i18n="svc_cta">Get in touch →</a>
-      </div>
-      <div class="service-card">
-        <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
-        </svg>
-        <div class="service-title" data-i18n="svc2_title">AI Acceleration Programme</div>
-        <div class="service-desc" data-i18n="svc2_desc">A 6–8 week cohort for professionals who want to genuinely transform how they work with AI. Weekly live sessions, async support, and hands-on implementation. You leave with systems that run — not slides you'll never open again.</div>
-        <span class="service-tag" data-i18n="svc2_tag">6–8 weeks · Small cohort · Weekly sessions</span>
-        <br/><a href="#contact" class="service-cta" data-i18n="svc_cta">Get in touch →</a>
-      </div>
-      <div class="service-card">
-        <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
-          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-        </svg>
-        <div class="service-title" data-i18n="svc3_title">AI Implementation Consulting</div>
-        <div class="service-desc" data-i18n="svc3_desc">I come in, diagnose your operations, and build something real. Dashboards, agents, decision intelligence systems — the kind that remove bottlenecks and surface insight automatically. I've done it at scale. Now I do it for you.</div>
-        <span class="service-tag" data-i18n="svc3_tag">Project-based · Bespoke · End-to-end</span>
-        <br/><a href="#contact" class="service-cta" data-i18n="svc_cta">Get in touch →</a>
-      </div>
-    </div>
-  </div>
-
-  <hr />
-
-  <!-- PROJECTS -->
-  <div class="projects" id="projects">
-    <div class="section-header">
-      <div class="section-label" data-i18n="nav_projects">Projects</div>
-      <div class="section-title" data-i18n="proj_title">Things I'm building.</div>
-      <p class="section-sub" data-i18n="proj_sub">I don't just advise on AI — I ship. This is what I'm building outside of my day job.</p>
-    </div>
-    <div class="projects-grid">
-      <div class="project-card">
-        <div class="project-badge" data-i18n="proj2_badge">Internal</div>
-        <div class="project-title">NSights</div>
-        <div class="project-desc" data-i18n="proj2_desc">Conversational analytics platform built autonomously at Netflix. Teams query operational data in natural language and get grounded answers within seconds — democratizing data insights. Returns 850+ hours per quarter back to global teams.</div>
-        <div class="project-stack">
-          <span class="stack-tag">Claude Agent SDK</span>
-          <span class="stack-tag">MCP Server</span>
-          <span class="stack-tag">RAG</span>
-          <span class="stack-tag">Trino/Presto</span>
-          <span class="stack-tag">React + TypeScript</span>
-        </div>
-      </div>
-      <div class="project-card">
-        <div class="project-badge" style="background:#FFF7ED;color:#C2410C;" data-i18n="proj3_badge">Building now</div>
-        <div class="project-title">Folia</div>
-        <div class="project-desc" data-i18n="proj3_desc">A mobile app to collect and care for your plants like Pokémon. Each plant gets its own Pokédex-style card. AI identifies the species from camera and gives personalised watering and light recommendations. Daily care is gamified — plants level up, you earn badges.</div>
-        <div class="project-stack">
-          <span class="stack-tag">Next.js</span>
-          <span class="stack-tag">AI vision</span>
-          <span class="stack-tag">iOS & Android</span>
-        </div>
-      </div>
-      <div class="project-card">
-        <div class="project-badge green" data-i18n="proj1_badge">Live · Real users</div>
-        <div class="project-title">FuelUp</div>
-        <div class="project-desc" data-i18n="proj1_desc">A B2C app I built from scratch, currently live with real users. Building FuelUp keeps me honest about what it actually takes to ship a product — from zero to production, end-to-end. It gives me a perspective most enterprise leaders simply don't have.</div>
-        <div class="project-stack">
-          <span class="stack-tag">B2C</span>
-          <span class="stack-tag">Mobile</span>
-          <span class="stack-tag">Full-stack</span>
+      <div class="story-grid">
+        <span></span>
+        <div class="story-body reveal">
+          <p data-i18n="story_p1">I started as an engineer — building live broadcast infrastructure for the Olympic Games and Grand Slams. Zero-failure environments, millions of viewers, real consequences. It taught me that the hardest problems are never purely technical.</p>
+          <p data-i18n="story_p2">I took that into six years at Netflix, where my scope kept growing. I started by partnering with flagship productions like La Casa de Papel — helping them work smarter and safer at global scale. Then I led four end-to-end M&amp;A integrations of acquired studios. Today, I define the collaboration frameworks that align global ops teams — Games, Animation, VFX, Enterprise — with the centralized engineering teams that power them, driving alignment and scale across the business. Along the way, I kept moving closer to what interested me most: how AI was changing the way people actually work.</p>
+          <p data-i18n-html="story_p3">The work I'm most proud of is the AI transformation. I autonomously built NSights — a production GenAI platform that lets teams query operational data in natural language and get answers within seconds. Democratizing data and insights, eliminating the manual bottlenecks that slow decisions. Beyond NSights, I lead AI communities and coach teams across all regions. <strong>People come to me because I build things, not just talk about them.</strong></p>
+          <p data-i18n="story_p4">Outside of my day job, I build. I shipped FuelUp — a B2C product live with real users — and I'm building Folia now. I train teams and individuals on how to use AI tools for real. That combination — builder, operator, teacher — is what I bring to every engagement.</p>
+          <div class="story-anchors">
+            <img src="netflix.svg" alt="Netflix" class="story-anchor" />
+            <img src="olympic.svg" alt="IOC · Olympic Channel" class="story-anchor" />
+          </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- STORY -->
-  <div class="story" id="story">
-    <div class="story-inner">
-      <div class="story-label" data-i18n="story_label">My story</div>
-      <div class="story-body">
-        <p data-i18n="story_p1">I started as an engineer — building live broadcast infrastructure for the Olympic Games and Grand Slams. Zero-failure environments, millions of viewers, real consequences. It taught me that the hardest problems are never purely technical.</p>
-        <p data-i18n="story_p2">I took that into six years at Netflix, where my scope kept growing. I started by partnering with flagship productions like La Casa de Papel — helping them work smarter and safer at global scale. Then I led four end-to-end M&amp;A integrations of acquired studios. Today, I define the collaboration frameworks that align global ops teams — Games, Animation, VFX, Enterprise — with the centralized engineering teams that power them, driving alignment and scale across the business. Along the way, I kept moving closer to what interested me most: how AI was changing the way people actually work.</p>
-        <p data-i18n-html="story_p3">The work I'm most proud of is the AI transformation. I autonomously built NSights — a production GenAI platform that lets teams query operational data in natural language and get answers within seconds. Democratizing data and insights, eliminating the manual bottlenecks that slow decisions. Beyond NSights, I lead AI communities and coach teams across all regions. <strong>People come to me because I build things, not just talk about them.</strong></p>
-        <p data-i18n="story_p4">Outside of my day job, I build. I shipped FuelUp — a B2C product live with real users — and I'm building Folia now. I train teams and individuals on how to use AI tools for real. That combination — builder, operator, teacher — is what I bring to every engagement.</p>
-        <div class="story-anchors">
-          <img src="netflix.svg" alt="Netflix" class="story-anchor" />
-          <img src="olympic.svg" alt="IOC · Olympic Channel" class="story-anchor" />
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <hr />
-
-  <!-- LOOKING FOR -->
-  <div class="looking" id="looking">
-    <div class="looking-inner">
-      <div class="looking-label" data-i18n="look_label">Open to</div>
-      <div>
-        <h2 data-i18n-html="look_title">Senior roles where AI<br />is genuinely the mission.</h2>
-        <p data-i18n="look_p1">I work with organisations directly — and I'm open to the right full-time opportunity. A senior role in AI transformation where I can build and lead at scale, not just advise. Culture of autonomy and speed. Based in Madrid, available for global travel.</p>
-        <p data-i18n="look_p2">If that sounds like you, let's talk.</p>
-      </div>
-    </div>
-  </div>
+  </section>
 
   <!-- CONTACT -->
   <div class="contact-section" id="contact">
-    <div class="contact-inner">
+    <div class="contact-inner reveal">
       <h2 data-i18n="contact_title">Let's talk.</h2>
       <p data-i18n="contact_sub">Drop me a line or connect on LinkedIn. Or ask Nemo, my AI agent — it'll do its best.</p>
+      <a href="mailto:abarrerolabajos@gmail.com" class="contact-mail">abarrerolabajos@gmail.com</a>
       <div class="contact-actions">
-        <a href="mailto:abarrerolabajos@gmail.com" class="btn btn-white">abarrerolabajos@gmail.com</a>
-        <a href="https://linkedin.com/in/a-barrero/" target="_blank" class="btn btn-ghost-w">LinkedIn</a>
-        <button class="btn btn-ghost-w" onclick="toggleChat()" data-i18n="btn_nemo">Ask Nemo</button>
+        <a href="https://linkedin.com/in/a-barrero/" target="_blank" class="link-und">LinkedIn</a>
+        <button class="link-und" onclick="toggleChat()" data-i18n="btn_nemo">Ask Nemo</button>
       </div>
     </div>
   </div>
@@ -539,31 +707,30 @@
       const menu = document.getElementById('mobile-menu');
       const btn = document.getElementById('hamburger');
       const open = !menu.classList.contains('closed');
-      if (open) { menu.classList.add('closed'); menu.style.display = 'none'; btn.classList.remove('open'); }
-      else { menu.classList.remove('closed'); menu.style.display = 'flex'; btn.classList.add('open'); }
+      if (open) { menu.classList.add('closed'); btn.classList.remove('open'); }
+      else { menu.classList.remove('closed'); btn.classList.add('open'); }
     }
     function closeMenu() {
-      const menu = document.getElementById('mobile-menu');
-      menu.classList.add('closed'); menu.style.display = 'none';
+      document.getElementById('mobile-menu').classList.add('closed');
       document.getElementById('hamburger').classList.remove('open');
     }
 
-    // ── Dark mode ──
+    // ── Theme (paper default, ink toggle) ──
     function toggleTheme() {
-      const dark = document.body.classList.toggle('dark');
-      document.getElementById('theme-btn').textContent = dark ? '🌙' : '☀️';
-      localStorage.setItem('nemo_theme', dark ? 'dark' : 'light');
+      const ink = document.body.classList.toggle('ink');
+      document.getElementById('theme-btn').textContent = ink ? '☀' : '☾';
+      localStorage.setItem('nemo_theme', ink ? 'ink' : 'paper');
     }
     (function () {
       const t = localStorage.getItem('nemo_theme');
-      if (t === 'dark') { document.body.classList.add('dark'); document.getElementById('theme-btn').textContent = '🌙'; }
+      if (t === 'ink' || t === 'dark') { document.body.classList.add('ink'); document.getElementById('theme-btn').textContent = '☀'; }
     })();
 
     // ── Language toggle ──
     const T = {
       en: {
         nav_work: 'Work with me', nav_projects: 'Projects', nav_about: 'About',
-        nav_open: 'Open to', nav_cta: 'Get in touch',
+        nav_cta: 'Get in touch',
         hero_eyebrow: 'AI Transformation @ Netflix · Madrid, Spain',
         hero_h1: 'I lead AI transformation<br />that actually changes<br /><em>how teams work.</em>',
         hero_lead: 'Ten years inside global operations, shaping the systems — and the way teams work around them — at scale, in production, every day.',
@@ -593,23 +760,19 @@
         proj2_badge: 'Internal',
         proj2_desc: 'Conversational analytics platform built autonomously at Netflix. Teams query operational data in natural language and get grounded answers within seconds — democratizing data insights. Returns 850+ hours per quarter back to global teams.',
         proj1_badge: 'Live · Real users',
-        proj1_desc: 'A B2C app I built from scratch, currently live with real users. Building FuelUp keeps me honest about what it actually takes to ship a product — from zero to production, end-to-end. It gives me a perspective most enterprise leaders simply don\'t have.',
+        proj1_desc: 'A B2C & B2B2C app I built from scratch, currently live with real users. Building FuelUp keeps me honest about what it actually takes to ship a product — from zero to production, end-to-end. It gives me a perspective most enterprise leaders simply don\'t have.',
         story_label: 'My story',
         story_p1: 'I started as an engineer — building live broadcast infrastructure for the Olympic Games and Grand Slams. Zero-failure environments, millions of viewers, real consequences. It taught me that the hardest problems are never purely technical.',
         story_p2: 'I took that into six years at Netflix, where my scope kept growing. I started by partnering with flagship productions like La Casa de Papel — helping them work smarter and safer at global scale. Then I led four end-to-end M&A integrations of acquired studios. Today, I define the collaboration frameworks that align global ops teams — Games, Animation, VFX, Enterprise — with the centralized engineering teams that power them, driving alignment and scale across the business. Along the way, I kept moving closer to what interested me most: how AI was changing the way people actually work.',
         story_p3: 'The work I\'m most proud of is the AI transformation. I autonomously built NSights — a production GenAI platform that lets teams query operational data in natural language and get answers within seconds. Democratizing data and insights, eliminating the manual bottlenecks that slow decisions. Beyond NSights, I lead AI communities and coach teams across all regions. <strong>People come to me because I build things, not just talk about them.</strong>',
         story_p4: 'Outside of my day job, I build. I shipped FuelUp — a B2C product live with real users — and I\'m building Folia now. I train teams and individuals on how to use AI tools for real. That combination — builder, operator, teacher — is what I bring to every engagement.',
         story_anchors_label: 'Built at scale at',
-        look_label: 'Open to',
-        look_title: 'Senior roles where AI<br />is genuinely the mission.',
-        look_p1: 'I work with organisations directly — and I\'m open to the right full-time opportunity. A senior role in AI transformation where I can build and lead at scale, not just advise. Culture of autonomy and speed. Based in Madrid, available for global travel.',
-        look_p2: 'If that sounds like you, let\'s talk.',
         contact_title: 'Let\'s talk.',
         contact_sub: 'Drop me a line or connect on LinkedIn. Or ask Nemo, my AI agent — it\'ll do its best.',
       },
       es: {
         nav_work: 'Trabaja conmigo', nav_projects: 'Proyectos', nav_about: 'Sobre mí',
-        nav_open: 'Abierto a', nav_cta: 'Contacta',
+        nav_cta: 'Contacta',
         hero_eyebrow: 'Transformación con IA @ Netflix · Madrid, España',
         hero_h1: 'Lidero transformación con IA<br />que de verdad cambia<br /><em>cómo trabajan los equipos.</em>',
         hero_lead: 'Diez años dentro de operaciones globales, dando forma a los sistemas — y a cómo trabajan los equipos a su alrededor — a escala, en producción, cada día.',
@@ -639,17 +802,13 @@
         proj2_badge: 'Interno',
         proj2_desc: 'Plataforma de analytics conversacional construida de forma autónoma en Netflix. Los equipos consultan datos operativos en lenguaje natural y obtienen respuestas fundamentadas en segundos — democratizando insights de datos. Devuelve 850+ horas por trimestre a equipos globales.',
         proj1_badge: 'En producción · Usuarios reales',
-        proj1_desc: 'Una app B2C que construí desde cero, actualmente en producción con usuarios reales. Construir FuelUp me mantiene honesto sobre lo que realmente cuesta lanzar un producto — de cero a producción, de principio a fin. Me da una perspectiva que la mayoría de líderes de empresa no tienen.',
+        proj1_desc: 'Una app B2C y B2B2C que construí desde cero, actualmente en producción con usuarios reales. Construir FuelUp me mantiene honesto sobre lo que realmente cuesta lanzar un producto — de cero a producción, de principio a fin. Me da una perspectiva que la mayoría de líderes de empresa no tienen.',
         story_label: 'Mi historia',
         story_p1: 'Empecé como ingeniero — construyendo infraestructura de broadcast en vivo para los Juegos Olímpicos y los Grand Slams. Entornos de cero errores, millones de espectadores, consecuencias reales. Me enseñó que los problemas más difíciles nunca son puramente técnicos.',
         story_p2: 'Lo apliqué durante seis años en Netflix, donde mi alcance no paró de crecer. Empecé colaborando con producciones insignia como La Casa de Papel — ayudándolas a trabajar de forma más inteligente y segura a escala global. Después lideré cuatro integraciones M&A end-to-end de estudios adquiridos. Hoy defino los frameworks de colaboración que alinean a los equipos de operaciones globales — Games, Animation, VFX, Enterprise — con los equipos de ingeniería centralizados que los soportan, impulsando alineación y escala en todo el negocio. Por el camino, fui acercándome cada vez más a lo que más me interesaba: cómo la IA estaba cambiando la forma en que la gente trabaja.',
         story_p3: 'El trabajo del que más orgulloso estoy es la transformación con IA. Construí de forma autónoma NSights — una plataforma GenAI en producción que permite a los equipos consultar datos operativos en lenguaje natural y obtener respuestas en segundos. Democratizando datos e insights, eliminando los cuellos de botella manuales que ralentizan las decisiones. Más allá de NSights, lidero comunidades de IA y formo equipos en todas las regiones. <strong>La gente viene a mí porque construyo cosas, no solo las comento.</strong>',
         story_p4: 'Fuera de mi trabajo principal, construyo. Lancé FuelUp — un producto B2C con usuarios reales — y ahora estoy construyendo Folia. Formo a equipos e individuos en cómo usar herramientas de IA de verdad. Esa combinación — constructor, operador, profesor — es lo que aporto en cada colaboración.',
         story_anchors_label: 'Construido a escala en',
-        look_label: 'Abierto a',
-        look_title: 'Roles senior donde la IA<br />es realmente la misión.',
-        look_p1: 'Trabajo directamente con organizaciones — y estoy abierto a la oportunidad adecuada a tiempo completo. Un rol senior en transformación con IA donde pueda construir y liderar a escala, no solo asesorar. Cultura de autonomía y velocidad. Basado en Madrid, disponible para viajes globales.',
-        look_p2: 'Si eso suena a ti, hablemos.',
         contact_title: 'Hablemos.',
         contact_sub: 'Escríbeme o conéctate en LinkedIn. O pregunta a Nemo, mi agente de IA — hará lo que pueda.',
       }
@@ -676,7 +835,6 @@
       gtag('event', 'lang_toggle', { event_category: 'preferences', event_label: currentLang });
     }
 
-    // Apply on load
     window.addEventListener('DOMContentLoaded', () => { applyLang(currentLang); });
 
     // ── Rate limit ──
@@ -694,7 +852,7 @@
       });
     }
 
-    // ── System prompt ──
+    // ── System prompt (local dev only — production uses api/chat.js) ──
     const SYS = `You are an AI representing Alfredo Barrero on his personal website. Speak in first person as if you are Alfredo — warm, direct, confident. Answer questions about his background, services, projects, and what he's open for.
 
 WHO I AM:
@@ -715,11 +873,11 @@ SERVICES I OFFER:
 3. AI Implementation Consulting — I come in, diagnose your operations, and build something real. Project-based, bespoke, end-to-end.
 
 PROJECTS:
-- FuelUp: B2C app I built from scratch, currently live with real users.
+- FuelUp: B2C & B2B2C app I built from scratch, currently live with real users.
 - NSights: production AI analytics platform at Netflix (internal).
 
-WHAT I'M ALSO OPEN FOR:
-A senior full-time role in AI transformation — Director or Head level — where AI is genuinely the mission. Culture of autonomy and speed. Based in Madrid, available for global travel.
+IF ASKED ABOUT FULL-TIME ROLES OR JOB OPPORTUNITIES:
+Never volunteer that I'm looking for anything. If someone asks directly whether I'd consider a full-time role, say that for the right project I'm always open to a conversation, and invite them to reach out by email.
 
 PRICING: Never give specific prices. If asked about cost, say it depends on the use case and context, and invite them to reach out directly.
 
@@ -823,6 +981,49 @@ STYLE: First person, warm but direct. Under 100 words unless more is clearly nee
     }
   </script>
 
+  <!-- Visual polish: reveal + count-up -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Scroll reveal — staggered
+      const revealEls = document.querySelectorAll('.reveal');
+      revealEls.forEach((el, i) => { el.style.transitionDelay = `${(i % 3) * 90}ms`; });
+      const ro = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); } });
+      }, { threshold: 0.12 });
+      revealEls.forEach(el => ro.observe(el));
+
+      // Stat count-up — preserves prefix/suffix ("+3,400h", "10K+", "10+ yrs")
+      function animateStat(el) {
+        const m = el.textContent.match(/^([^\d]*)([\d,.]+)(.*)$/);
+        if (!m) return;
+        const target = parseFloat(m[2].replace(/,/g, ''));
+        const useComma = m[2].includes(',');
+        const t0 = performance.now(), dur = 1300;
+        function tick(t) {
+          const p = Math.min((t - t0) / dur, 1);
+          const v = Math.round(target * (1 - Math.pow(1 - p, 3)));
+          el.textContent = m[1] + (useComma ? v.toLocaleString('en-US') : v) + m[3];
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+      if (!reduced) {
+        const ledger = document.querySelector('.ledger');
+        if (ledger) {
+          const so = new IntersectionObserver(entries => {
+            if (entries.some(e => e.isIntersecting)) {
+              document.querySelectorAll('.stat-n').forEach(animateStat);
+              so.disconnect();
+            }
+          }, { threshold: 0.3 });
+          so.observe(ledger);
+        }
+      }
+    });
+  </script>
+
   <!-- Vercel Analytics -->
   <script defer src="/_vercel/insights/script.js"></script>
 
@@ -835,10 +1036,10 @@ STYLE: First person, warm but direct. Under 100 words unless more is clearly nee
       document.querySelectorAll('a[href*="linkedin.com"]').forEach(el => {
         el.addEventListener('click', () => { gtag('event', 'contact_click', { event_category: 'engagement', event_label: 'LinkedIn', method: 'linkedin', outbound: true }); });
       });
-      document.querySelectorAll('.nav-cta, .btn-dark, .btn-accent').forEach(el => {
+      document.querySelectorAll('.nav-cta, .btn-ink').forEach(el => {
         el.addEventListener('click', () => { gtag('event', 'cta_click', { event_category: 'engagement', event_label: el.textContent.trim() }); });
       });
-      const sections = ['services', 'projects', 'story', 'looking', 'contact'];
+      const sections = ['services', 'projects', 'story', 'contact'];
       const observed = new Set();
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
