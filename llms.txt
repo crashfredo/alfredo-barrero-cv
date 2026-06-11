@@ -1,0 +1,23 @@
+# Alfredo Barrero
+
+> AI transformation leader based in Madrid, Spain. Global Program Lead at Netflix. 10+ years in global operations and engineering across streaming, broadcasting and the Olympic Games. Builds production AI systems — not slideware.
+
+## Who he is
+
+- Leads AI transformation at Netflix: built NSights, a production GenAI analytics platform (Claude Agent SDK, MCP, RAG, Trino/Presto) that lets teams query operational data in natural language. Returns 850+ hours per quarter to global teams.
+- Led 6+ end-to-end M&A integrations of acquired companies with zero downtime.
+- Previously: live broadcast infrastructure for the Olympic Games and Grand Slams (IOC/Olympic Channel).
+- Telecom Engineer, PMP, MBA. Spain's Top Talent 2025.
+- Founder of FuelUp (B2C & B2B2C app, live with real users) and building Folia.
+
+## Services
+
+- AI Workshop for Teams: half-day or full-day intensive, teams of 8–15, on-site or remote.
+- AI Acceleration Programme: 6–8 week cohort with weekly live sessions and hands-on implementation.
+- AI Implementation Consulting: diagnose operations and build real systems — dashboards, agents, decision intelligence. Project-based, end-to-end.
+
+## Contact
+
+- Email: abarrerolabajos@gmail.com
+- LinkedIn: https://linkedin.com/in/a-barrero/
+- Website: https://alfredobarrero.vercel.app/
