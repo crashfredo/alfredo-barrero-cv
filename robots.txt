@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://alfredobarrero.vercel.app/sitemap.xml
+Sitemap: https://www.alfredobarrero.com/sitemap.xml
