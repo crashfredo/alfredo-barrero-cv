@@ -28,18 +28,113 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Alfredo Barrero",
-    "jobTitle": "AI Transformation Leader · Global Program Lead",
-    "worksFor": { "@type": "Organization", "name": "Netflix" },
-    "address": { "@type": "PostalAddress", "addressLocality": "Madrid", "addressCountry": "ES" },
-    "email": "mailto:abarrerolabajos@gmail.com",
-    "url": "https://www.alfredobarrero.com/",
-    "image": "https://www.alfredobarrero.com/pic.jpeg",
-    "sameAs": ["https://linkedin.com/in/a-barrero/"],
-    "knowsAbout": ["AI transformation", "Generative AI", "AI agents", "Claude Agent SDK", "Model Context Protocol", "RAG", "Global operations", "M&A integration"],
-    "knowsLanguage": ["es", "en"],
-    "award": "Spain's Top Talent 2025"
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://www.alfredobarrero.com/#alfredo",
+        "name": "Alfredo Barrero",
+        "jobTitle": "AI Transformation Leader · Global Program Lead",
+        "description": "AI transformation leader in Madrid. 10+ years in global operations at Netflix and the Olympic Games. Builds production AI systems and runs AI workshops, acceleration programmes, implementation consulting and 1:1 mentoring.",
+        "worksFor": { "@type": "Organization", "name": "Netflix" },
+        "address": { "@type": "PostalAddress", "addressLocality": "Madrid", "addressCountry": "ES" },
+        "email": "mailto:abarrerolabajos@gmail.com",
+        "url": "https://www.alfredobarrero.com/",
+        "image": "https://www.alfredobarrero.com/pic.jpeg",
+        "sameAs": ["https://linkedin.com/in/a-barrero/"],
+        "knowsAbout": ["AI transformation", "Generative AI", "AI agents", "Claude Agent SDK", "Model Context Protocol", "RAG", "Global operations", "M&A integration"],
+        "knowsLanguage": ["es", "en"],
+        "award": "Spain's Top Talent 2025",
+        "makesOffer": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "AI Workshop for Teams",
+              "description": "A half-day or full-day intensive for teams of 8–15 people, going from zero to using AI in real workflows — Claude, NotebookLM, agents, automation. On-site or remote.",
+              "provider": { "@id": "https://www.alfredobarrero.com/#alfredo" },
+              "serviceType": "AI training workshop"
+            },
+            "availabilityStarts": "2026"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "AI Acceleration Programme",
+              "description": "A 6–8 week cohort for professionals who want to transform how they work with AI. Weekly live sessions, async support and hands-on implementation.",
+              "provider": { "@id": "https://www.alfredobarrero.com/#alfredo" },
+              "serviceType": "AI acceleration programme"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "AI Implementation Consulting",
+              "description": "Diagnose operations and build real systems — dashboards, agents, decision intelligence. Project-based, bespoke, end-to-end.",
+              "provider": { "@id": "https://www.alfredobarrero.com/#alfredo" },
+              "serviceType": "AI implementation consulting"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "1:1 AI Mentoring",
+              "description": "Personal mentoring for professionals who want to grow their careers with AI — practical and honest.",
+              "provider": { "@id": "https://www.alfredobarrero.com/#alfredo" },
+              "serviceType": "Career mentoring"
+            }
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://www.alfredobarrero.com/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Who is Alfredo Barrero?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Alfredo Barrero is an AI transformation leader based in Madrid, Spain, and a Global Program Lead at Netflix. He has 10+ years in global operations and engineering across streaming, broadcasting and the Olympic Games, and builds production AI systems that change how teams work."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What services does Alfredo Barrero offer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Four ways to work with him: AI Workshops for teams (half or full day), an AI Acceleration Programme (6–8 week cohort), AI Implementation Consulting (project-based, end-to-end), and 1:1 mentoring for professionals growing their careers with AI."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does Alfredo Barrero work remotely or only in Madrid?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "He is based in Madrid, Spain, and delivers workshops and engagements both on-site and remotely. He works with a small number of organisations and individuals at a time."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is NSights?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "NSights is a production GenAI Data & Insights platform Alfredo built autonomously at Netflix. It pairs a data engine that abstracts a clean layer over raw data tables with an agentic layer trained to use it, exposed through three surfaces: an advanced analytics dashboard, a self-serve MCP, and an agentic copilot for qualitative insight. It returns 850+ hours per quarter to global teams."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How can I contact or work with Alfredo Barrero?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Email abarrerolabajos@gmail.com or connect on LinkedIn at linkedin.com/in/a-barrero. You can also ask Nemo, the AI assistant on his website."
+            }
+          }
+        ]
+      }
+    ]
   }
   </script>
   <link rel="icon" type="image/svg+xml"
