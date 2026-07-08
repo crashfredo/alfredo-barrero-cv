@@ -298,6 +298,25 @@
     }
     .svc-row:hover .svc-arrow { transform: translateX(8px); }
 
+    /* ── SERVICES — 1:1 note ── */
+    .svc-note {
+      display: grid; grid-template-columns: 110px 1fr; gap: 18px;
+      align-items: baseline; padding: 26px 0 4px;
+    }
+    .svc-note-label {
+      font-family: var(--mono); font-size: 12px; color: var(--accent);
+      letter-spacing: 1px; text-transform: uppercase;
+    }
+    .svc-note p { font-size: 15px; color: var(--muted); line-height: 1.7; max-width: 60ch; }
+    .svc-note strong { color: var(--ink); font-weight: 600; }
+    .svc-note a {
+      color: var(--ink); text-decoration: none;
+      border-bottom: 1.5px solid var(--accent); padding-bottom: 1px;
+      transition: color .15s;
+    }
+    .svc-note a:hover { color: var(--accent); }
+    @media (max-width: 768px) { .svc-note { grid-template-columns: 1fr; gap: 8px; } }
+
     /* ── PROJECTS — editorial grid ── */
     .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid var(--line); }
     .proj {
@@ -306,6 +325,12 @@
     }
     .proj.feature { grid-column: 1 / -1; border-bottom: 1px solid var(--line); }
     .proj + .proj:not(.feature) { padding-left: 36px; border-left: 1px solid var(--line); }
+    .proj-grid.trio { grid-template-columns: repeat(3, 1fr); }
+    .proj-grid.trio .proj { padding: 32px 26px 36px 0; }
+    @media (max-width: 900px) {
+      .proj-grid.trio { grid-template-columns: 1fr; }
+      .proj-grid.trio .proj { padding-right: 0; padding-left: 0; border-left: none; }
+    }
     .proj-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 14px; flex-wrap: wrap; }
     .proj h3 {
       font-family: var(--serif); font-weight: 600; font-size: clamp(24px, 2.6vw, 34px);
@@ -322,6 +347,42 @@
       color: var(--muted); padding: 4px 12px; border: 1px solid var(--line);
       margin: 0 -1px -1px 0;
     }
+
+    /* NSights — three surfaces */
+    .proj-surfaces {
+      margin-top: 26px; border-top: 1px solid var(--line);
+      display: grid; grid-template-columns: repeat(3, 1fr);
+    }
+    .surface {
+      display: grid; grid-template-columns: 26px 1fr; gap: 10px;
+      padding: 20px 22px 4px 0; border-right: 1px solid var(--line);
+    }
+    .surface:last-child { border-right: none; }
+    .surface + .surface { padding-left: 22px; }
+    .surface-n { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: 1px; }
+    .surface strong {
+      display: block; font-family: var(--serif); font-weight: 600; font-size: 16px;
+      color: var(--ink); margin-bottom: 5px; letter-spacing: -.2px;
+    }
+    .surface span { font-size: 13px; color: var(--muted); line-height: 1.55; }
+    @media (max-width: 768px) {
+      .proj-surfaces { grid-template-columns: 1fr; }
+      .surface { border-right: none; border-bottom: 1px solid var(--line); padding: 16px 0; }
+      .surface:last-child { border-bottom: none; }
+      .surface + .surface { padding-left: 0; }
+    }
+
+    /* Projects — "on the side" divider */
+    .proj-subhead {
+      display: grid; grid-template-columns: 110px 1fr; gap: 18px; align-items: baseline;
+      margin: clamp(40px, 6vh, 64px) 0 clamp(20px, 3vh, 30px);
+    }
+    .proj-subhead-label {
+      font-family: var(--mono); font-size: 12px; color: var(--accent);
+      letter-spacing: 1px; text-transform: uppercase;
+    }
+    .proj-subhead p { font-size: 15px; color: var(--muted); max-width: 58ch; }
+    @media (max-width: 768px) { .proj-subhead { grid-template-columns: 1fr; gap: 8px; } }
 
     /* ── STORY ── */
     .story-grid { display: grid; grid-template-columns: 110px 1fr; gap: 18px; }
@@ -600,6 +661,10 @@
           <span class="svc-arrow">→</span>
         </a>
       </div>
+      <div class="svc-note reveal">
+        <span class="svc-note-label">01.4</span>
+        <p data-i18n-html="svc4_note"><strong>Prefer something more personal?</strong> I also mentor professionals 1:1 who want to grow their careers with AI — practical, honest, no fluff. <a href="#contact">Let's talk</a>.</p>
+      </div>
     </div>
   </section>
 
@@ -609,17 +674,40 @@
       <div class="sec-head reveal">
         <span class="sec-no">02</span>
         <div>
-          <h2 class="sec-title" data-i18n="proj_title">Things I'm building.</h2>
-          <p class="sec-sub" data-i18n="proj_sub">I don't just advise on AI — I ship. This is what I'm building outside of my day job.</p>
+          <h2 class="sec-title" data-i18n="proj_title">What I build.</h2>
+          <p class="sec-sub" data-i18n="proj_sub">I don't just advise on AI — I ship. A production platform at global scale, and products I build on the side.</p>
         </div>
       </div>
       <div class="proj-grid">
         <article class="proj feature reveal">
           <div class="proj-head">
             <h3>NSights</h3>
-            <span class="proj-badge" data-i18n="proj2_badge">Internal</span>
+            <span class="proj-badge" data-i18n="proj2_badge">Netflix · Flagship</span>
           </div>
-          <p data-i18n="proj2_desc">Conversational analytics platform built autonomously at Netflix. Teams query operational data in natural language and get grounded answers within seconds — democratizing data insights. Returns 850+ hours per quarter back to global teams.</p>
+          <p data-i18n="proj2_desc">A GenAI Data &amp; Insights platform I built autonomously at Netflix — transforming how data and insights are consumed at global scale. A data engine defines a clean abstraction layer on top of raw data tables; an agentic layer is trained on how to use it; and three surfaces put it in people's hands. Returns 850+ hours per quarter back to global teams.</p>
+          <div class="proj-surfaces">
+            <div class="surface">
+              <span class="surface-n">01</span>
+              <div>
+                <strong data-i18n="nsurf1_t">Analytics dashboard</strong>
+                <span data-i18n="nsurf1_d">Advanced, self-explanatory views over live operational data.</span>
+              </div>
+            </div>
+            <div class="surface">
+              <span class="surface-n">02</span>
+              <div>
+                <strong data-i18n="nsurf2_t">Self-serve MCP</strong>
+                <span data-i18n="nsurf2_d">Query data and insights directly from your own AI tools.</span>
+              </div>
+            </div>
+            <div class="surface">
+              <span class="surface-n">03</span>
+              <div>
+                <strong data-i18n="nsurf3_t">Agentic copilot</strong>
+                <span data-i18n="nsurf3_d">Goes beyond the numbers to add qualitative insight.</span>
+              </div>
+            </div>
+          </div>
           <div class="proj-stack">
             <span class="stack-tag">Claude Agent SDK</span>
             <span class="stack-tag">MCP Server</span>
@@ -628,7 +716,14 @@
             <span class="stack-tag">React + TypeScript</span>
           </div>
         </article>
-        <article class="proj feature reveal">
+      </div>
+
+      <div class="proj-subhead reveal">
+        <span class="proj-subhead-label" data-i18n="proj_side_label">On the side</span>
+        <p data-i18n="proj_side_sub">Products I build outside my day job — proof I ship, not just advise.</p>
+      </div>
+      <div class="proj-grid trio">
+        <article class="proj reveal">
           <div class="proj-head">
             <h3>Mente</h3>
             <span class="proj-badge" data-i18n="proj4_badge">In beta · TestFlight</span>
@@ -814,15 +909,21 @@
         svc3_title: 'AI Implementation Consulting',
         svc3_desc: 'I come in, diagnose your operations, and build something real. Dashboards, agents, decision intelligence systems — the kind that remove bottlenecks and surface insight automatically. I\'ve done it at scale. Now I do it for you.',
         svc3_tag: 'Project-based · Bespoke · End-to-end',
-        proj_title: 'Things I\'m building.',
-        proj_sub: 'I don\'t just advise on AI — I ship. This is what I\'m building outside of my day job.',
+        svc4_note: '<strong>Prefer something more personal?</strong> I also mentor professionals 1:1 who want to grow their careers with AI — practical, honest, no fluff. <a href="#contact">Let\'s talk</a>.',
+        proj_title: 'What I build.',
+        proj_sub: 'I don\'t just advise on AI — I ship. A production platform at global scale, and products I build on the side.',
+        proj_side_label: 'On the side',
+        proj_side_sub: 'Products I build outside my day job — proof I ship, not just advise.',
+        nsurf1_t: 'Analytics dashboard', nsurf1_d: 'Advanced, self-explanatory views over live operational data.',
+        nsurf2_t: 'Self-serve MCP', nsurf2_d: 'Query data and insights directly from your own AI tools.',
+        nsurf3_t: 'Agentic copilot', nsurf3_d: 'Goes beyond the numbers to add qualitative insight.',
         svc_cta: 'Get in touch →',
         proj4_badge: 'In beta · TestFlight',
         proj4_desc: 'An AI copilot for the household. Capture anything about home life — typed text, voice, or a photo of a receipt — and it sorts everything into six drawers: groceries, money, health, family, house and paperwork. It tells records apart from tasks, asks before acting when unsure, learns from your corrections, and lets the whole family share the load. iOS beta on TestFlight, web app live.',
         proj3_badge: 'Published',
         proj3_desc: 'A mobile app to collect and care for your plants like Pokémon. Each plant gets its own Pokédex-style card. AI identifies the species from camera and gives personalised watering and light recommendations. Daily care is gamified — plants level up, you earn badges.',
-        proj2_badge: 'Internal',
-        proj2_desc: 'Conversational analytics platform built autonomously at Netflix. Teams query operational data in natural language and get grounded answers within seconds — democratizing data insights. Returns 850+ hours per quarter back to global teams.',
+        proj2_badge: 'Netflix · Flagship',
+        proj2_desc: 'A GenAI Data & Insights platform I built autonomously at Netflix — transforming how data and insights are consumed at global scale. A data engine defines a clean abstraction layer on top of raw data tables; an agentic layer is trained on how to use it; and three surfaces put it in people\'s hands. Returns 850+ hours per quarter back to global teams.',
         proj1_badge: 'Live · Real users',
         proj1_desc: 'A B2C & B2B2C app I built from scratch, currently live with real users. Building FuelUp keeps me honest about what it actually takes to ship a product — from zero to production, end-to-end. It gives me a perspective most enterprise leaders simply don\'t have.',
         story_label: 'My story',
@@ -864,15 +965,21 @@
         svc3_title: 'Consultoría de Implementación IA',
         svc3_desc: 'Entro, diagnostico tus operaciones y construyo algo real. Dashboards, agentes, sistemas de inteligencia para decisiones — los que eliminan cuellos de botella y generan insight automáticamente. Lo he hecho a escala. Ahora lo hago para ti.',
         svc3_tag: 'Por proyecto · A medida · End-to-end',
-        proj_title: 'Lo que estoy construyendo.',
-        proj_sub: 'No me limito a asesorar sobre IA — lanzo productos. Esto es lo que construyo fuera de mi trabajo principal.',
+        svc4_note: '<strong>¿Prefieres algo más personal?</strong> También hago mentoría 1:1 a profesionales que quieren crecer en su carrera con IA — práctica, honesta, sin humo. <a href="#contact">Hablemos</a>.',
+        proj_title: 'Lo que construyo.',
+        proj_sub: 'No me limito a asesorar sobre IA — lanzo productos. Una plataforma en producción a escala global, y productos que construyo por mi cuenta.',
+        proj_side_label: 'Por mi cuenta',
+        proj_side_sub: 'Productos que construyo fuera de mi trabajo principal — la prueba de que lanzo, no solo asesoro.',
+        nsurf1_t: 'Dashboard de analítica', nsurf1_d: 'Vistas avanzadas y autoexplicativas sobre datos operativos en vivo.',
+        nsurf2_t: 'MCP de autoservicio', nsurf2_d: 'Consulta datos e insights directamente desde tus propias herramientas de IA.',
+        nsurf3_t: 'Copiloto agéntico', nsurf3_d: 'Va más allá de los números para añadir insight cualitativo.',
         svc_cta: 'Contacta →',
         proj4_badge: 'En beta · TestFlight',
         proj4_desc: 'Un copiloto de IA para el hogar. Capturas cualquier cosa de la vida doméstica — texto, voz o una foto de un recibo — y lo organiza todo en seis cajones: compra, dinero, salud, familia, casa y papeleo. Distingue registros de tareas, pregunta antes de actuar cuando duda, aprende de tus correcciones y permite repartir la carga entre toda la familia. Beta de iOS en TestFlight, web app en producción.',
         proj3_badge: 'Publicada',
         proj3_desc: 'Una app móvil para coleccionar y cuidar tus plantas como si fueran Pokémon. Cada planta tiene su propia ficha tipo Pokédex. La IA identifica la especie con la cámara y te da recomendaciones personalizadas de riego y luz. El cuidado diario es gamificado — tus plantas suben de nivel y ganas insignias.',
-        proj2_badge: 'Interno',
-        proj2_desc: 'Plataforma de analytics conversacional construida de forma autónoma en Netflix. Los equipos consultan datos operativos en lenguaje natural y obtienen respuestas fundamentadas en segundos — democratizando insights de datos. Devuelve 850+ horas por trimestre a equipos globales.',
+        proj2_badge: 'Netflix · Insignia',
+        proj2_desc: 'Una plataforma de Datos e Insights con GenAI que construí de forma autónoma en Netflix — transformando cómo se consumen los datos y los insights a escala global. Un data engine define una capa de abstracción limpia sobre las tablas de datos en bruto; una capa agéntica está entrenada en cómo usarla; y tres superficies lo ponen en manos de la gente. Devuelve 850+ horas por trimestre a equipos globales.',
         proj1_badge: 'En producción · Usuarios reales',
         proj1_desc: 'Una app B2C y B2B2C que construí desde cero, actualmente en producción con usuarios reales. Construir FuelUp me mantiene honesto sobre lo que realmente cuesta lanzar un producto — de cero a producción, de principio a fin. Me da una perspectiva que la mayoría de líderes de empresa no tienen.',
         story_label: 'Mi historia',
@@ -950,7 +1057,7 @@ WHO I AM:
 I'm an AI Transformation Leader based in Madrid, Spain, with 10+ years in operations and engineering across streaming, broadcasting, and the Olympic Games. Over the last several years I've focused on AI transformation — building systems that genuinely change how people work, not just automate tasks.
 
 MY CURRENT ROLE (Global Program Lead at Netflix, 2020–present):
-- Autonomously built NSights: a production natural-language analytics platform on top of Netflix's global support data. Stack: Claude Agent SDK (Python), custom MCP server (Java/Spring Boot), RAG pipeline with hourly vector indexing, Trino/Presto big data queries, React + TypeScript + SSE streaming. Returns 850+ hours per quarter (3,400+ hours/year) back to global teams — democratizing data & insights access across the business.
+- Autonomously built NSights: a production GenAI Data & Insights platform transforming how data and insights are consumed at global scale. Architecture: a data engine that defines a clean abstraction layer on top of raw data tables; an agentic layer trained on how to use that data engine; and three surfaces — an advanced analytics dashboard, a self-serve MCP so users can pull data and insights from their own AI tools, and an agentic copilot that goes beyond quantitative data to add qualitative insight. Stack: Claude Agent SDK (Python), custom MCP server (Java/Spring Boot), RAG pipeline with hourly vector indexing, Trino/Presto big data queries, React + TypeScript + SSE streaming. Returns 850+ hours per quarter (3,400+ hours/year) back to global teams.
 - Known internally as someone people come to when they want to understand AI properly and build something real with it. I lead AI communities, coach teams and individuals across all regions on practical GenAI adoption.
 - Led end-to-end integration of 6 acquired companies, zero downtime, managing both technical and human change at scale.
 - Built operational frameworks saving 10,000+ hours/year.
@@ -962,12 +1069,13 @@ SERVICES I OFFER:
 1. AI Workshop for Teams — half-day or full-day intensive for teams of 8–15. Real tools (Claude, NotebookLM, agents), real use cases, your context. On-site or remote.
 2. AI Acceleration Programme — 6–8 week cohort. Weekly live sessions, async support, hands-on implementation.
 3. AI Implementation Consulting — I come in, diagnose your operations, and build something real. Project-based, bespoke, end-to-end.
+I also mentor professionals 1:1 who want to grow their careers with AI — practical and honest. Mention this only if someone asks about individual, personal, career or 1:1 help rather than team engagements.
 
 PROJECTS:
 - FuelUp: B2C & B2B2C app I built from scratch, currently live with real users.
 - Folia Garden: published mobile app to collect and care for your plants like Pokémon — AI identifies the species from camera and gives personalised care recommendations.
 - Mente: what I'm building now — an AI copilot for the household. You capture anything about home life (text, voice, or a photo of a receipt) and it sorts it into six drawers (groceries, money, health, family, house, paperwork), telling records apart from tasks. iOS beta on TestFlight, web app live.
-- NSights: production AI analytics platform at Netflix (internal).
+- NSights: production GenAI Data & Insights platform at Netflix (internal) — data engine + agentic layer + three surfaces (analytics dashboard, self-serve MCP, agentic copilot).
 
 IF ASKED ABOUT FULL-TIME ROLES OR JOB OPPORTUNITIES:
 Never volunteer that I'm looking for anything. If someone asks directly whether I'd consider a full-time role, say that for the right project I'm always open to a conversation, and invite them to reach out by email.

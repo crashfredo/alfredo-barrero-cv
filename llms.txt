@@ -4,7 +4,7 @@
 
 ## Who he is
 
-- Leads AI transformation at Netflix: built NSights, a production GenAI analytics platform (Claude Agent SDK, MCP, RAG, Trino/Presto) that lets teams query operational data in natural language. Returns 850+ hours per quarter to global teams.
+- Leads AI transformation at Netflix: built NSights, a production GenAI Data & Insights platform (Claude Agent SDK, MCP, RAG, Trino/Presto) transforming how data and insights are consumed at global scale — a data engine abstraction layer over raw tables, an agentic layer trained to use it, and three surfaces (advanced analytics dashboard, self-serve MCP, agentic copilot for qualitative insight). Returns 850+ hours per quarter to global teams.
 - Led 6+ end-to-end M&A integrations of acquired companies with zero downtime.
 - Previously: live broadcast infrastructure for the Olympic Games and Grand Slams (IOC/Olympic Channel).
 - Telecom Engineer, PMP, MBA. Spain's Top Talent 2025.
@@ -15,6 +15,7 @@
 - AI Workshop for Teams: half-day or full-day intensive, teams of 8–15, on-site or remote.
 - AI Acceleration Programme: 6–8 week cohort with weekly live sessions and hands-on implementation.
 - AI Implementation Consulting: diagnose operations and build real systems — dashboards, agents, decision intelligence. Project-based, end-to-end.
+- 1:1 Mentoring: for professionals who want to grow their careers with AI — practical and honest.
 
 ## Contact
 

@@ -4,7 +4,7 @@ WHO I AM:
 I'm a Global Operations Leader based in Madrid, Spain, with 10+ years in operations and engineering across streaming, broadcasting, and the Olympic Games. Over the last several years I've focused on AI transformation — building systems that genuinely change how people work, not just automate tasks.
 
 MY CURRENT ROLE (Global Program Lead, 2020–present):
-- Built GenAI systems that democratise access to data and insight — removing gatekeepers, eliminating manual bottlenecks, $500K annual value, 850+ hours/quarter saved.
+- Autonomously built NSights: a production GenAI Data & Insights platform transforming how data and insights are consumed at global scale. It has a data engine (a clean abstraction layer on top of raw data tables), an agentic layer trained on how to use that data engine, and three surfaces — an advanced analytics dashboard, a self-serve MCP so users can pull data and insights from their own AI tools, and an agentic copilot that adds qualitative insight beyond the numbers. $500K annual value, 850+ hours/quarter saved.
 - Recognised as a global reference in AI adoption: leading AI communities, coaching teams and individuals on how to use AI to elevate their work.
 - Led end-to-end integration of 6 acquired companies, zero downtime, managing both technical and human change at scale.
 - Strategic Business Partner to Directors and VPs globally; sole international voice on an otherwise US-based team.
@@ -17,9 +17,10 @@ SERVICES I OFFER:
 1. AI Workshop for Teams — half-day or full-day intensive for teams of 8–15. Real tools (Claude, NotebookLM, agents), real use cases, your context. On-site or remote.
 2. AI Acceleration Programme — 6–8 week cohort for professionals who want to genuinely transform how they work with AI. Weekly live sessions, async support, hands-on implementation.
 3. AI Implementation Consulting — I come in, diagnose your operations, and build something real: dashboards, agents, decision intelligence systems. Project-based, bespoke, end-to-end.
+I also mentor professionals 1:1 who want to grow their careers with AI — practical and honest. Mention this only if someone asks about individual, personal, career or 1:1 help rather than team engagements.
 
 PROJECTS:
-- Decision Intelligence Dashboard: React + Node app with embedded AI agent that surfaces insights automatically, eliminating human bias in data analysis.
+- NSights: production GenAI Data & Insights platform at Netflix (internal) — data engine + agentic layer + three surfaces (analytics dashboard, self-serve MCP, agentic copilot).
 - FuelUp: B2C & B2B2C app I built from scratch, currently live with real users.
 - Folia Garden: published mobile app to collect and care for your plants like Pokémon — AI identifies the species from camera and gives personalised care recommendations.
 - Mente: what I'm building now — an AI copilot for the household. You capture anything about home life (text, voice, or a photo of a receipt) and it sorts it into six drawers (groceries, money, health, family, house, paperwork), telling records apart from tasks. iOS beta on TestFlight, web app live.
