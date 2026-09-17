@@ -420,11 +420,25 @@
     }
     .proj.feature { grid-column: 1 / -1; border-bottom: 1px solid var(--line); }
     .proj + .proj:not(.feature) { padding-left: 36px; border-left: 1px solid var(--line); }
-    .proj-grid.trio { grid-template-columns: repeat(3, 1fr); }
-    .proj-grid.trio .proj { padding: 32px 26px 36px 0; }
-    @media (max-width: 900px) {
+    .proj-grid.trio { grid-template-columns: repeat(4, 1fr); }
+    .proj-grid.trio .proj { padding: 32px 22px 36px 0; }
+    .proj-grid.trio .proj + .proj { padding-left: 22px; }
+    .proj-grid.trio .proj p { font-size: 14px; }
+
+    /* project → live link */
+    .proj-link {
+      margin-top: 16px; align-self: flex-start;
+      font-family: var(--mono); font-size: 11.5px; letter-spacing: .6px;
+      text-transform: uppercase; color: var(--ink); text-decoration: none;
+      border-bottom: 1.5px solid var(--accent); padding-bottom: 2px;
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: color .15s, gap .15s;
+    }
+    .proj-link:hover { color: var(--accent); gap: 10px; }
+    .proj-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    @media (max-width: 700px) {
       .proj-grid.trio { grid-template-columns: 1fr; }
-      .proj-grid.trio .proj { padding-right: 0; padding-left: 0; border-left: none; }
+      .proj-grid.trio .proj { padding-right: 0; padding-left: 0 !important; border-left: none !important; }
     }
     .proj-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 14px; flex-wrap: wrap; }
     .proj h3 {
@@ -820,6 +834,19 @@
       <div class="proj-grid trio">
         <article class="proj reveal">
           <div class="proj-head">
+            <h3>Volanda</h3>
+            <span class="proj-badge" data-i18n="proj5_badge">On the App Store</span>
+          </div>
+          <p data-i18n="proj5_desc">A flight-deal radar, not a search engine. You set your home airport, your budget ceiling and the windows you could travel in — a long weekend, Easter, any free Saturday. Every afternoon it sweeps fares and only pings you when something fits your number. The rest of the time, silence.</p>
+          <div class="proj-stack">
+            <span class="stack-tag">Next.js</span>
+            <span class="stack-tag">Firebase</span>
+            <span class="stack-tag">iOS &amp; Android</span>
+          </div>
+          <a class="proj-link" href="https://volanda.app/r/app" target="_blank" rel="noopener" data-i18n-html="proj5_cta">Get the app <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="proj reveal">
+          <div class="proj-head">
             <h3>Mente</h3>
             <span class="proj-badge" data-i18n="proj4_badge">In beta · TestFlight</span>
           </div>
@@ -842,6 +869,7 @@
             <span class="stack-tag">AI vision</span>
             <span class="stack-tag">iOS & Android</span>
           </div>
+          <a class="proj-link" href="https://foliagarden.app" target="_blank" rel="noopener" data-i18n-html="proj3_cta">Get the app <span aria-hidden="true">→</span></a>
         </article>
         <article class="proj reveal">
           <div class="proj-head">
@@ -854,6 +882,7 @@
             <span class="stack-tag">Mobile</span>
             <span class="stack-tag">Full-stack</span>
           </div>
+          <a class="proj-link" href="https://fuelup.es/app" target="_blank" rel="noopener" data-i18n-html="proj1_cta">Get the app <span aria-hidden="true">&rarr;</span></a>
         </article>
       </div>
     </div>
@@ -1013,6 +1042,11 @@
         nsurf2_t: 'Self-serve MCP', nsurf2_d: 'Query data and insights directly from your own AI tools.',
         nsurf3_t: 'Agentic copilot', nsurf3_d: 'Goes beyond the numbers to add qualitative insight.',
         svc_cta: 'Get in touch →',
+        proj5_badge: 'On the App Store',
+        proj5_cta: 'Get the app <span aria-hidden="true">&rarr;</span>',
+        proj3_cta: 'Get the app <span aria-hidden="true">&rarr;</span>',
+        proj1_cta: 'Get the app <span aria-hidden="true">&rarr;</span>',
+        proj5_desc: 'A flight-deal radar, not a search engine. You set your home airport, your budget ceiling and the windows you could travel in — a long weekend, Easter, any free Saturday. Every afternoon it sweeps fares and only pings you when something fits your number. The rest of the time, silence.',
         proj4_badge: 'In beta · TestFlight',
         proj4_desc: 'An AI copilot for the household. Capture anything about home life — typed text, voice, or a photo of a receipt — and it sorts everything into six drawers: groceries, money, health, family, house and paperwork. It tells records apart from tasks, asks before acting when unsure, learns from your corrections, and lets the whole family share the load. iOS beta on TestFlight, web app live.',
         proj3_badge: 'Published',
@@ -1069,6 +1103,11 @@
         nsurf2_t: 'MCP de autoservicio', nsurf2_d: 'Consulta datos e insights directamente desde tus propias herramientas de IA.',
         nsurf3_t: 'Copiloto agéntico', nsurf3_d: 'Va más allá de los números para añadir insight cualitativo.',
         svc_cta: 'Contacta →',
+        proj5_badge: 'En la App Store',
+        proj5_cta: 'Descargar <span aria-hidden="true">&rarr;</span>',
+        proj3_cta: 'Descargar <span aria-hidden="true">&rarr;</span>',
+        proj1_cta: 'Descargar <span aria-hidden="true">&rarr;</span>',
+        proj5_desc: 'Un radar de chollos de vuelo, no un buscador. Le dices desde qué aeropuerto sales, cuánto quieres gastar y cuándo podrías viajar — un puente, Semana Santa, cualquier finde libre. Cada tarde barre las tarifas y solo te avisa si algo cabe en tu número. El resto del tiempo, silencio.',
         proj4_badge: 'En beta · TestFlight',
         proj4_desc: 'Un copiloto de IA para el hogar. Capturas cualquier cosa de la vida doméstica — texto, voz o una foto de un recibo — y lo organiza todo en seis cajones: compra, dinero, salud, familia, casa y papeleo. Distingue registros de tareas, pregunta antes de actuar cuando duda, aprende de tus correcciones y permite repartir la carga entre toda la familia. Beta de iOS en TestFlight, web app en producción.',
         proj3_badge: 'Publicada',
@@ -1168,6 +1207,7 @@ I also mentor professionals 1:1 who want to grow their careers with AI — pract
 
 PROJECTS:
 - FuelUp: B2C & B2B2C app I built from scratch, currently live with real users.
+- Volanda: a flight-deal radar (not a search engine) — you set your home airport, budget ceiling and travel windows, and it sweeps fares daily, pinging you only when something fits. Live on the App Store, Android in beta.
 - Folia Garden: published mobile app to collect and care for your plants like Pokémon — AI identifies the species from camera and gives personalised care recommendations.
 - Mente: what I'm building now — an AI copilot for the household. You capture anything about home life (text, voice, or a photo of a receipt) and it sorts it into six drawers (groceries, money, health, family, house, paperwork), telling records apart from tasks. iOS beta on TestFlight, web app live.
 - NSights: production GenAI Data & Insights platform at Netflix (internal) — data engine + agentic layer + three surfaces (analytics dashboard, self-serve MCP, agentic copilot).

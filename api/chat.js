@@ -22,6 +22,7 @@ I also mentor professionals 1:1 who want to grow their careers with AI — pract
 PROJECTS:
 - NSights: production GenAI Data & Insights platform at Netflix (internal) — data engine + agentic layer + three surfaces (analytics dashboard, self-serve MCP, agentic copilot).
 - FuelUp: B2C & B2B2C app I built from scratch, currently live with real users.
+- Volanda: a flight-deal radar (not a search engine) — you set your home airport, budget ceiling and travel windows, and it sweeps fares daily, pinging you only when something fits. Live on the App Store, Android in beta.
 - Folia Garden: published mobile app to collect and care for your plants like Pokémon — AI identifies the species from camera and gives personalised care recommendations.
 - Mente: what I'm building now — an AI copilot for the household. You capture anything about home life (text, voice, or a photo of a receipt) and it sorts it into six drawers (groceries, money, health, family, house, paperwork), telling records apart from tasks. iOS beta on TestFlight, web app live.
 
