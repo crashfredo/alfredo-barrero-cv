@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alfredo Barrero — AI Transformation Leader · Madrid</title>
-  <meta name="description" content="AI transformation leader in Madrid. 10+ years in global operations at Netflix and the Olympic Games. I build production AI systems — workshops, acceleration programmes and implementation consulting." />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Alfredo Barrero — AI Transformation Leader · Madrid</title>
+<meta name="description" content="AI transformation leader in Madrid. 10+ years in global operations, shaping the systems and the way teams work around them." />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/archivo-900.woff2" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/plex-sans.woff2" />
   <link rel="canonical" href="https://www.alfredobarrero.com/" />
-
   <!-- Open Graph -->
   <meta property="og:type" content="profile" />
   <meta property="og:title" content="Alfredo Barrero — AI Transformation Leader" />
@@ -24,7 +24,6 @@
   <meta name="twitter:description" content="I lead AI transformation that actually changes how teams work. Workshops, programmes and consulting from Madrid." />
   <meta name="twitter:image" content="https://www.alfredobarrero.com/pic.jpeg" />
 
-  <!-- Structured data for search engines and AI assistants -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -149,402 +148,238 @@
     gtag('js', new Date());
     gtag('config', 'G-MEF17T9Q13');
   </script>
-  <style>
-    /* ── RESET ── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<style>
+/* ── Tipografías reales del sistema CrashFredo (embebidas) ── */
+@font-face{font-family:'Archivo';font-style:normal;font-weight:900;font-stretch:125%;font-display:block;src:url(fonts/archivo-900.woff2) format('woff2')}
+@font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:500;font-display:block;src:url(fonts/plex-mono-500.woff2) format('woff2')}
+@font-face{font-family:'IBM Plex Sans';font-style:normal;font-weight:400 500;font-stretch:100%;font-display:block;src:url(fonts/plex-sans.woff2) format('woff2')}
 
-    /* ── TOKENS — paper & ink ── */
-    :root {
-      --paper: #F4EFE6;
-      --paper2: #EDE6D8;
-      --ink: #1A150F;
-      --muted: #6E6759;
-      --faint: #A89F8E;
-      --accent: #9E3B23;
-      --line: rgba(26,21,15,0.16);
-      --line-strong: rgba(26,21,15,0.55);
-      --wrap: 1180px;
-      --pad: clamp(20px, 5vw, 64px);
-      --serif: 'Fraunces', Georgia, serif;
-      --sans: 'Hanken Grotesk', system-ui, sans-serif;
-      --mono: 'Spline Sans Mono', ui-monospace, monospace;
-    }
+/* ── Tokens: tinta (principal) y papel (claro), misma familia ── */
+:root{
+  --tinta:#1E1B16;--papel:#F6F1E8;--naranja:#E3521A;
+  --bg:#1E1B16;--fg:#F6F1E8;--muted:#A89E8F;--line:#3A352C;--card:#26221B;--dot:#3A352C;--onacc:#1E1B16;
+  --gut:clamp(16px,4vw,48px);--maxw:1200px;
+  --archivo:'Archivo',Impact,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;--sans:'IBM Plex Sans',system-ui,sans-serif;
+}
+:root[data-theme="light"]{
+  --bg:#F6F1E8;--fg:#1E1B16;--muted:#6F675B;--line:#D9D0C1;--card:#EFE8DB;--dot:#CFC5B4;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{
+  background:var(--bg) radial-gradient(var(--dot) 1.5px,transparent 1.5px);background-size:48px 48px;
+  color:var(--fg);font-family:var(--sans);font-weight:400;font-size:16px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut)}
 
-    /* ── INK MODE (dark) ── */
-    body.ink {
-      --paper: #16120D;
-      --paper2: #1E1913;
-      --ink: #EFE7D6;
-      --muted: #9C9283;
-      --faint: #6B6356;
-      --accent: #D2693F;
-      --line: rgba(239,231,214,0.16);
-      --line-strong: rgba(239,231,214,0.55);
-    }
+/* ── Voces tipográficas ── */
+.archivo{font-family:var(--archivo);font-weight:900;font-stretch:125%;text-transform:uppercase;letter-spacing:-.03em;line-height:.92}
+.mono{font-family:var(--mono);font-weight:500;text-transform:uppercase;letter-spacing:.14em;font-size:11px;line-height:1.4}
+.sans{font-family:var(--sans)}
+.k{color:var(--naranja)}
+.spec{display:inline-block;background:var(--naranja);color:var(--onacc);padding:7px 12px 6px;font-family:var(--mono);font-weight:500;font-size:11px;letter-spacing:.14em;text-transform:uppercase;line-height:1;white-space:nowrap}
+.spec.ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.btn{background:transparent;cursor:pointer;font:inherit;display:inline-flex;align-items:center;gap:10px;padding:14px 20px 13px;font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.14em;text-transform:uppercase;line-height:1;border:1px solid var(--fg);color:var(--fg);transition:background .15s,color .15s}
+.btn.primary{background:var(--naranja);border-color:var(--naranja);color:var(--onacc)}
+.btn.primary:hover{background:var(--fg);border-color:var(--fg);color:var(--bg)}
+.btn:not(.primary):hover{background:var(--fg);color:var(--bg)}
+.btn .arr{font-family:var(--archivo);font-weight:900;font-stretch:125%;font-size:14px;line-height:1}
+.hair{border-top:1px solid var(--line)}
+.chip{display:inline-block;padding:6px 10px 5px;border:1px solid var(--line);font-family:var(--mono);font-weight:500;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);line-height:1}
 
-    html { scroll-behavior: smooth; overflow-x: hidden; }
-    body {
-      font-family: var(--sans);
-      color: var(--ink); background: var(--paper);
-      font-size: 16.5px; line-height: 1.7; overflow-x: hidden;
-      transition: background .3s, color .3s;
-    }
-    ::selection { background: var(--accent); color: var(--paper); }
+/* Esquinas de registro (trazo 2px naranja, nunca logos) */
+.reg{position:relative}
+.reg::before,.reg::after,.reg > .rg::before,.reg > .rg::after{content:"";position:absolute;width:18px;height:18px;border:0 solid var(--naranja);pointer-events:none}
+.reg::before{top:0;left:0;border-top-width:2px;border-left-width:2px}
+.reg::after{top:0;right:0;border-top-width:2px;border-right-width:2px}
+.reg > .rg::before{bottom:0;left:0;border-bottom-width:2px;border-left-width:2px}
+.reg > .rg::after{bottom:0;right:0;border-bottom-width:2px;border-right-width:2px}
 
-    /* grain */
-    body::after {
-      content: ''; position: fixed; inset: 0; z-index: 999; pointer-events: none;
-      opacity: .05;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
-    }
+/* Cota de plano (hairline con ticks) */
+.cota{display:flex;align-items:center;gap:10px;color:var(--muted)}
+.cota::before,.cota::after{content:"";flex:1;height:1px;background:var(--line);position:relative}
+.cota .t{white-space:nowrap}
 
-    .mono { font-family: var(--mono); }
-    .wrap { max-width: var(--wrap); margin: 0 auto; padding-left: var(--pad); padding-right: var(--pad); }
+/* ── Nav ── */
+nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand .name{font-size:15px;letter-spacing:-.02em;white-space:nowrap}
+.apex{display:block;flex:none;overflow:visible}
+.links{display:flex;align-items:center;gap:26px}
+.links a.nl{font-family:var(--mono);font-weight:500;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg)}
+.links a.nl .nv{color:var(--naranja);margin-right:6px}
+.links a.nl:hover{color:var(--naranja)}
+.ibtn{width:34px;height:34px;border:1px solid var(--line);background:transparent;color:var(--fg);font-family:var(--mono);font-weight:500;font-size:12px;cursor:pointer;line-height:1}
+.ibtn:hover{border-color:var(--fg)}
+#burger{display:none}
+#mobile-menu{display:none;border-bottom:1px solid var(--line);background:var(--bg)}
+#mobile-menu.open{display:block}
+#mobile-menu a{display:block;padding:16px var(--gut);border-top:1px solid var(--line);font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+#mobile-menu a .nv{color:var(--naranja);margin-right:8px}
 
-    /* ── ENTRY / REVEAL ── */
-    @keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
-    .hero-main > * { animation: rise .7s ease both; }
-    .hero-main > *:nth-child(1) { animation-delay: .05s; }
-    .hero-main > *:nth-child(2) { animation-delay: .15s; }
-    .hero-main > *:nth-child(3) { animation-delay: .25s; }
-    .hero-main > *:nth-child(4) { animation-delay: .35s; }
-    .hero-main > *:nth-child(5) { animation-delay: .45s; }
-    .hero-figure { animation: rise .8s .3s ease both; }
-    .ledger { animation: rise .8s .55s ease both; }
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
-    .reveal.in { opacity: 1; transform: none; }
-    @media (prefers-reduced-motion: reduce) {
-      .hero-main > *, .hero-figure, .ledger { animation: none; }
-      .reveal { opacity: 1; transform: none; transition: none; }
-    }
+/* ── Hero ── */
+.hero{padding:clamp(40px,7vw,96px) 0 0}
+.hero-frame{padding:clamp(24px,4vw,56px) clamp(20px,3.5vw,48px) clamp(28px,4vw,56px)}
+h1.hero-h1{font-size:clamp(28px,3.4vw,48px);margin:26px 0 0;overflow-wrap:anywhere}
+h1.hero-h1 br{display:none}
+h1.hero-h1 em{font-style:normal;color:var(--naranja)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:clamp(24px,5vw,64px);align-items:start}
+.hero-lead{margin-top:30px;font-size:clamp(17px,1.4vw,19px);line-height:1.5;color:var(--muted);max-width:52ch}
+.hero-creds{margin-top:22px;color:var(--muted);line-height:1.9}
+.hero-creds strong{color:var(--fg);font-weight:500}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+.figure{margin:0;justify-self:end;width:100%;max-width:400px}
+.figure .ph{padding:10px}
+.figure img{width:100%;aspect-ratio:4/5;object-fit:cover;filter:grayscale(1) contrast(1.05)}
+.figure figcaption{margin-top:14px}
 
-    /* ── NAV ── */
-    nav {
-      position: sticky; top: 0; z-index: 100;
-      background: color-mix(in srgb, var(--paper) 92%, transparent);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--line);
-      height: 60px; padding: 0 var(--pad);
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .nav-name {
-      font-family: var(--serif); font-weight: 600; font-size: 17px;
-      color: var(--ink); text-decoration: none; letter-spacing: -.2px;
-    }
-    .nav-links { display: flex; gap: 26px; align-items: center; }
-    .nav-links > a {
-      font-family: var(--mono); font-size: 12px; letter-spacing: .4px;
-      color: var(--muted); text-decoration: none; text-transform: uppercase;
-      transition: color .15s;
-    }
-    .nav-links > a:hover { color: var(--accent); }
-    .nav-links .nv { color: var(--accent); margin-right: 2px; }
-    .nav-cta {
-      color: var(--ink) !important; border-bottom: 1.5px solid var(--accent);
-      padding-bottom: 2px;
-    }
-    .nav-cta:hover { color: var(--accent) !important; }
-    .nav-icon-btn {
-      background: none; border: 1px solid var(--line); border-radius: 0;
-      padding: 5px 10px; cursor: pointer; color: var(--muted);
-      font-family: var(--mono); font-size: 12px; line-height: 1;
-      transition: border-color .15s, color .15s;
-    }
-    .nav-icon-btn:hover { border-color: var(--line-strong); color: var(--ink); }
+/* ── Ledger de cifras ── */
+.ledger{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:clamp(40px,6vw,80px)}
+.stat{padding:28px 24px 30px 0;border-left:1px solid var(--line);padding-left:24px}
+.stat:first-child{border-left:0;padding-left:0}
+.stat-n{font-size:clamp(30px,3.2vw,46px);color:var(--fg);white-space:nowrap}
+.stat-t{margin-top:12px;color:var(--naranja)}
+.stat-d{margin-top:10px;font-size:14px;line-height:1.5;color:var(--muted)}
 
-    #hamburger { display: none; flex-direction: column; justify-content: center; align-items: center; gap: 5px; width: 36px; height: 36px; background: none; border: none; cursor: pointer; padding: 4px; }
-    #hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); transition: all .2s; }
-    #hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    #hamburger.open span:nth-child(2) { opacity: 0; }
-    #hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-    #mobile-menu {
-      display: none; position: fixed; top: 60px; left: 0; right: 0;
-      background: var(--paper); border-bottom: 1px solid var(--line);
-      padding: 16px 20px 20px; z-index: 99; flex-direction: column;
-    }
-    #mobile-menu a { font-family: var(--mono); font-size: 14px; text-transform: uppercase; letter-spacing: .5px; color: var(--ink); text-decoration: none; padding: 13px 0; border-bottom: 1px solid var(--line); }
-    #mobile-menu a:last-child { border-bottom: none; }
-    #mobile-menu a:hover { color: var(--accent); }
+/* ── Secciones ── */
+section.sec{padding:clamp(56px,9vw,128px) 0 0}
+.sec-head{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:24px;align-items:start;border-top:1px solid var(--line);padding-top:28px}
+.sec-head .idx{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.sec-head .idx .cnt{color:var(--muted)}
+.sec-head h2{font-size:clamp(28px,3.6vw,50px)}
+.sec-head .sub{margin-top:18px;font-size:clamp(16px,1.35vw,18px);line-height:1.55;color:var(--muted);max-width:56ch}
 
-    /* ── HERO ── */
-    .hero { padding: clamp(56px, 9vh, 110px) var(--pad) 0; }
-    .hero-grid {
-      max-width: var(--wrap); margin: 0 auto;
-      display: grid; grid-template-columns: 1.35fr .85fr;
-      gap: clamp(32px, 5vw, 72px); align-items: start;
-    }
-    .hero-eyebrow {
-      font-family: var(--mono); font-size: 12px; letter-spacing: 1.5px;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 30px;
-      display: flex; align-items: center; gap: 14px;
-    }
-    .hero-eyebrow::before { content: ''; width: 42px; height: 1px; background: var(--accent); flex-shrink: 0; }
-    .hero h1 {
-      font-family: var(--serif); font-weight: 560;
-      font-size: clamp(40px, 5.8vw, 74px);
-      line-height: 1.06; letter-spacing: -1px; margin-bottom: 30px;
-      text-wrap: balance;
-    }
-    .hero h1 em { font-style: italic; font-weight: 440; color: var(--accent); }
-    .hero-lead { font-size: 18px; color: var(--muted); line-height: 1.75; max-width: 54ch; margin-bottom: 18px; }
-    .hero-creds {
-      font-family: var(--mono); font-size: 12px; letter-spacing: .6px;
-      color: var(--faint); text-transform: uppercase; margin-bottom: 40px;
-    }
-    .hero-creds strong { color: var(--ink); font-weight: 500; }
-    .hero-actions { display: flex; gap: 26px; align-items: center; flex-wrap: wrap; }
+/* Servicios: filas numeradas con hairline */
+.rows{margin-top:clamp(32px,5vw,64px);border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1.3fr) minmax(0,.9fr) 48px;gap:24px;padding:34px 0;border-bottom:1px solid var(--line);align-items:start;color:inherit}
+.row .no{font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.14em;color:var(--naranja);padding-top:6px}
+.row h3{font-family:var(--archivo);font-weight:900;font-stretch:125%;text-transform:uppercase;letter-spacing:-.02em;line-height:.95;font-size:clamp(20px,2.2vw,28px)}
+.row p{margin-top:14px;font-size:15px;line-height:1.55;color:var(--muted);max-width:56ch}
+.row .tag{color:var(--muted);padding-top:8px}
+.row .go{font-family:var(--archivo);font-weight:900;font-stretch:125%;font-size:26px;color:var(--naranja);line-height:1;justify-self:end;transition:transform .15s}
+.row:hover .go{transform:translateX(6px)}
+.note{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:24px;padding:34px 0 0}
+.note p{font-size:16px;line-height:1.55;color:var(--muted);max-width:64ch}
+.note p strong{color:var(--fg);font-weight:500}
+.note p a{color:var(--naranja);border-bottom:1px solid var(--naranja)}
 
-    .btn-ink {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--ink); color: var(--paper);
-      font-family: var(--mono); font-size: 13px; letter-spacing: .5px; text-transform: uppercase;
-      padding: 14px 28px; text-decoration: none; border: 1px solid var(--ink);
-      cursor: pointer; transition: background .2s, color .2s;
-    }
-    .btn-ink:hover { background: var(--accent); border-color: var(--accent); color: #F4EFE6; }
-    .link-und {
-      font-family: var(--mono); font-size: 13px; letter-spacing: .5px; text-transform: uppercase;
-      color: var(--ink); text-decoration: none;
-      border-bottom: 1.5px solid var(--accent); padding-bottom: 3px;
-      transition: color .15s; cursor: pointer; background: none; border-top: none; border-left: none; border-right: none;
-    }
-    .link-und:hover { color: var(--accent); }
+/* Proyectos */
+.feature{margin-top:clamp(32px,5vw,64px);background:var(--card);border:1px solid var(--line);padding:clamp(24px,4vw,48px)}
+.feature .fh{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.feature h3{font-size:clamp(34px,4.5vw,64px);margin-top:20px}
+.feature > p{margin-top:20px;font-size:clamp(15px,1.3vw,17px);line-height:1.55;color:var(--muted);max-width:72ch}
+.surfaces{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:36px;border-top:1px solid var(--line)}
+.surf{padding:22px 24px 24px 0;border-left:1px solid var(--line);padding-left:24px}
+.surf:first-child{border-left:0;padding-left:0}
+.surf .no{color:var(--naranja)}
+.surf h4{font-family:var(--archivo);font-weight:900;font-stretch:125%;text-transform:uppercase;letter-spacing:-.02em;font-size:16px;line-height:1;margin-top:12px}
+.surf p{margin-top:10px;font-size:14px;line-height:1.5;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
 
-    .hero-figure { position: relative; margin-top: 14px; }
-    .hero-figure img {
-      width: 100%; max-width: 360px; display: block; margin-left: auto;
-      filter: grayscale(1) contrast(1.05);
-      border: 1px solid var(--line-strong);
-    }
-    .hero-figure::before {
-      content: ''; position: absolute; top: 14px; right: -14px;
-      width: 100%; max-width: 360px; height: 100%;
-      border: 1px solid var(--accent); z-index: -1;
-    }
-    .hero-figure figcaption {
-      font-family: var(--mono); font-size: 11px; color: var(--faint);
-      letter-spacing: .8px; text-transform: uppercase;
-      text-align: right; margin-top: 12px;
-    }
+/* El taller: donde CrashFredo firma lo que construye */
+.taller{margin-top:clamp(48px,7vw,96px);border-top:1px solid var(--line);padding-top:32px;display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:24px;align-items:start}
+.taller .sig{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.taller .wm{font-size:22px;letter-spacing:-.03em}
+.taller .lema{font-size:13px;letter-spacing:-.02em;line-height:1}
+.taller .lema .k{color:var(--naranja)}
+.taller h3{font-size:clamp(26px,3.4vw,44px)}
+.taller .sub{margin-top:16px;font-size:clamp(16px,1.35vw,18px);line-height:1.55;color:var(--muted);max-width:56ch}
+.apps{margin-top:clamp(28px,4vw,48px);border-top:1px solid var(--line)}
+.app{position:relative;display:grid;grid-template-columns:96px minmax(0,1fr) minmax(0,220px);gap:28px;padding:36px 0 36px 24px;border-bottom:1px solid var(--line);align-items:start}
+.app .bar{position:absolute;left:0;top:36px;bottom:36px;width:4px;background:var(--acc)}
+.app .icon{width:96px;height:96px;border-radius:22%;object-fit:cover;flex:none}
+.app .ah{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+.app h4{font-family:var(--archivo);font-weight:900;font-stretch:125%;text-transform:uppercase;letter-spacing:-.03em;line-height:.9;font-size:clamp(28px,3.2vw,40px);color:var(--acc)}
+.app .badge{color:var(--muted)}
+.app p{margin-top:14px;font-size:15px;line-height:1.55;color:var(--muted);max-width:60ch}
+.app .chips{margin-top:18px}
+.app .cta{justify-self:end;align-self:start;padding-top:8px;font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg);white-space:nowrap;display:inline-flex;gap:8px;align-items:center}
+.app .cta .arr{font-family:var(--archivo);font-weight:900;font-stretch:125%;color:var(--acc);font-size:16px;line-height:1}
+.app .cta:hover{color:var(--acc)}
 
-    /* ── LEDGER (stats) ── */
-    .ledger {
-      max-width: var(--wrap); margin: clamp(56px, 9vh, 96px) auto 0;
-      border-top: 1px solid var(--line-strong); border-bottom: 1px solid var(--line-strong);
-      display: grid; grid-template-columns: repeat(4, 1fr);
-    }
-    .stat { padding: 30px 26px 32px 0; border-right: 1px solid var(--line); }
-    .stat:last-child { border-right: none; }
-    .stat + .stat { padding-left: 26px; }
-    .stat-n {
-      font-family: var(--serif); font-weight: 560; font-size: clamp(30px, 3vw, 40px);
-      line-height: 1; color: var(--accent); margin-bottom: 12px;
-      font-variant-numeric: lining-nums;
-    }
-    .stat-t {
-      font-family: var(--mono); font-size: 11px; letter-spacing: 1px;
-      text-transform: uppercase; color: var(--ink); margin-bottom: 8px;
-    }
-    .stat-d { font-size: 13px; color: var(--muted); line-height: 1.6; }
+/* Historia */
+.story{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:24px;margin-top:clamp(32px,5vw,64px)}
+.story .col p{font-size:clamp(16px,1.3vw,17px);line-height:1.6;color:var(--muted);max-width:66ch}
+.story .col p + p{margin-top:22px}
+.story .col p strong{color:var(--fg);font-weight:500}
+.anchors{display:flex;align-items:center;gap:36px;margin-top:40px;padding-top:28px;border-top:1px solid var(--line)}
+.anchors svg{height:26px;width:auto;display:block;filter:grayscale(1) brightness(0) invert(.9);opacity:.85}
+:root[data-theme="light"] .anchors svg{filter:grayscale(1) brightness(0.25)}
+.anchors .ol svg{height:42px}
 
-    /* ── SECTION SCAFFOLD ── */
-    section { padding: clamp(64px, 10vh, 110px) var(--pad) 0; }
-    .sec-inner { max-width: var(--wrap); margin: 0 auto; }
-    .sec-head {
-      display: grid; grid-template-columns: 110px 1fr; gap: 18px;
-      padding-top: 22px; border-top: 1px solid var(--line-strong);
-      margin-bottom: clamp(36px, 5vh, 56px);
-    }
-    .sec-no { font-family: var(--mono); font-size: 13px; color: var(--accent); letter-spacing: 1px; }
-    .sec-no::after { content: ' /'; color: var(--faint); }
-    .sec-title {
-      font-family: var(--serif); font-weight: 600;
-      font-size: clamp(28px, 3.4vw, 44px); line-height: 1.12; letter-spacing: -.4px;
-      margin-bottom: 14px;
-    }
-    .sec-sub { font-size: 16px; color: var(--muted); max-width: 58ch; }
+/* Contacto + firma del taller */
+.contact{margin-top:clamp(64px,10vw,140px);border-top:1px solid var(--line);padding:clamp(48px,7vw,96px) 0 0}
+.contact-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(32px,6vw,96px);align-items:end}
+.contact h2{font-size:clamp(44px,7vw,104px)}
+.contact .sub{margin-top:22px;font-size:clamp(16px,1.35vw,18px);line-height:1.55;color:var(--muted);max-width:48ch}
+.contact .mail{display:inline-block;margin-top:34px;font-family:var(--mono);font-weight:500;font-size:clamp(15px,1.7vw,22px);letter-spacing:.02em;border-bottom:2px solid var(--naranja);padding-bottom:4px;word-break:break-all}
+.contact-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+.signature{display:flex;flex-direction:column;align-items:flex-start;gap:18px;padding:28px;border:1px solid var(--line);background:var(--card)}
+.signature .wm{font-size:clamp(26px,3vw,36px)}
+.signature .lema{font-size:clamp(18px,2vw,24px);line-height:.95}
+.signature .lema .k{color:var(--naranja)}
+.handle{display:inline-flex;align-items:center;gap:10px;border:1.5px solid var(--fg);border-radius:999px;padding:10px 18px 10px 14px;font-family:var(--mono);font-weight:500;font-size:13px;letter-spacing:.08em;line-height:1;color:var(--fg)}
+.handle .arr{font-family:var(--archivo);font-weight:900;font-stretch:125%;color:var(--naranja)}
+.signature .why{font-size:13px;line-height:1.5;color:var(--muted);max-width:34ch}
 
-    /* ── SERVICES — index rows ── */
-    .svc-list { border-top: 1px solid var(--line); }
-    .svc-row {
-      display: grid; grid-template-columns: 110px 1.1fr 1fr auto;
-      gap: 18px; align-items: baseline;
-      padding: 30px 18px 32px 0; border-bottom: 1px solid var(--line);
-      text-decoration: none; color: inherit; position: relative;
-      transition: background .25s, color .25s, padding-left .25s;
-    }
-    .svc-row:hover { background: var(--ink); color: var(--paper); padding-left: 18px; }
-    .svc-no { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: 1px; }
-    .svc-row h3 {
-      font-family: var(--serif); font-weight: 600; font-size: clamp(20px, 2.2vw, 27px);
-      letter-spacing: -.2px; line-height: 1.2; margin-bottom: 10px;
-    }
-    .svc-row p { font-size: 14.5px; color: var(--muted); line-height: 1.7; max-width: 52ch; transition: color .25s; }
-    .svc-row:hover p { color: color-mix(in srgb, var(--paper) 75%, transparent); }
-    .svc-meta { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
-    .svc-tag {
-      font-family: var(--mono); font-size: 11px; letter-spacing: .8px; text-transform: uppercase;
-      color: var(--muted); transition: color .25s;
-    }
-    .svc-row:hover .svc-tag { color: color-mix(in srgb, var(--paper) 70%, transparent); }
-    .svc-arrow {
-      font-family: var(--serif); font-size: 26px; line-height: 1; color: var(--accent);
-      transition: transform .25s; align-self: center;
-    }
-    .svc-row:hover .svc-arrow { transform: translateX(8px); }
+footer{margin-top:clamp(48px,7vw,96px);border-top:1px solid var(--line);padding:24px 0 32px}
+footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--muted)}
 
-    /* ── SERVICES — 1:1 note ── */
-    .svc-note {
-      display: grid; grid-template-columns: 110px 1fr; gap: 18px;
-      align-items: baseline; padding: 26px 0 4px;
-    }
-    .svc-note-label {
-      font-family: var(--mono); font-size: 12px; color: var(--accent);
-      letter-spacing: 1px; text-transform: uppercase;
-    }
-    .svc-note p { font-size: 15px; color: var(--muted); line-height: 1.7; max-width: 60ch; }
-    .svc-note strong { color: var(--ink); font-weight: 600; }
-    .svc-note a {
-      color: var(--ink); text-decoration: none;
-      border-bottom: 1.5px solid var(--accent); padding-bottom: 1px;
-      transition: color .15s;
-    }
-    .svc-note a:hover { color: var(--accent); }
-    @media (max-width: 768px) { .svc-note { grid-template-columns: 1fr; gap: 8px; } }
+/* Nemo (botón de chat, igual que la web actual; aquí sólo maqueta) */
+#chat-btn{position:fixed;right:20px;bottom:20px;z-index:30;width:52px;height:52px;background:var(--naranja);color:var(--onacc);border:0;cursor:pointer;display:grid;place-items:center;font-family:var(--archivo);font-weight:900;font-stretch:125%;font-size:22px}
+#chat-btn:hover{background:var(--fg);color:var(--bg)}
 
-    /* ── PROJECTS — editorial grid ── */
-    .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid var(--line); }
-    .proj {
-      padding: 36px 36px 40px 0; border-bottom: 1px solid var(--line);
-      display: flex; flex-direction: column;
-    }
-    .proj.feature { grid-column: 1 / -1; border-bottom: 1px solid var(--line); }
-    .proj + .proj:not(.feature) { padding-left: 36px; border-left: 1px solid var(--line); }
-    .proj-grid.trio { grid-template-columns: repeat(4, 1fr); }
-    .proj-grid.trio .proj { padding: 32px 22px 36px 0; }
-    .proj-grid.trio .proj + .proj { padding-left: 22px; }
-    .proj-grid.trio .proj p { font-size: 14px; }
-
-    /* project → live link */
-    .proj-link {
-      margin-top: 16px; align-self: flex-start;
-      font-family: var(--mono); font-size: 11.5px; letter-spacing: .6px;
-      text-transform: uppercase; color: var(--ink); text-decoration: none;
-      border-bottom: 1.5px solid var(--accent); padding-bottom: 2px;
-      display: inline-flex; align-items: center; gap: 6px;
-      transition: color .15s, gap .15s;
-    }
-    .proj-link:hover { color: var(--accent); gap: 10px; }
-    .proj-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-    @media (max-width: 700px) {
-      .proj-grid.trio { grid-template-columns: 1fr; }
-      .proj-grid.trio .proj { padding-right: 0; padding-left: 0 !important; border-left: none !important; }
-    }
-    .proj-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 14px; flex-wrap: wrap; }
-    .proj h3 {
-      font-family: var(--serif); font-weight: 600; font-size: clamp(24px, 2.6vw, 34px);
-      letter-spacing: -.3px;
-    }
-    .proj-badge {
-      font-family: var(--mono); font-size: 10.5px; letter-spacing: 1.2px; text-transform: uppercase;
-      color: var(--accent); border: 1px solid currentColor; padding: 4px 10px;
-    }
-    .proj p { font-size: 15px; color: var(--muted); line-height: 1.75; max-width: 72ch; }
-    .proj-stack { margin-top: 22px; display: flex; gap: 0; flex-wrap: wrap; }
-    .stack-tag {
-      font-family: var(--mono); font-size: 11px; letter-spacing: .5px;
-      color: var(--muted); padding: 4px 12px; border: 1px solid var(--line);
-      margin: 0 -1px -1px 0;
-    }
-
-    /* NSights — three surfaces */
-    .proj-surfaces {
-      margin-top: 26px; border-top: 1px solid var(--line);
-      display: grid; grid-template-columns: repeat(3, 1fr);
-    }
-    .surface {
-      display: grid; grid-template-columns: 26px 1fr; gap: 10px;
-      padding: 20px 22px 4px 0; border-right: 1px solid var(--line);
-    }
-    .surface:last-child { border-right: none; }
-    .surface + .surface { padding-left: 22px; }
-    .surface-n { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: 1px; }
-    .surface strong {
-      display: block; font-family: var(--serif); font-weight: 600; font-size: 16px;
-      color: var(--ink); margin-bottom: 5px; letter-spacing: -.2px;
-    }
-    .surface span { font-size: 13px; color: var(--muted); line-height: 1.55; }
-    @media (max-width: 768px) {
-      .proj-surfaces { grid-template-columns: 1fr; }
-      .surface { border-right: none; border-bottom: 1px solid var(--line); padding: 16px 0; }
-      .surface:last-child { border-bottom: none; }
-      .surface + .surface { padding-left: 0; }
-    }
-
-    /* Projects — "on the side" divider */
-    .proj-subhead {
-      display: grid; grid-template-columns: 110px 1fr; gap: 18px; align-items: baseline;
-      margin: clamp(40px, 6vh, 64px) 0 clamp(20px, 3vh, 30px);
-    }
-    .proj-subhead-label {
-      font-family: var(--mono); font-size: 12px; color: var(--accent);
-      letter-spacing: 1px; text-transform: uppercase;
-    }
-    .proj-subhead p { font-size: 15px; color: var(--muted); max-width: 58ch; }
-    @media (max-width: 768px) { .proj-subhead { grid-template-columns: 1fr; gap: 8px; } }
-
-    /* ── STORY ── */
-    .story-grid { display: grid; grid-template-columns: 110px 1fr; gap: 18px; }
-    .story-body { max-width: 70ch; }
-    .story-body p { font-size: 17.5px; line-height: 1.85; margin-bottom: 22px; }
-    .story-body p:first-child::first-letter {
-      font-family: var(--serif); font-weight: 600; font-size: 64px; line-height: .82;
-      float: left; padding: 8px 12px 0 0; color: var(--accent);
-    }
-    .story-body strong { font-weight: 700; }
-    .story-body em { font-style: italic; color: var(--muted); }
-    .story-anchors {
-      margin-top: 44px; padding-top: 26px; border-top: 1px solid var(--line);
-      display: flex; align-items: center; gap: 44px; flex-wrap: wrap;
-    }
-    .story-anchor { height: 32px; width: auto; opacity: .5; transition: opacity .2s; filter: grayscale(1) brightness(0.25); }
-    body.ink .story-anchor { filter: grayscale(1) brightness(0) invert(.9); }
-    .story-anchor:hover { opacity: .85; }
-
-    /* ── CONTACT ── */
-    .contact-section { padding: clamp(72px, 12vh, 130px) var(--pad); text-align: center; }
-    .contact-inner { max-width: 760px; margin: 0 auto; }
-    .contact-section h2 {
-      font-family: var(--serif); font-weight: 560;
-      font-size: clamp(48px, 9vw, 104px); line-height: 1; letter-spacing: -2px;
-      margin-bottom: 26px;
-    }
-    .contact-section > .contact-inner > p { color: var(--muted); margin-bottom: 44px; font-size: 16px; }
-    .contact-mail {
-      display: inline-block; font-family: var(--serif); font-weight: 500;
-      font-size: clamp(18px, 2.6vw, 28px); color: var(--ink); text-decoration: none;
-      border-bottom: 2px solid var(--accent); padding-bottom: 4px; margin-bottom: 36px;
-      transition: color .2s;
-    }
-    .contact-mail:hover { color: var(--accent); }
-    .contact-actions { display: flex; gap: 26px; justify-content: center; flex-wrap: wrap; }
-
-    footer {
-      text-align: center; padding: 26px var(--pad);
-      font-family: var(--mono); font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
-      color: var(--faint); border-top: 1px solid var(--line);
-    }
-
+/* ── Responsive ── */
+@media (max-width:980px){
+  .links a.nl,.links .nav-cta{display:none}
+  #burger{display:inline-grid;place-items:center}
+  .row{grid-template-columns:64px minmax(0,1fr) 40px}
+  .row .tag{grid-column:2;padding-top:0;margin-top:14px}
+  .row .go{grid-row:1;grid-column:3}
+  .sec-head,.note,.taller,.story{grid-template-columns:minmax(0,1fr)}
+  .app{grid-template-columns:72px minmax(0,1fr)}
+  .app .icon{width:72px;height:72px}
+  .app .cta{grid-column:2;justify-self:start;margin-top:16px}
+  .contact-grid{grid-template-columns:minmax(0,1fr);align-items:start}
+}
+@media (max-width:760px){
+  .hero-grid{grid-template-columns:minmax(0,1fr)}
+  .figure{justify-self:start;max-width:360px;margin-top:8px}
+  .ledger{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .stat{padding:22px 16px 24px}
+  .stat:nth-child(odd){border-left:0;padding-left:0}
+  .stat:nth-child(n+3){border-top:1px solid var(--line)}
+  .surfaces{grid-template-columns:1fr}
+  .surf{border-left:0;padding-left:0;border-top:1px solid var(--line)}
+  .surf:first-child{border-top:0}
+}
+@media (max-width:480px){
+  h1.hero-h1{font-size:26px}
+  .spec{white-space:normal;line-height:1.35;padding:5px 10px}
+  .brand .name{font-size:13px}
+  .nav-in{height:58px}
+  .row{grid-template-columns:48px minmax(0,1fr) 32px;gap:14px}
+  .app{grid-template-columns:minmax(0,1fr);padding-left:18px;gap:18px}
+  .app .icon{width:64px;height:64px}
+  .hero-frame{padding:20px 16px 24px}
+  .figure{max-width:100%}
+  .signature{padding:22px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
     /* ── CHAT ── */
     #chat-btn {
       position: fixed; bottom: 24px; right: 24px; z-index: 200;
       width: 54px; height: 54px; border-radius: 50%;
-      background: var(--ink); color: var(--paper); border: 1px solid var(--ink);
+      background: var(--fg); color: var(--bg); border: 1px solid var(--fg);
       cursor: pointer; display: flex; align-items: center; justify-content: center;
       transition: transform .15s, background .2s;
       animation: chatPulse 2.4s ease-out 1.5s 4;
     }
-    #chat-btn:hover { transform: scale(1.07); background: var(--accent); border-color: var(--accent); }
+    #chat-btn:hover { transform: scale(1.07); background: var(--naranja); border-color: var(--naranja); }
     @keyframes chatPulse {
       0% { box-shadow: 0 0 0 0 rgba(158,59,35,0.4); }
       100% { box-shadow: 0 0 0 18px rgba(158,59,35,0); }
@@ -553,21 +388,21 @@
     #chat-window {
       position: fixed; bottom: 92px; right: 24px; z-index: 200;
       width: 370px; max-height: 540px;
-      background: var(--paper); border: 1px solid var(--line-strong);
-      box-shadow: 10px 10px 0 0 var(--accent);
+      background: var(--bg); border: 1px solid var(--line-strong);
+      box-shadow: 10px 10px 0 0 var(--naranja);
       overflow: hidden; display: none; flex-direction: column;
     }
     #chat-window.open { display: flex; }
     .chat-header {
-      padding: 14px 18px; background: var(--ink); color: var(--paper);
+      padding: 14px 18px; background: var(--fg); color: var(--bg);
       display: flex; align-items: center; justify-content: space-between;
     }
     .chat-left { display: flex; align-items: center; gap: 10px; }
     .chat-av {
       width: 32px; height: 32px; border-radius: 50%;
-      border: 1px solid var(--accent); color: var(--accent);
+      border: 1px solid var(--naranja); color: var(--naranja);
       display: flex; align-items: center; justify-content: center;
-      font-family: var(--serif); font-weight: 600; font-size: 14px;
+      font-family: var(--archivo); font-weight: 600; font-size: 14px;
     }
     .chat-hname { font-size: 13.5px; font-weight: 700; }
     .chat-hsub { font-size: 11px; opacity: .65; }
@@ -576,359 +411,389 @@
     #chat-msgs { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; min-height: 240px; }
     #msgs-spacer { flex: 1; }
     .msg { max-width: 86%; font-size: 13.5px; line-height: 1.55; padding: 10px 14px; }
-    .msg-ai { background: var(--paper2); color: var(--ink); align-self: flex-start; border: 1px solid var(--line); }
-    .msg-user { background: var(--ink); color: var(--paper); align-self: flex-end; }
-    .msg-t { background: var(--paper2); color: var(--muted); align-self: flex-start; font-style: italic; font-size: 12.5px; padding: 10px 14px; border: 1px solid var(--line); }
+    .msg-ai { background: var(--card); color: var(--fg); align-self: flex-start; border: 1px solid var(--line); }
+    .msg-user { background: var(--fg); color: var(--bg); align-self: flex-end; }
+    .msg-t { background: var(--card); color: var(--muted); align-self: flex-start; font-style: italic; font-size: 12.5px; padding: 10px 14px; border: 1px solid var(--line); }
     .chat-sugg { padding: 0 12px 10px; display: flex; flex-wrap: wrap; gap: 6px; }
     .sugg {
       font-family: var(--mono); font-size: 11px; background: none; border: 1px solid var(--line);
       padding: 5px 11px; cursor: pointer; color: var(--muted);
       transition: border-color .15s, color .15s;
     }
-    .sugg:hover { border-color: var(--accent); color: var(--accent); }
+    .sugg:hover { border-color: var(--naranja); color: var(--naranja); }
     .lead-form { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
     .lead-form input {
-      border: 1px solid var(--line); background: var(--paper); color: var(--ink);
+      border: 1px solid var(--line); background: var(--bg); color: var(--fg);
       padding: 8px 12px; font-size: 13px; font-family: var(--sans); outline: none;
     }
-    .lead-form input:focus { border-color: var(--accent); }
+    .lead-form input:focus { border-color: var(--naranja); }
     .lead-form button {
-      background: var(--ink); color: var(--paper); border: none; cursor: pointer;
+      background: var(--fg); color: var(--bg); border: none; cursor: pointer;
       font-family: var(--mono); font-size: 11px; letter-spacing: .8px; text-transform: uppercase;
       padding: 9px 14px; align-self: flex-start;
     }
-    .lead-form button:hover { background: var(--accent); }
+    .lead-form button:hover { background: var(--naranja); }
     .chat-row { padding: 10px 12px; border-top: 1px solid var(--line); display: flex; gap: 8px; }
     #chat-in {
       flex: 1; border: 1px solid var(--line); padding: 8px 12px;
       font-size: 13.5px; font-family: var(--sans);
-      background: var(--paper); color: var(--ink);
+      background: var(--bg); color: var(--fg);
       outline: none; resize: none; max-height: 80px;
     }
-    #chat-in:focus { border-color: var(--accent); }
+    #chat-in:focus { border-color: var(--naranja); }
     #chat-go {
-      background: var(--ink); color: var(--paper); border: none;
+      background: var(--fg); color: var(--bg); border: none;
       width: 36px; height: 36px; flex-shrink: 0; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
     }
-    #chat-go:hover { background: var(--accent); }
-    #qlimit { font-family: var(--mono); font-size: 10.5px; color: var(--faint); text-align: right; padding: 4px 14px 0; }
-    #rcap-note { font-size: 10px; color: var(--faint); text-align: center; padding: 0 14px 6px; display: none; }
+    #chat-go:hover { background: var(--naranja); }
+    #qlimit { font-family: var(--mono); font-size: 10.5px; color: var(--muted); text-align: right; padding: 4px 14px 0; }
+    #rcap-note { font-size: 10px; color: var(--muted); text-align: center; padding: 0 14px 6px; display: none; }
     #rcap-note a { color: inherit; }
     .grecaptcha-badge { visibility: hidden; }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 980px) {
-      .ledger { grid-template-columns: 1fr 1fr; }
-      .stat { border-right: none; border-bottom: 1px solid var(--line); padding-left: 0 !important; }
-      .stat:nth-child(odd) { border-right: 1px solid var(--line); padding-right: 26px; }
-      .stat:nth-child(even) { padding-left: 26px !important; }
-      .stat:nth-child(3), .stat:nth-child(4) { border-bottom: none; }
-      .svc-row { grid-template-columns: 70px 1fr; }
-      .svc-arrow { display: none; }
-      .svc-meta { grid-column: 2; }
-    }
-    @media (max-width: 768px) {
-      .hero-grid { grid-template-columns: 1fr; }
-      .hero-figure { order: -1; margin-top: 0; }
-      .hero-figure img { margin-left: 0; max-width: 240px; }
-      .hero-figure::before { max-width: 240px; }
-      .hero-figure figcaption { text-align: left; }
-      .sec-head, .story-grid { grid-template-columns: 1fr; gap: 10px; }
-      .svc-row { grid-template-columns: 1fr; gap: 10px; padding-right: 0; }
-      .svc-arrow { display: none; }
-      .proj-grid { grid-template-columns: 1fr; }
-      .proj { padding-right: 0; }
-      .proj + .proj:not(.feature) { padding-left: 0; border-left: none; }
-      .nav-links > a:not(.nav-cta) { display: none; }
-      .nav-links { gap: 10px; }
-      nav { padding: 0 16px; }
-      #hamburger { display: flex; }
-      #mobile-menu { display: flex; }
-      #mobile-menu.closed { display: none; }
-      #chat-window { position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100dvh; max-height: 100dvh; border: none; box-shadow: none; z-index: 300; }
+
+    /* ── Integración ── */
+    .archivo .dot { margin-left: .06em; }                 /* el punto no se pega a la W */
+    #theme-btn { font-family: "Apple Symbols","Segoe UI Symbol","Noto Sans Symbols 2",system-ui,sans-serif; font-size: 14px; }
+    @media (max-width: 760px) {
+      #chat-window { position: fixed; inset: 0; width: 100%; height: 100dvh; max-height: 100dvh; border: none; box-shadow: none; z-index: 300; }
       #chat-btn { bottom: 16px; right: 16px; }
       #chat-in { font-size: 16px; }
     }
-    @media (max-width: 460px) {
-      .ledger { grid-template-columns: 1fr; }
-      .stat { border-right: none !important; border-bottom: 1px solid var(--line); padding: 24px 0 !important; }
-      .stat:last-child { border-bottom: none; }
-    }
-  </style>
+    @media (max-width: 480px) { .nav-in { gap: 8px; } .links { gap: 8px; } .ibtn { width: 30px; height: 30px; } }
+
+</style>
 </head>
+<body id="top">
 
-<body>
-
-  <nav>
-    <a class="nav-name" href="#top">Alfredo Barrero</a>
-    <div class="nav-links">
-      <a href="#services"><span class="nv">01</span> <span data-i18n="nav_work">Work with me</span></a>
-      <a href="#projects"><span class="nv">02</span> <span data-i18n="nav_projects">Projects</span></a>
-      <a href="#story"><span class="nv">03</span> <span data-i18n="nav_about">About</span></a>
-      <button class="nav-icon-btn" id="theme-btn" onclick="toggleTheme()" title="Toggle ink mode">☾</button>
-      <button class="nav-icon-btn" id="lang-btn" onclick="toggleLang()" title="Switch language">ES</button>
-      <a href="#contact" class="nav-cta" data-i18n="nav_cta">Get in touch</a>
-      <button id="hamburger" onclick="toggleMenu()" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
+<nav>
+  <div class="wrap nav-in">
+    <a class="brand" href="#top" aria-label="Alfredo Barrero — home">
+      <!-- Símbolo Apex: geometría exacta de src/components/ApexMark.tsx -->
+      <svg class="apex" viewBox="0 0 100 100" width="28" height="28" aria-hidden="true">
+        <path d="M15 92V50A30 30 0 0 1 45 20H97" fill="none" stroke="currentColor" stroke-width="24" stroke-linecap="butt"/>
+        <path d="M45 36H51V56H31V50A14 14 0 0 1 45 36Z" fill="#E3521A"/>
+      </svg>
+      <span class="name archivo">Alfredo Barrero</span>
+    </a>
+    <div class="links">
+      <a class="nl" href="#services"><span class="nv">01</span><span data-i18n="nav_work">Work with me</span></a>
+      <a class="nl" href="#projects"><span class="nv">02</span><span data-i18n="nav_projects">Projects</span></a>
+      <a class="nl" href="#story"><span class="nv">03</span><span data-i18n="nav_about">About</span></a>
+      <button class="ibtn" id="theme-btn" onclick="toggleTheme()" title="Toggle paper mode">☀</button>
+      <button class="ibtn" id="lang-btn" onclick="toggleLang()" title="Switch language">ES</button>
+      <a href="#contact" class="spec nav-cta" data-i18n="nav_cta">Get in touch</a>
+      <button class="ibtn" id="burger" onclick="toggleMenu()" aria-label="Menu">≡</button>
     </div>
-  </nav>
-
-  <div id="mobile-menu" class="closed">
-    <a href="#services" onclick="closeMenu()" data-i18n="nav_work">Work with me</a>
-    <a href="#projects" onclick="closeMenu()" data-i18n="nav_projects">Projects</a>
-    <a href="#story" onclick="closeMenu()" data-i18n="nav_about">About</a>
-    <a href="#contact" onclick="closeMenu()" data-i18n="nav_cta">Get in touch</a>
   </div>
+  <div id="mobile-menu">
+    <a href="#services" onclick="toggleMenu()"><span class="nv">01</span><span data-i18n="nav_work">Work with me</span></a>
+    <a href="#projects" onclick="toggleMenu()"><span class="nv">02</span><span data-i18n="nav_projects">Projects</span></a>
+    <a href="#story" onclick="toggleMenu()"><span class="nv">03</span><span data-i18n="nav_about">About</span></a>
+    <a href="#contact" onclick="toggleMenu()"><span class="nv">→</span><span data-i18n="nav_cta">Get in touch</span></a>
+  </div>
+</nav>
 
-  <!-- HERO -->
-  <header class="hero" id="top">
-    <div class="hero-grid">
-      <div class="hero-main">
-        <p class="hero-eyebrow" data-i18n="hero_eyebrow">AI Transformation @ Netflix · Madrid, Spain</p>
-        <h1 data-i18n-html="hero_h1">I lead AI transformation<br />that actually changes<br /><em>how teams work.</em></h1>
-        <p class="hero-lead" data-i18n="hero_lead">Ten years inside global operations, shaping the systems — and the way teams work around them — at scale, in production, every day.</p>
-        <p class="hero-creds" data-i18n-html="hero_creds"><strong>Spain's Top Talent 2025</strong> · MBA · Founder @ FuelUp</p>
-        <div class="hero-actions">
-          <a href="#services" class="btn-ink" data-i18n="btn_work">Work with me</a>
-          <a href="#contact" class="link-und" data-i18n="btn_contact">Get in touch</a>
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-frame reg"><span class="rg"></span>
+      <div class="hero-grid">
+        <div>
+          <span class="spec" data-i18n="hero_eyebrow">AI Transformation @ Netflix · Madrid, Spain</span>
+          <h1 class="hero-h1 archivo" data-i18n-html="hero_h1">I lead AI transformation<br />that actually changes<br /><em>how teams work.</em></h1>
+          <p class="hero-lead" data-i18n="hero_lead">Ten years inside global operations, shaping the systems — and the way teams work around them — at scale, in production, every day.</p>
+          <p class="hero-creds mono" data-i18n-html="hero_creds"><strong>Spain's Top Talent 2025</strong> · MBA<br>Founder @ FuelUp · Volanda · Folia Garden · Mente</p>
+          <div class="hero-actions">
+            <a href="#services" class="btn primary" data-i18n="btn_work">Work with me</a>
+            <a href="#contact" class="btn"><span data-i18n="btn_contact">Get in touch</span><span class="arr">→</span></a>
+          </div>
         </div>
+        <figure class="figure">
+          <div class="ph reg"><span class="rg"></span><img src="pic.jpeg" fetchpriority="high" decoding="async" alt="Alfredo Barrero" /></div>
+          <figcaption class="cota mono"><span class="t">Madrid · 40.4168° N, 3.7038° W</span></figcaption>
+        </figure>
       </div>
-      <figure class="hero-figure">
-        <img src="pic.jpeg" alt="Alfredo Barrero" />
-        <figcaption>Madrid · 40.4168° N, 3.7038° W</figcaption>
-      </figure>
     </div>
 
     <div class="ledger">
       <div class="stat">
-        <div class="stat-n">+3,400h</div>
-        <div class="stat-t" data-i18n="stat1_t">Returned to the business / year</div>
+        <div class="stat-n archivo">+3,400h</div>
+        <div class="stat-t mono" data-i18n="stat1_t">Returned to the business / year</div>
         <p class="stat-d" data-i18n="stat1_d">Built NSights, a production AI platform democratizing data and insights — freeing 850+ hours per quarter for high-impact work.</p>
       </div>
       <div class="stat">
-        <div class="stat-n">6+</div>
-        <div class="stat-t" data-i18n="stat2_t">M&amp;A integrations led</div>
+        <div class="stat-n archivo">6+</div>
+        <div class="stat-t mono" data-i18n="stat2_t">M&amp;A integrations led</div>
         <p class="stat-d" data-i18n="stat2_d">End-to-end, zero downtime, globally distributed teams.</p>
       </div>
       <div class="stat">
-        <div class="stat-n">10K+</div>
-        <div class="stat-t" data-i18n="stat3_t">Hours saved/year</div>
+        <div class="stat-n archivo">10K+</div>
+        <div class="stat-t mono" data-i18n="stat3_t">Hours saved/year</div>
         <p class="stat-d" data-i18n="stat3_d">Frameworks aligning Games, Animation, VFX and Enterprise ops with centralized engineering — globally.</p>
       </div>
       <div class="stat">
-        <div class="stat-n">10+ yrs</div>
-        <div class="stat-t" data-i18n="stat4_t">Global experience</div>
-        <p class="stat-d" data-i18n="stat4_d">Tech, Broadcast & AI transformation. Cross-cultural global leadership.</p>
-      </div>
-    </div>
-  </header>
-
-  <!-- 01 WORK WITH ME -->
-  <section id="services">
-    <div class="sec-inner">
-      <div class="sec-head reveal">
-        <span class="sec-no">01</span>
-        <div>
-          <h2 class="sec-title" data-i18n-html="svc_title">Three ways I can help<br />your team right now.</h2>
-          <p class="sec-sub" data-i18n="svc_sub">I work with a small number of organisations and individuals at a time. If you're serious about AI transformation, let's talk.</p>
-        </div>
-      </div>
-      <div class="svc-list">
-        <a href="#contact" class="svc-row reveal">
-          <span class="svc-no">01.1</span>
-          <div>
-            <h3 data-i18n="svc1_title">AI Workshop for Teams</h3>
-            <p data-i18n="svc1_desc">A half-day or full-day intensive for teams of 8–15 people. We go from zero to actually using AI in your workflows — Claude, NotebookLM, agents, automation. No theory. Real tools, real use cases, your context.</p>
-          </div>
-          <div class="svc-meta">
-            <span class="svc-tag" data-i18n="svc1_tag">Half-day · Full-day · On-site or remote</span>
-          </div>
-          <span class="svc-arrow">→</span>
-        </a>
-        <a href="#contact" class="svc-row reveal">
-          <span class="svc-no">01.2</span>
-          <div>
-            <h3 data-i18n="svc2_title">AI Acceleration Programme</h3>
-            <p data-i18n="svc2_desc">A 6–8 week cohort for professionals who want to genuinely transform how they work with AI. Weekly live sessions, async support, and hands-on implementation. You leave with systems that run — not slides you'll never open again.</p>
-          </div>
-          <div class="svc-meta">
-            <span class="svc-tag" data-i18n="svc2_tag">6–8 weeks · Small cohort · Weekly sessions</span>
-          </div>
-          <span class="svc-arrow">→</span>
-        </a>
-        <a href="#contact" class="svc-row reveal">
-          <span class="svc-no">01.3</span>
-          <div>
-            <h3 data-i18n="svc3_title">AI Implementation Consulting</h3>
-            <p data-i18n="svc3_desc">I come in, diagnose your operations, and build something real. Dashboards, agents, decision intelligence systems — the kind that remove bottlenecks and surface insight automatically. I've done it at scale. Now I do it for you.</p>
-          </div>
-          <div class="svc-meta">
-            <span class="svc-tag" data-i18n="svc3_tag">Project-based · Bespoke · End-to-end</span>
-          </div>
-          <span class="svc-arrow">→</span>
-        </a>
-      </div>
-      <div class="svc-note reveal">
-        <span class="svc-note-label">01.4</span>
-        <p data-i18n-html="svc4_note"><strong>Prefer something more personal?</strong> I also mentor professionals 1:1 who want to grow their careers with AI — practical, honest, no fluff. <a href="#contact">Let's talk</a>.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 02 PROJECTS -->
-  <section id="projects">
-    <div class="sec-inner">
-      <div class="sec-head reveal">
-        <span class="sec-no">02</span>
-        <div>
-          <h2 class="sec-title" data-i18n="proj_title">What I build.</h2>
-          <p class="sec-sub" data-i18n="proj_sub">I don't just advise on AI — I ship. A production platform at global scale, and products I build on the side.</p>
-        </div>
-      </div>
-      <div class="proj-grid">
-        <article class="proj feature reveal">
-          <div class="proj-head">
-            <h3>NSights</h3>
-            <span class="proj-badge" data-i18n="proj2_badge">Netflix · Flagship</span>
-          </div>
-          <p data-i18n="proj2_desc">A GenAI Data &amp; Insights platform I built autonomously at Netflix — transforming how data and insights are consumed at global scale. A data engine defines a clean abstraction layer on top of raw data tables; an agentic layer is trained on how to use it; and three surfaces put it in people's hands. Returns 850+ hours per quarter back to global teams.</p>
-          <div class="proj-surfaces">
-            <div class="surface">
-              <span class="surface-n">01</span>
-              <div>
-                <strong data-i18n="nsurf1_t">Analytics dashboard</strong>
-                <span data-i18n="nsurf1_d">Advanced, self-explanatory views over live operational data.</span>
-              </div>
-            </div>
-            <div class="surface">
-              <span class="surface-n">02</span>
-              <div>
-                <strong data-i18n="nsurf2_t">Self-serve MCP</strong>
-                <span data-i18n="nsurf2_d">Query data and insights directly from your own AI tools.</span>
-              </div>
-            </div>
-            <div class="surface">
-              <span class="surface-n">03</span>
-              <div>
-                <strong data-i18n="nsurf3_t">Agentic copilot</strong>
-                <span data-i18n="nsurf3_d">Goes beyond the numbers to add qualitative insight.</span>
-              </div>
-            </div>
-          </div>
-          <div class="proj-stack">
-            <span class="stack-tag">Claude Agent SDK</span>
-            <span class="stack-tag">MCP Server</span>
-            <span class="stack-tag">RAG</span>
-            <span class="stack-tag">Trino/Presto</span>
-            <span class="stack-tag">React + TypeScript</span>
-          </div>
-        </article>
-      </div>
-
-      <div class="proj-subhead reveal">
-        <span class="proj-subhead-label" data-i18n="proj_side_label">On the side</span>
-        <p data-i18n="proj_side_sub">Products I build outside my day job — proof I ship, not just advise.</p>
-      </div>
-      <div class="proj-grid trio">
-        <article class="proj reveal">
-          <div class="proj-head">
-            <h3>Volanda</h3>
-            <span class="proj-badge" data-i18n="proj5_badge">On the App Store</span>
-          </div>
-          <p data-i18n="proj5_desc">A flight-deal radar, not a search engine. You set your home airport, your budget ceiling and the windows you could travel in — a long weekend, Easter, any free Saturday. Every afternoon it sweeps fares and only pings you when something fits your number. The rest of the time, silence.</p>
-          <div class="proj-stack">
-            <span class="stack-tag">Next.js</span>
-            <span class="stack-tag">Firebase</span>
-            <span class="stack-tag">iOS &amp; Android</span>
-          </div>
-          <a class="proj-link" href="https://volanda.app/r/app" target="_blank" rel="noopener" data-i18n-html="proj5_cta">Get the app <span aria-hidden="true">→</span></a>
-        </article>
-        <article class="proj reveal">
-          <div class="proj-head">
-            <h3>Mente</h3>
-            <span class="proj-badge" data-i18n="proj4_badge">In beta · TestFlight</span>
-          </div>
-          <p data-i18n="proj4_desc">An AI copilot for the household. Capture anything about home life — typed text, voice, or a photo of a receipt — and it sorts everything into six drawers: groceries, money, health, family, house and paperwork. It tells records apart from tasks, asks before acting when unsure, learns from your corrections, and lets the whole family share the load. iOS beta on TestFlight, web app live.</p>
-          <div class="proj-stack">
-            <span class="stack-tag">Gemini</span>
-            <span class="stack-tag">iOS + Web</span>
-            <span class="stack-tag">WhatsApp capture</span>
-            <span class="stack-tag">Offline-first</span>
-          </div>
-        </article>
-        <article class="proj reveal">
-          <div class="proj-head">
-            <h3>Folia Garden</h3>
-            <span class="proj-badge" data-i18n="proj3_badge">Published</span>
-          </div>
-          <p data-i18n="proj3_desc">A mobile app to collect and care for your plants like Pokémon. Each plant gets its own Pokédex-style card. AI identifies the species from camera and gives personalised watering and light recommendations. Daily care is gamified — plants level up, you earn badges.</p>
-          <div class="proj-stack">
-            <span class="stack-tag">Next.js</span>
-            <span class="stack-tag">AI vision</span>
-            <span class="stack-tag">iOS & Android</span>
-          </div>
-          <a class="proj-link" href="https://foliagarden.app" target="_blank" rel="noopener" data-i18n-html="proj3_cta">Get the app <span aria-hidden="true">→</span></a>
-        </article>
-        <article class="proj reveal">
-          <div class="proj-head">
-            <h3>FuelUp</h3>
-            <span class="proj-badge" data-i18n="proj1_badge">Live · Real users</span>
-          </div>
-          <p data-i18n="proj1_desc">A B2C &amp; B2B2C app I built from scratch, currently live with real users. Building FuelUp keeps me honest about what it actually takes to ship a product — from zero to production, end-to-end. It gives me a perspective most enterprise leaders simply don't have.</p>
-          <div class="proj-stack">
-            <span class="stack-tag">B2C · B2B2C</span>
-            <span class="stack-tag">Mobile</span>
-            <span class="stack-tag">Full-stack</span>
-          </div>
-          <a class="proj-link" href="https://fuelup.es/app" target="_blank" rel="noopener" data-i18n-html="proj1_cta">Get the app <span aria-hidden="true">&rarr;</span></a>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- 03 STORY -->
-  <section id="story">
-    <div class="sec-inner">
-      <div class="sec-head reveal">
-        <span class="sec-no">03</span>
-        <div>
-          <h2 class="sec-title" data-i18n="story_label">My story</h2>
-        </div>
-      </div>
-      <div class="story-grid">
-        <span></span>
-        <div class="story-body reveal">
-          <p data-i18n="story_p1">I started as an engineer — building live broadcast infrastructure for the Olympic Games and Grand Slams. Zero-failure environments, millions of viewers, real consequences. It taught me that the hardest problems are never purely technical.</p>
-          <p data-i18n="story_p2">I took that into six years at Netflix, where my scope kept growing. I started by partnering with flagship productions like La Casa de Papel — helping them work smarter and safer at global scale. Then I led six end-to-end M&amp;A integrations of acquired studios. Today, I define the collaboration frameworks that align global ops teams — Games, Animation, VFX, Enterprise — with the centralized engineering teams that power them, driving alignment and scale across the business. Along the way, I kept moving closer to what interested me most: how AI was changing the way people actually work.</p>
-          <p data-i18n-html="story_p3">The work I'm most proud of is the AI transformation. I autonomously built NSights — a production GenAI platform that lets teams query operational data in natural language and get answers within seconds. Democratizing data and insights, eliminating the manual bottlenecks that slow decisions. Beyond NSights, I lead AI communities and coach teams across all regions. <strong>People come to me because I build things, not just talk about them.</strong></p>
-          <p data-i18n="story_p4">Outside of my day job, I build. I shipped FuelUp — a B2C product live with real users — and Folia Garden, an AI plant-care app now published. Right now I'm building Mente, an AI copilot for the household. I train teams and individuals on how to use AI tools for real. That combination — builder, operator, teacher — is what I bring to every engagement.</p>
-          <div class="story-anchors">
-            <img src="netflix.svg" alt="Netflix" class="story-anchor" />
-            <img src="olympic.svg" alt="IOC · Olympic Channel" class="story-anchor" />
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <div class="contact-section" id="contact">
-    <div class="contact-inner reveal">
-      <h2 data-i18n="contact_title">Let's talk.</h2>
-      <p data-i18n="contact_sub">Drop me a line or connect on LinkedIn. Or ask Nemo, my AI agent — it'll do its best.</p>
-      <a href="mailto:abarrerolabajos@gmail.com" class="contact-mail">abarrerolabajos@gmail.com</a>
-      <div class="contact-actions">
-        <a href="https://linkedin.com/in/a-barrero/" target="_blank" class="link-und">LinkedIn</a>
-        <button class="link-und" onclick="toggleChat()" data-i18n="btn_nemo">Ask Nemo</button>
+        <div class="stat-n archivo">10+ yrs</div>
+        <div class="stat-t mono" data-i18n="stat4_t">Global experience</div>
+        <p class="stat-d" data-i18n="stat4_d">Tech, Broadcast &amp; AI transformation. Cross-cultural global leadership.</p>
       </div>
     </div>
   </div>
+</header>
 
-  <footer>© 2026 Alfredo Barrero · Madrid, Spain</footer>
+<!-- 01 WORK WITH ME -->
+<section class="sec" id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="idx"><span class="spec">01 · <span data-i18n="nav_work">Work with me</span></span><span class="mono cnt">01 /</span></div>
+      <div>
+        <h2 class="archivo" data-i18n-html="svc_title">Three ways I can help<br />your team right now<span class="dot">.</span></h2>
+        <p class="sub" data-i18n="svc_sub">I work with a small number of organisations and individuals at a time. If you're serious about AI transformation, let's talk.</p>
+      </div>
+    </div>
 
-  <!-- CHAT -->
+    <div class="rows">
+      <a class="row" href="#contact">
+        <span class="no">01.1</span>
+        <div><h3 data-i18n="svc1_title">AI Workshop for Teams</h3>
+          <p data-i18n="svc1_desc">A half-day or full-day intensive for teams of 8–15 people. We go from zero to actually using AI in your workflows — Claude, NotebookLM, agents, automation. No theory. Real tools, real use cases, your context.</p></div>
+        <span class="tag mono" data-i18n="svc1_tag">Half-day · Full-day · On-site or remote</span>
+        <span class="go">→</span>
+      </a>
+      <a class="row" href="#contact">
+        <span class="no">01.2</span>
+        <div><h3 data-i18n="svc2_title">AI Acceleration Programme</h3>
+          <p data-i18n="svc2_desc">A 6–8 week cohort for professionals who want to genuinely transform how they work with AI. Weekly live sessions, async support, and hands-on implementation. You leave with systems that run — not slides you'll never open again.</p></div>
+        <span class="tag mono" data-i18n="svc2_tag">6–8 weeks · Small cohort · Weekly sessions</span>
+        <span class="go">→</span>
+      </a>
+      <a class="row" href="#contact">
+        <span class="no">01.3</span>
+        <div><h3 data-i18n="svc3_title">AI Implementation Consulting</h3>
+          <p data-i18n="svc3_desc">I come in, diagnose your operations, and build something real. Dashboards, agents, decision intelligence systems — the kind that remove bottlenecks and surface insight automatically. I've done it at scale. Now I do it for you.</p></div>
+        <span class="tag mono" data-i18n="svc3_tag">Project-based · Bespoke · End-to-end</span>
+        <span class="go">→</span>
+      </a>
+    </div>
+    <div class="note">
+      <span class="mono k">01.4</span>
+      <p data-i18n-html="svc4_note"><strong>Prefer something more personal?</strong> I also mentor professionals 1:1 who want to grow their careers with AI — practical, honest, no fluff. <a href="#contact">Let's talk</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 02 WHAT I BUILD -->
+<section class="sec" id="projects">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="idx"><span class="spec">02 · <span data-i18n="nav_projects">Projects</span></span><span class="mono cnt">02 /</span></div>
+      <div>
+        <h2 class="archivo" data-i18n="proj_title">What I build.</h2>
+        <p class="sub" data-i18n="proj_sub">I don't just advise on AI — I ship. A production platform at global scale, and products I build on the side.</p>
+      </div>
+    </div>
+
+    <article class="feature reg"><span class="rg"></span>
+      <div class="fh"><span class="spec" data-i18n="proj2_badge">Netflix · Flagship</span></div>
+      <h3 class="archivo">NSights</h3>
+      <p data-i18n="proj2_desc">A GenAI Data &amp; Insights platform I built autonomously at Netflix — transforming how data and insights are consumed at global scale. A data engine defines a clean abstraction layer on top of raw data tables; an agentic layer is trained on how to use it; and three surfaces put it in people's hands. Returns 850+ hours per quarter back to global teams.</p>
+      <div class="surfaces">
+        <div class="surf"><span class="mono no">01</span><h4 data-i18n="nsurf1_t">Analytics dashboard</h4><p data-i18n="nsurf1_d">Advanced, self-explanatory views over live operational data.</p></div>
+        <div class="surf"><span class="mono no">02</span><h4 data-i18n="nsurf2_t">Self-serve MCP</h4><p data-i18n="nsurf2_d">Query data and insights directly from your own AI tools.</p></div>
+        <div class="surf"><span class="mono no">03</span><h4 data-i18n="nsurf3_t">Agentic copilot</h4><p data-i18n="nsurf3_d">Goes beyond the numbers to add qualitative insight.</p></div>
+      </div>
+      <div class="chips"><span class="chip">Claude Agent SDK</span><span class="chip">MCP Server</span><span class="chip">RAG</span><span class="chip">Trino/Presto</span><span class="chip">React + TypeScript</span></div>
+    </article>
+
+    <!-- El taller: aquí CrashFredo firma lo que construye -->
+    <div class="taller">
+      <div class="sig">
+        <svg class="apex" viewBox="0 0 100 100" width="56" height="56" aria-hidden="true">
+          <path d="M15 92V50A30 30 0 0 1 45 20H97" fill="none" stroke="currentColor" stroke-width="24" stroke-linecap="butt"/>
+          <path d="M45 36H51V56H31V50A14 14 0 0 1 45 36Z" fill="#E3521A"/>
+        </svg>
+        <span class="wm archivo">crashfredo</span>
+        <span class="lema archivo">one founder,<br />one <span class="k">phone</span></span>
+              </div>
+      <div>
+        <h3 class="archivo" data-i18n="proj_side_label">On the side</h3>
+        <p class="sub" data-i18n="proj_side_sub">Products I build outside my day job — proof I ship, not just advise.</p>
+      </div>
+    </div>
+
+    <div class="apps">
+      <article class="app" style="--acc:#2fe38f">
+        <span class="bar"></span>
+        <img class="icon" loading="lazy" decoding="async" width="192" height="192" src="brand/fuelup.png" alt="FuelUp" />
+        <div>
+          <div class="ah"><h4>FuelUp</h4><span class="mono badge" data-i18n="proj1_badge">Live · Real users</span></div>
+          <p data-i18n="proj1_desc">A B2C &amp; B2B2C app I built from scratch, currently live with real users. Building FuelUp keeps me honest about what it actually takes to ship a product — from zero to production, end-to-end. It gives me a perspective most enterprise leaders simply don't have.</p>
+          <div class="chips"><span class="chip">B2C · B2B2C</span><span class="chip">Mobile</span><span class="chip">Full-stack</span></div>
+        </div>
+        <a class="cta" href="https://fuelup.es/app" data-i18n-html="proj1_cta">Get the app <span aria-hidden="true">&rarr;</span></a>
+      </article>
+
+      <article class="app" style="--acc:#FFA928">
+        <span class="bar"></span>
+        <img class="icon" loading="lazy" decoding="async" width="192" height="192" src="brand/volanda.png" alt="Volanda" />
+        <div>
+          <div class="ah"><h4>Volanda</h4><span class="mono badge" data-i18n="proj5_badge">On the App Store</span></div>
+          <p data-i18n="proj5_desc">A flight-deal radar, not a search engine. You set your home airport, your budget ceiling and the windows you could travel in — a long weekend, Easter, any free Saturday. Every afternoon it sweeps fares and only pings you when something fits your number. The rest of the time, silence.</p>
+          <div class="chips"><span class="chip">Next.js</span><span class="chip">Firebase</span><span class="chip">iOS &amp; Android</span></div>
+        </div>
+        <a class="cta" href="https://volanda.app/r/app" data-i18n-html="proj5_cta">Get the app <span aria-hidden="true">&rarr;</span></a>
+      </article>
+
+      <article class="app" style="--acc:#8FCBA8">
+        <span class="bar"></span>
+        <img class="icon" loading="lazy" decoding="async" width="192" height="192" src="brand/folia.png" alt="Folia Garden" />
+        <div>
+          <div class="ah"><h4>Folia Garden</h4><span class="mono badge" data-i18n="proj3_badge">Published</span></div>
+          <p data-i18n="proj3_desc">A mobile app to collect and care for your plants like Pokémon. Each plant gets its own Pokédex-style card. AI identifies the species from camera and gives personalised watering and light recommendations. Daily care is gamified — plants level up, you earn badges.</p>
+          <div class="chips"><span class="chip">Next.js</span><span class="chip">AI vision</span><span class="chip">iOS &amp; Android</span></div>
+        </div>
+        <a class="cta" href="https://foliagarden.app" data-i18n-html="proj3_cta">Get the app <span aria-hidden="true">&rarr;</span></a>
+      </article>
+
+      <article class="app" style="--acc:#5b6cff">
+        <span class="bar"></span>
+        <img class="icon" loading="lazy" decoding="async" width="192" height="192" src="brand/mente.png" alt="Mente" />
+        <div>
+          <div class="ah"><h4>Mente</h4><span class="mono badge" data-i18n="proj4_badge">In beta · TestFlight</span></div>
+          <p data-i18n="proj4_desc">An AI copilot for the household. Capture anything about home life — typed text, voice, or a photo of a receipt — and it sorts everything into six drawers: groceries, money, health, family, house and paperwork. It tells records apart from tasks, asks before acting when unsure, learns from your corrections, and lets the whole family share the load. iOS beta on TestFlight, web app live.</p>
+          <div class="chips"><span class="chip">Gemini</span><span class="chip">iOS + Web</span><span class="chip">WhatsApp capture</span><span class="chip">Offline-first</span></div>
+        </div>
+        <span></span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 03 ABOUT -->
+<section class="sec" id="story">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="idx"><span class="spec">03 · <span data-i18n="nav_about">About</span></span><span class="mono cnt">03 /</span></div>
+      <div><h2 class="archivo" data-i18n="story_label">My story</h2></div>
+    </div>
+    <div class="story">
+      <span></span>
+      <div class="col">
+        <p data-i18n="story_p1">I started as an engineer — building live broadcast infrastructure for the Olympic Games and Grand Slams. Zero-failure environments, millions of viewers, real consequences. It taught me that the hardest problems are never purely technical.</p>
+        <p data-i18n="story_p2">I took that into six years at Netflix, where my scope kept growing. I started by partnering with flagship productions like La Casa de Papel — helping them work smarter and safer at global scale. Then I led six end-to-end M&amp;A integrations of acquired studios. Today, I define the collaboration frameworks that align global ops teams — Games, Animation, VFX, Enterprise — with the centralized engineering teams that power them, driving alignment and scale across the business. Along the way, I kept moving closer to what interested me most: how AI was changing the way people actually work.</p>
+        <p data-i18n-html="story_p3">The work I'm most proud of is the AI transformation. I autonomously built NSights — a production GenAI platform that lets teams query operational data in natural language and get answers within seconds. Democratizing data and insights, eliminating the manual bottlenecks that slow decisions. Beyond NSights, I lead AI communities and coach teams across all regions. <strong>People come to me because I build things, not just talk about them.</strong></p>
+        <p data-i18n="story_p4">Outside of my day job, I build. I shipped FuelUp — a B2C product live with real users —, Volanda — a flight-deal radar on the App Store — and Folia Garden, an AI plant-care app now published. Right now I'm building Mente, an AI copilot for the household. I train teams and individuals on how to use AI tools for real. That combination — builder, operator, teacher — is what I bring to every engagement.</p>
+        <div class="anchors" role="img" aria-label="Netflix · IOC · Olympic Channel">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="-153.6 -69.1855 1331.2 415.113"><path fill="#d81f26" d="M140.803 258.904c-15.404 2.705-31.079 3.516-47.294 5.676L44.051 119.724v151.073C28.647 272.418 14.594 274.58 0 276.742V0h41.08l56.212 157.021V0h43.511zm85.131-157.558c16.757 0 42.431-.811 57.835-.811v43.24c-19.189 0-41.619 0-57.835.811v64.322c25.405-1.621 50.809-3.785 76.482-4.596v41.617l-119.724 9.461V0h119.724v43.241h-76.482zm237.284-58.104h-44.862V242.15c-14.594 0-29.188 0-43.239.539V43.242h-44.862V0H463.22zm70.266 55.132h59.187v43.24h-59.187v98.104h-42.433V0h120.808v43.241h-78.375zm148.641 103.507c24.594.539 49.456 2.434 73.51 3.783v42.701c-38.646-2.434-77.293-4.863-116.75-5.676V0h43.24zm109.994 49.457c13.783.812 28.377 1.623 42.43 3.242V0h-42.43zM1024 0l-54.863 131.615L1024 276.742c-16.217-2.162-32.432-5.135-48.648-7.838l-31.078-79.994-31.617 73.51c-15.678-2.705-30.812-3.516-46.484-5.678l55.672-126.75L871.576 0h46.482l28.377 72.699L976.705 0z"/></svg>
+          <span class="ol"><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+	 viewBox="0 0 60 60" xml:space="preserve">
+<path style="fill:#F3D55B;" d="M19.369,26.473c0.152-0.009,0.302-0.023,0.456-0.023c0.171,0,0.338,0.015,0.506,0.026
+	c-0.013-0.208-0.032-0.414-0.032-0.625c0-0.466,0.044-0.922,0.108-1.371c-0.194-0.012-0.386-0.03-0.583-0.03
+	c-0.18,0-0.356,0.017-0.534,0.027c0.064,0.45,0.109,0.906,0.109,1.373C19.4,26.06,19.382,26.266,19.369,26.473z"/>
+<path style="fill:#F3D55B;" d="M17.324,26.875c0.045-0.336,0.076-0.677,0.076-1.025c0-0.361-0.034-0.713-0.082-1.06
+	c-3.942,1.057-6.893,4.533-7.162,8.737c0.712-0.042,1.397-0.179,2.045-0.402C12.592,30.209,14.616,27.809,17.324,26.875z"/>
+<path style="fill:#F3D55B;" d="M19.825,41.85c-3.886,0-7.099-2.895-7.618-6.64c-0.635,0.17-1.294,0.276-1.973,0.313
+	c0.671,4.699,4.71,8.327,9.591,8.327c4.882,0,8.922-3.629,9.592-8.329c-0.678-0.041-1.337-0.149-1.971-0.323
+	C26.932,38.949,23.715,41.85,19.825,41.85z"/>
+<path style="fill:#F3D55B;" d="M22.38,24.802c-0.047,0.344-0.08,0.692-0.08,1.048c0,0.355,0.033,0.702,0.079,1.044
+	c2.675,0.945,4.673,3.323,5.067,6.212c0.648,0.229,1.334,0.372,2.048,0.419C29.225,29.339,26.297,25.874,22.38,24.802z"/>
+<path style="fill:#24AE5F;" d="M37.63,26.831c0.041-0.322,0.07-0.648,0.07-0.981c0-0.37-0.035-0.732-0.086-1.088
+	c-3.997,1.022-7.001,4.526-7.27,8.771c0.708-0.031,1.392-0.153,2.038-0.364C32.764,30.19,34.849,27.739,37.63,26.831z"/>
+<path style="fill:#24AE5F;" d="M42.686,26.938c2.602,0.968,4.539,3.299,4.941,6.124c0.649,0.241,1.337,0.399,2.054,0.457
+	c-0.269-4.145-3.144-7.584-7.006-8.689c-0.045,0.335-0.076,0.673-0.076,1.02C42.6,26.22,42.635,26.581,42.686,26.938z"/>
+<path style="fill:#24AE5F;" d="M40.013,41.85c-3.876,0-7.083-2.881-7.614-6.612c-0.637,0.163-1.297,0.262-1.976,0.291
+	c0.673,4.696,4.711,8.321,9.591,8.321c4.884,0,8.926-3.632,9.593-8.335c-0.678-0.048-1.336-0.164-1.968-0.345
+	C47.136,38.934,43.912,41.85,40.013,41.85z"/>
+<path style="fill:#24AE5F;" d="M39.669,26.467c0.115-0.005,0.228-0.017,0.344-0.017c0.209,0,0.414,0.015,0.619,0.031
+	c-0.014-0.21-0.032-0.418-0.032-0.631c0-0.465,0.044-0.918,0.108-1.365c-0.23-0.016-0.46-0.035-0.694-0.035
+	c-0.143,0-0.281,0.015-0.422,0.021c0.065,0.452,0.11,0.91,0.11,1.379C39.7,26.058,39.682,26.262,39.669,26.467z"/>
+<path style="fill:#0096E6;" d="M19.369,26.473c-0.712,0.042-1.397,0.179-2.045,0.402c-0.39,2.916-2.415,5.316-5.123,6.25
+	c-0.045,0.336-0.076,0.677-0.076,1.025c0,0.361,0.034,0.713,0.082,1.06C16.148,34.153,19.1,30.677,19.369,26.473z"/>
+<path style="fill:#0096E6;" d="M10.157,33.527C10.005,33.536,9.854,33.55,9.7,33.55c-4.246,0-7.7-3.454-7.7-7.7s3.454-7.7,7.7-7.7
+	c3.886,0,7.099,2.895,7.618,6.64c0.635-0.17,1.294-0.276,1.973-0.313c-0.671-4.699-4.71-8.327-9.591-8.327
+	c-5.349,0-9.7,4.352-9.7,9.7s4.352,9.7,9.7,9.7c0.18,0,0.356-0.017,0.534-0.027c-0.064-0.45-0.109-0.906-0.109-1.373
+	C10.125,33.94,10.143,33.734,10.157,33.527z"/>
+<path style="fill:#F3D55B;" d="M12.125,34.15c0-0.348,0.031-0.689,0.076-1.025c-0.647,0.223-1.333,0.36-2.045,0.402
+	c-0.013,0.207-0.032,0.413-0.032,0.623c0,0.467,0.045,0.923,0.109,1.373c0.679-0.037,1.338-0.143,1.973-0.313
+	C12.159,34.862,12.125,34.51,12.125,34.15z"/>
+<path style="fill:#0096E6;" d="M17.4,25.85c0,0.348-0.031,0.689-0.076,1.025c0.647-0.223,1.333-0.36,2.045-0.402
+	c0.013-0.207,0.032-0.413,0.032-0.623c0-0.467-0.045-0.923-0.109-1.373c-0.679,0.037-1.338,0.143-1.973,0.313
+	C17.367,25.138,17.4,25.49,17.4,25.85z"/>
+<path style="fill:#38454F;" d="M30,18.15c3.876,0,7.083,2.881,7.614,6.612c0.637-0.163,1.297-0.262,1.976-0.291
+	C38.917,19.775,34.879,16.15,30,16.15c-4.882,0-8.922,3.629-9.592,8.329c0.678,0.041,1.337,0.149,1.971,0.323
+	C22.894,21.051,26.11,18.15,30,18.15z"/>
+<path style="fill:#38454F;" d="M39.669,26.467c-0.708,0.031-1.392,0.153-2.038,0.364c-0.381,2.979-2.466,5.43-5.248,6.338
+	c-0.041,0.322-0.07,0.648-0.07,0.981c0,0.37,0.035,0.732,0.086,1.088C36.396,34.215,39.4,30.712,39.669,26.467z"/>
+<path style="fill:#38454F;" d="M30.344,33.533C30.229,33.538,30.116,33.55,30,33.55c-0.171,0-0.338-0.015-0.506-0.026
+	c0.013,0.208,0.032,0.414,0.032,0.625c0,0.466-0.044,0.922-0.108,1.371c0.194,0.012,0.386,0.03,0.583,0.03
+	c0.143,0,0.281-0.015,0.422-0.021c-0.065-0.452-0.11-0.91-0.11-1.379C30.312,33.942,30.331,33.738,30.344,33.533z"/>
+<path style="fill:#38454F;" d="M22.379,26.894c-0.648-0.229-1.334-0.372-2.048-0.419c0.269,4.186,3.197,7.65,7.114,8.722
+	c0.047-0.344,0.08-0.692,0.08-1.048c0-0.355-0.033-0.702-0.079-1.044C24.771,32.161,22.773,29.783,22.379,26.894z"/>
+<path style="fill:#38454F;" d="M29.494,33.525c-0.714-0.047-1.4-0.19-2.048-0.419c0.047,0.342,0.079,0.689,0.079,1.044
+	c0,0.356-0.033,0.704-0.08,1.048c0.634,0.174,1.293,0.282,1.971,0.323c0.064-0.449,0.108-0.904,0.108-1.371
+	C29.525,33.939,29.507,33.732,29.494,33.525z"/>
+<path style="fill:#F3D55B;" d="M20.331,26.475c0.714,0.047,1.4,0.19,2.048,0.419c-0.047-0.342-0.079-0.689-0.079-1.044
+	c0-0.356,0.033-0.704,0.08-1.048c-0.634-0.174-1.293-0.282-1.971-0.323c-0.064,0.449-0.108,0.904-0.108,1.371
+	C20.3,26.061,20.318,26.268,20.331,26.475z"/>
+<path style="fill:#24AE5F;" d="M32.312,34.15c0-0.333,0.028-0.659,0.07-0.981c-0.646,0.211-1.33,0.333-2.038,0.364
+	c-0.013,0.205-0.031,0.409-0.031,0.617c0,0.469,0.045,0.927,0.11,1.379c0.68-0.029,1.34-0.128,1.976-0.291
+	C32.348,34.881,32.312,34.52,32.312,34.15z"/>
+<path style="fill:#38454F;" d="M37.7,25.85c0,0.333-0.028,0.659-0.07,0.981c0.646-0.211,1.33-0.333,2.038-0.364
+	c0.013-0.205,0.031-0.409,0.031-0.617c0-0.469-0.045-0.927-0.11-1.379c-0.68,0.029-1.34,0.128-1.976,0.291
+	C37.665,25.119,37.7,25.48,37.7,25.85z"/>
+<path style="fill:#E64C3C;" d="M50.3,16.15c-4.884,0-8.926,3.632-9.593,8.335c0.678,0.048,1.336,0.164,1.968,0.345
+	c0.502-3.764,3.725-6.68,7.625-6.68c4.246,0,7.7,3.454,7.7,7.7s-3.454,7.7-7.7,7.7c-0.209,0-0.414-0.015-0.619-0.031
+	c0.014,0.21,0.032,0.418,0.032,0.631c0,0.465-0.044,0.918-0.108,1.365c0.23,0.016,0.46,0.035,0.694,0.035c5.349,0,9.7-4.352,9.7-9.7
+	S55.648,16.15,50.3,16.15z"/>
+<path style="fill:#E64C3C;" d="M42.686,26.938c-0.649-0.241-1.337-0.399-2.054-0.457c0.269,4.145,3.144,7.584,7.006,8.689
+	c0.045-0.335,0.076-0.673,0.076-1.02c0-0.37-0.035-0.731-0.086-1.088C45.025,32.094,43.088,29.763,42.686,26.938z"/>
+<path style="fill:#E64C3C;" d="M49.681,33.519c-0.717-0.057-1.405-0.215-2.054-0.457c0.051,0.356,0.086,0.718,0.086,1.088
+	c0,0.347-0.031,0.685-0.076,1.02c0.632,0.181,1.29,0.297,1.968,0.345c0.063-0.447,0.108-0.901,0.108-1.365
+	C49.713,33.937,49.695,33.729,49.681,33.519z"/>
+<path style="fill:#24AE5F;" d="M40.632,26.481c0.717,0.057,1.405,0.215,2.054,0.457C42.635,26.581,42.6,26.22,42.6,25.85
+	c0-0.347,0.031-0.685,0.076-1.02c-0.632-0.181-1.29-0.297-1.968-0.345c-0.063,0.447-0.108,0.901-0.108,1.365
+	C40.6,26.063,40.618,26.271,40.632,26.481z"/>
+</svg></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <h2 class="archivo" data-i18n="contact_title">Let's talk.</h2>
+      <p class="sub" data-i18n="contact_sub">Drop me a line or connect on LinkedIn. Or ask Nemo, my AI agent — it'll do its best.</p>
+      <a href="mailto:abarrerolabajos@gmail.com" class="mail">abarrerolabajos@gmail.com</a>
+      <div class="contact-actions">
+        <a href="https://linkedin.com/in/a-barrero/" class="btn primary">LinkedIn</a>
+        <button class="btn" onclick="toggleChat()"><span data-i18n="btn_nemo">Ask Nemo</span><span class="arr">→</span></button>
+      </div>
+    </div>
+    <aside class="signature reg"><span class="rg"></span>
+      <svg class="apex" viewBox="0 0 100 100" width="72" height="72" aria-hidden="true">
+        <path d="M15 92V50A30 30 0 0 1 45 20H97" fill="none" stroke="currentColor" stroke-width="24" stroke-linecap="butt"/>
+        <path d="M45 36H51V56H31V50A14 14 0 0 1 45 36Z" fill="#E3521A"/>
+      </svg>
+      <span class="wm archivo">crashfredo</span>
+      <span class="lema archivo">one founder,<br />one <span class="k">phone</span></span>
+      <a class="handle" href="https://instagram.com/crashfredo">@crashfredo<span class="arr">→</span></a>
+    </aside>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap in mono">
+    <span>© 2026 Alfredo Barrero · Madrid, Spain</span>
+    <span>40.4168° N, 3.7038° W</span>
+  </div>
+</footer>
+
+<button id="chat-btn" onclick="toggleChat()" title="Ask Alfredo's AI" aria-label="Ask Nemo">N</button>
+
   <button id="chat-btn" onclick="toggleChat()" title="Ask Alfredo's AI">
     <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
       <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z" />
@@ -964,7 +829,8 @@
     </div>
   </div>
 
-  <script>
+
+<script>
     // ── Config ──
     const IS_LOCAL = ['localhost', '127.0.0.1'].includes(location.hostname) || location.hostname.startsWith('192.168');
     const SESSION_LIMIT = 5;
@@ -983,178 +849,138 @@
       document.head.appendChild(s);
     }
 
-    // ── Mobile menu ──
-    function toggleMenu() {
-      const menu = document.getElementById('mobile-menu');
-      const btn = document.getElementById('hamburger');
-      const open = !menu.classList.contains('closed');
-      if (open) { menu.classList.add('closed'); btn.classList.remove('open'); }
-      else { menu.classList.remove('closed'); btn.classList.add('open'); }
+  // ── Tema: tinta por defecto, papel como alternativa (misma familia) ──
+  const root = document.documentElement;
+  const q = new URLSearchParams(location.search);
+  function setTheme(t){ root.setAttribute('data-theme', t); document.getElementById('theme-btn').textContent = t === 'dark' ? '☀' : '☾'; }
+  function toggleTheme(){ const t = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'; setTheme(t); try{localStorage.setItem('cf_theme', t);}catch(e){} }
+  (function(){ let t = q.get('theme'); try{ t = t || localStorage.getItem('cf_theme') || localStorage.getItem('nemo_theme'); }catch(e){} setTheme((t === 'light' || t === 'paper') ? 'light' : 'dark'); })();
+
+  function toggleMenu(){ document.getElementById('mobile-menu').classList.toggle('open'); }
+
+  // ── Idioma: diccionario EN/ES copiado tal cual de la web actual ──
+  const T = {
+    en: {
+      nav_work: 'Work with me', nav_projects: 'Projects', nav_about: 'About', nav_cta: 'Get in touch',
+      hero_eyebrow: 'AI Transformation @ Netflix · Madrid, Spain',
+      hero_h1: 'I lead AI transformation<br />that actually changes<br /><em>how teams work.</em>',
+      hero_lead: 'Ten years inside global operations, shaping the systems — and the way teams work around them — at scale, in production, every day.',
+      hero_creds: '<strong>Spain\'s Top Talent 2025</strong> · MBA<br>Founder @ FuelUp · Volanda · Folia Garden · Mente',
+      btn_work: 'Work with me', btn_contact: 'Get in touch', btn_nemo: 'Ask Nemo',
+      stat1_t: 'Returned to the business / year',
+      stat1_d: 'Built NSights, a production AI platform democratizing data and insights — freeing 850+ hours per quarter for high-impact work.',
+      stat2_t: 'M&A integrations led', stat2_d: 'End-to-end, zero downtime, globally distributed teams.',
+      stat3_t: 'Hours saved/year', stat3_d: 'Frameworks aligning Games, Animation, VFX and Enterprise ops with centralized engineering — globally.',
+      stat4_t: 'Global experience', stat4_d: 'Tech, Broadcast & AI transformation. Cross-cultural global leadership.',
+      svc_title: 'Three ways I can help<br />your team right now<span class="dot">.</span>',
+      svc_sub: 'I work with a small number of organisations and individuals at a time. If you\'re serious about AI transformation, let\'s talk.',
+      svc1_title: 'AI Workshop for Teams',
+      svc1_desc: 'A half-day or full-day intensive for teams of 8–15 people. We go from zero to actually using AI in your workflows — Claude, NotebookLM, agents, automation. No theory. Real tools, real use cases, your context.',
+      svc1_tag: 'Half-day · Full-day · On-site or remote',
+      svc2_title: 'AI Acceleration Programme',
+      svc2_desc: 'A 6–8 week cohort for professionals who want to genuinely transform how they work with AI. Weekly live sessions, async support, and hands-on implementation. You leave with systems that run — not slides you\'ll never open again.',
+      svc2_tag: '6–8 weeks · Small cohort · Weekly sessions',
+      svc3_title: 'AI Implementation Consulting',
+      svc3_desc: 'I come in, diagnose your operations, and build something real. Dashboards, agents, decision intelligence systems — the kind that remove bottlenecks and surface insight automatically. I\'ve done it at scale. Now I do it for you.',
+      svc3_tag: 'Project-based · Bespoke · End-to-end',
+      svc4_note: '<strong>Prefer something more personal?</strong> I also mentor professionals 1:1 who want to grow their careers with AI — practical, honest, no fluff. <a href="#contact">Let\'s talk</a>.',
+      proj_title: 'What I build.',
+      proj_sub: 'I don\'t just advise on AI — I ship. A production platform at global scale, and products I build on the side.',
+      proj_side_label: 'On the side',
+      proj_side_sub: 'Products I build outside my day job — proof I ship, not just advise.',
+      nsurf1_t: 'Analytics dashboard', nsurf1_d: 'Advanced, self-explanatory views over live operational data.',
+      nsurf2_t: 'Self-serve MCP', nsurf2_d: 'Query data and insights directly from your own AI tools.',
+      nsurf3_t: 'Agentic copilot', nsurf3_d: 'Goes beyond the numbers to add qualitative insight.',
+      proj5_badge: 'On the App Store',
+      proj5_cta: 'Get the app <span aria-hidden="true">&rarr;</span>',
+      proj3_cta: 'Get the app <span aria-hidden="true">&rarr;</span>',
+      proj1_cta: 'Get the app <span aria-hidden="true">&rarr;</span>',
+      proj5_desc: 'A flight-deal radar, not a search engine. You set your home airport, your budget ceiling and the windows you could travel in — a long weekend, Easter, any free Saturday. Every afternoon it sweeps fares and only pings you when something fits your number. The rest of the time, silence.',
+      proj4_badge: 'In beta · TestFlight',
+      proj4_desc: 'An AI copilot for the household. Capture anything about home life — typed text, voice, or a photo of a receipt — and it sorts everything into six drawers: groceries, money, health, family, house and paperwork. It tells records apart from tasks, asks before acting when unsure, learns from your corrections, and lets the whole family share the load. iOS beta on TestFlight, web app live.',
+      proj3_badge: 'Published',
+      proj3_desc: 'A mobile app to collect and care for your plants like Pokémon. Each plant gets its own Pokédex-style card. AI identifies the species from camera and gives personalised watering and light recommendations. Daily care is gamified — plants level up, you earn badges.',
+      proj2_badge: 'Netflix · Flagship',
+      proj2_desc: 'A GenAI Data & Insights platform I built autonomously at Netflix — transforming how data and insights are consumed at global scale. A data engine defines a clean abstraction layer on top of raw data tables; an agentic layer is trained on how to use it; and three surfaces put it in people\'s hands. Returns 850+ hours per quarter back to global teams.',
+      proj1_badge: 'Live · Real users',
+      proj1_desc: 'A B2C & B2B2C app I built from scratch, currently live with real users. Building FuelUp keeps me honest about what it actually takes to ship a product — from zero to production, end-to-end. It gives me a perspective most enterprise leaders simply don\'t have.',
+      story_label: 'My story',
+      story_p1: 'I started as an engineer — building live broadcast infrastructure for the Olympic Games and Grand Slams. Zero-failure environments, millions of viewers, real consequences. It taught me that the hardest problems are never purely technical.',
+      story_p2: 'I took that into six years at Netflix, where my scope kept growing. I started by partnering with flagship productions like La Casa de Papel — helping them work smarter and safer at global scale. Then I led six end-to-end M&A integrations of acquired studios. Today, I define the collaboration frameworks that align global ops teams — Games, Animation, VFX, Enterprise — with the centralized engineering teams that power them, driving alignment and scale across the business. Along the way, I kept moving closer to what interested me most: how AI was changing the way people actually work.',
+      story_p3: 'The work I\'m most proud of is the AI transformation. I autonomously built NSights — a production GenAI platform that lets teams query operational data in natural language and get answers within seconds. Democratizing data and insights, eliminating the manual bottlenecks that slow decisions. Beyond NSights, I lead AI communities and coach teams across all regions. <strong>People come to me because I build things, not just talk about them.</strong>',
+      story_p4: 'Outside of my day job, I build. I shipped FuelUp — a B2C product live with real users —, Volanda — a flight-deal radar on the App Store — and Folia Garden, an AI plant-care app now published. Right now I\'m building Mente, an AI copilot for the household. I train teams and individuals on how to use AI tools for real. That combination — builder, operator, teacher — is what I bring to every engagement.',
+      contact_title: 'Let\'s talk.',
+      contact_sub: 'Drop me a line or connect on LinkedIn. Or ask Nemo, my AI agent — it\'ll do its best.'
+    },
+    es: {
+      nav_work: 'Trabaja conmigo', nav_projects: 'Proyectos', nav_about: 'Sobre mí', nav_cta: 'Contacta',
+      hero_eyebrow: 'Transformación con IA @ Netflix · Madrid, España',
+      hero_h1: 'Lidero transformación con IA<br />que de verdad cambia<br /><em>cómo trabajan los equipos.</em>',
+      hero_lead: 'Diez años dentro de operaciones globales, dando forma a los sistemas — y a cómo trabajan los equipos a su alrededor — a escala, en producción, cada día.',
+      hero_creds: '<strong>Spain\'s Top Talent 2025</strong> · MBA<br>Fundador @ FuelUp · Volanda · Folia Garden · Mente',
+      btn_work: 'Trabaja conmigo', btn_contact: 'Contacta', btn_nemo: 'Pregunta a Nemo',
+      stat1_t: 'Devueltas al negocio / año',
+      stat1_d: 'Construí NSights, una plataforma de IA en producción que democratiza datos e insights — liberando 850+ horas por trimestre para trabajo de alto impacto.',
+      stat2_t: 'Integraciones M&A lideradas', stat2_d: 'De principio a fin, sin downtime, con equipos distribuidos globalmente.',
+      stat3_t: 'Horas ahorradas/año', stat3_d: 'Frameworks que alinean las operaciones de Games, Animation, VFX y Enterprise con ingeniería centralizada — globalmente.',
+      stat4_t: 'Experiencia global', stat4_d: 'Tecnología, Broadcast y transformación con IA. Liderazgo multicultural global.',
+      svc_title: 'Tres formas en que puedo<br />ayudar a tu equipo ahora<span class="dot">.</span>',
+      svc_sub: 'Trabajo con un número reducido de organizaciones e individuos a la vez. Si te tomas en serio la transformación con IA, hablemos.',
+      svc1_title: 'Workshop de IA para Equipos',
+      svc1_desc: 'Una sesión intensiva de medio día o día completo para equipos de 8–15 personas. Pasamos de cero a usar IA realmente en vuestros flujos de trabajo — Claude, NotebookLM, agentes, automatización. Sin teoría. Herramientas reales, casos reales, vuestro contexto.',
+      svc1_tag: 'Medio día · Día completo · Presencial o remoto',
+      svc2_title: 'Programa de Aceleración con IA',
+      svc2_desc: 'Un cohort de 6–8 semanas para profesionales que quieren transformar de verdad cómo trabajan con IA. Sesiones en vivo semanales, soporte async e implementación práctica. Sales con sistemas que funcionan — no con slides que nunca volverás a abrir.',
+      svc2_tag: '6–8 semanas · Cohort pequeño · Sesiones semanales',
+      svc3_title: 'Consultoría de Implementación IA',
+      svc3_desc: 'Entro, diagnostico tus operaciones y construyo algo real. Dashboards, agentes, sistemas de inteligencia para decisiones — los que eliminan cuellos de botella y generan insight automáticamente. Lo he hecho a escala. Ahora lo hago para ti.',
+      svc3_tag: 'Por proyecto · A medida · End-to-end',
+      svc4_note: '<strong>¿Prefieres algo más personal?</strong> También hago mentoría 1:1 a profesionales que quieren crecer en su carrera con IA — práctica, honesta, sin humo. <a href="#contact">Hablemos</a>.',
+      proj_title: 'Lo que construyo.',
+      proj_sub: 'No me limito a asesorar sobre IA — lanzo productos. Una plataforma en producción a escala global, y productos que construyo por mi cuenta.',
+      proj_side_label: 'Por mi cuenta',
+      proj_side_sub: 'Productos que construyo fuera de mi trabajo principal — la prueba de que lanzo, no solo asesoro.',
+      nsurf1_t: 'Dashboard de analítica', nsurf1_d: 'Vistas avanzadas y autoexplicativas sobre datos operativos en vivo.',
+      nsurf2_t: 'MCP de autoservicio', nsurf2_d: 'Consulta datos e insights directamente desde tus propias herramientas de IA.',
+      nsurf3_t: 'Copiloto agéntico', nsurf3_d: 'Va más allá de los números para añadir insight cualitativo.',
+      proj5_badge: 'En la App Store',
+      proj5_cta: 'Descargar <span aria-hidden="true">&rarr;</span>',
+      proj3_cta: 'Descargar <span aria-hidden="true">&rarr;</span>',
+      proj1_cta: 'Descargar <span aria-hidden="true">&rarr;</span>',
+      proj5_desc: 'Un radar de chollos de vuelo, no un buscador. Le dices desde qué aeropuerto sales, cuánto quieres gastar y cuándo podrías viajar — un puente, Semana Santa, cualquier finde libre. Cada tarde barre las tarifas y solo te avisa si algo cabe en tu número. El resto del tiempo, silencio.',
+      proj4_badge: 'En beta · TestFlight',
+      proj4_desc: 'Un copiloto de IA para el hogar. Capturas cualquier cosa de la vida doméstica — texto, voz o una foto de un recibo — y lo organiza todo en seis cajones: compra, dinero, salud, familia, casa y papeleo. Distingue registros de tareas, pregunta antes de actuar cuando duda, aprende de tus correcciones y permite repartir la carga entre toda la familia. Beta de iOS en TestFlight, web app en producción.',
+      proj3_badge: 'Publicada',
+      proj3_desc: 'Una app móvil para coleccionar y cuidar tus plantas como si fueran Pokémon. Cada planta tiene su propia ficha tipo Pokédex. La IA identifica la especie con la cámara y te da recomendaciones personalizadas de riego y luz. El cuidado diario es gamificado — tus plantas suben de nivel y ganas insignias.',
+      proj2_badge: 'Netflix · Insignia',
+      proj2_desc: 'Una plataforma de Datos e Insights con GenAI que construí de forma autónoma en Netflix — transformando cómo se consumen los datos y los insights a escala global. Un data engine define una capa de abstracción limpia sobre las tablas de datos en bruto; una capa agéntica está entrenada en cómo usarla; y tres superficies lo ponen en manos de la gente. Devuelve 850+ horas por trimestre a equipos globales.',
+      proj1_badge: 'En producción · Usuarios reales',
+      proj1_desc: 'Una app B2C y B2B2C que construí desde cero, actualmente en producción con usuarios reales. Construir FuelUp me mantiene honesto sobre lo que realmente cuesta lanzar un producto — de cero a producción, de principio a fin. Me da una perspectiva que la mayoría de líderes de empresa no tienen.',
+      story_label: 'Mi historia',
+      story_p1: 'Empecé como ingeniero — construyendo infraestructura de broadcast en vivo para los Juegos Olímpicos y los Grand Slams. Entornos de cero errores, millones de espectadores, consecuencias reales. Me enseñó que los problemas más difíciles nunca son puramente técnicos.',
+      story_p2: 'Lo apliqué durante seis años en Netflix, donde mi alcance no paró de crecer. Empecé colaborando con producciones insignia como La Casa de Papel — ayudándolas a trabajar de forma más inteligente y segura a escala global. Después lideré seis integraciones M&A end-to-end de estudios adquiridos. Hoy defino los frameworks de colaboración que alinean a los equipos de operaciones globales — Games, Animation, VFX, Enterprise — con los equipos de ingeniería centralizados que los soportan, impulsando alineación y escala en todo el negocio. Por el camino, fui acercándome cada vez más a lo que más me interesaba: cómo la IA estaba cambiando la forma en que la gente trabaja.',
+      story_p3: 'El trabajo del que más orgulloso estoy es la transformación con IA. Construí de forma autónoma NSights — una plataforma GenAI en producción que permite a los equipos consultar datos operativos en lenguaje natural y obtener respuestas en segundos. Democratizando datos e insights, eliminando los cuellos de botella manuales que ralentizan las decisiones. Más allá de NSights, lidero comunidades de IA y formo equipos en todas las regiones. <strong>La gente viene a mí porque construyo cosas, no solo las comento.</strong>',
+      story_p4: 'Fuera de mi trabajo principal, construyo. Lancé FuelUp — un producto B2C con usuarios reales —, Volanda — un radar de chollos de vuelos en el App Store — y Folia Garden, una app de cuidado de plantas con IA ya publicada. Ahora estoy construyendo Mente, un copiloto de IA para el hogar. Formo a equipos e individuos en cómo usar herramientas de IA de verdad. Esa combinación — constructor, operador, profesor — es lo que aporto en cada colaboración.',
+      contact_title: 'Hablemos.',
+      contact_sub: 'Escríbeme o conéctate en LinkedIn. O pregunta a Nemo, mi agente de IA — hará lo que pueda.'
     }
-    function closeMenu() {
-      document.getElementById('mobile-menu').classList.add('closed');
-      document.getElementById('hamburger').classList.remove('open');
-    }
+  };
+  let currentLang = 'en';
+  function applyLang(lang){
+    currentLang = lang; document.documentElement.lang = lang;
+    document.getElementById('lang-btn').textContent = lang === 'en' ? 'ES' : 'EN';
+    document.querySelectorAll('[data-i18n]').forEach(el => { const k = el.getAttribute('data-i18n'); if (T[lang][k] !== undefined) el.textContent = T[lang][k]; });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => { const k = el.getAttribute('data-i18n-html'); if (T[lang][k] !== undefined) el.innerHTML = T[lang][k]; });
+    try{localStorage.setItem('cf_lang', lang);}catch(e){}
+    fixH1();
+  }
+  function fixH1(){ const h = document.querySelector('.hero-h1'); h.innerHTML = h.innerHTML.replace(/<br\s*\/?>/g, ' '); }
+  fixH1();
+  function toggleLang(){ applyLang(currentLang === 'en' ? 'es' : 'en'); }
+  (function(){ let l = q.get('lang'); try{ l = l || localStorage.getItem('cf_lang')  || localStorage.getItem('nemo_lang'); }catch(e){} if (l === 'es') applyLang('es'); })();
 
-    // ── Theme (paper default, ink toggle) ──
-    function toggleTheme() {
-      const ink = document.body.classList.toggle('ink');
-      document.getElementById('theme-btn').textContent = ink ? '☀' : '☾';
-      localStorage.setItem('nemo_theme', ink ? 'ink' : 'paper');
-    }
-    (function () {
-      const t = localStorage.getItem('nemo_theme');
-      if (t === 'ink' || t === 'dark') { document.body.classList.add('ink'); document.getElementById('theme-btn').textContent = '☀'; }
-    })();
-
-    // ── Language toggle ──
-    const T = {
-      en: {
-        nav_work: 'Work with me', nav_projects: 'Projects', nav_about: 'About',
-        nav_cta: 'Get in touch',
-        hero_eyebrow: 'AI Transformation @ Netflix · Madrid, Spain',
-        hero_h1: 'I lead AI transformation<br />that actually changes<br /><em>how teams work.</em>',
-        hero_lead: 'Ten years inside global operations, shaping the systems — and the way teams work around them — at scale, in production, every day.',
-        hero_creds: '<strong>Spain\'s Top Talent 2025</strong> · MBA · Founder @ FuelUp',
-        btn_work: 'Work with me', btn_contact: 'Get in touch', btn_nemo: 'Ask Nemo',
-        stat1_t: 'Returned to the business / year',
-        stat1_d: 'Built NSights, a production AI platform democratizing data and insights — freeing 850+ hours per quarter for high-impact work.',
-        stat2_t: 'M&A integrations led', stat2_d: 'End-to-end, zero downtime, globally distributed teams.',
-        stat3_t: 'Hours saved/year', stat3_d: 'Frameworks aligning Games, Animation, VFX and Enterprise ops with centralized engineering — globally.',
-        stat4_t: 'Global experience', stat4_d: 'Tech, Broadcast & AI transformation. Cross-cultural global leadership.',
-        svc_title: 'Three ways I can help<br />your team right now.',
-        svc_sub: 'I work with a small number of organisations and individuals at a time. If you\'re serious about AI transformation, let\'s talk.',
-        svc1_title: 'AI Workshop for Teams',
-        svc1_desc: 'A half-day or full-day intensive for teams of 8–15 people. We go from zero to actually using AI in your workflows — Claude, NotebookLM, agents, automation. No theory. Real tools, real use cases, your context.',
-        svc1_tag: 'Half-day · Full-day · On-site or remote',
-        svc2_title: 'AI Acceleration Programme',
-        svc2_desc: 'A 6–8 week cohort for professionals who want to genuinely transform how they work with AI. Weekly live sessions, async support, and hands-on implementation. You leave with systems that run — not slides you\'ll never open again.',
-        svc2_tag: '6–8 weeks · Small cohort · Weekly sessions',
-        svc3_title: 'AI Implementation Consulting',
-        svc3_desc: 'I come in, diagnose your operations, and build something real. Dashboards, agents, decision intelligence systems — the kind that remove bottlenecks and surface insight automatically. I\'ve done it at scale. Now I do it for you.',
-        svc3_tag: 'Project-based · Bespoke · End-to-end',
-        svc4_note: '<strong>Prefer something more personal?</strong> I also mentor professionals 1:1 who want to grow their careers with AI — practical, honest, no fluff. <a href="#contact">Let\'s talk</a>.',
-        proj_title: 'What I build.',
-        proj_sub: 'I don\'t just advise on AI — I ship. A production platform at global scale, and products I build on the side.',
-        proj_side_label: 'On the side',
-        proj_side_sub: 'Products I build outside my day job — proof I ship, not just advise.',
-        nsurf1_t: 'Analytics dashboard', nsurf1_d: 'Advanced, self-explanatory views over live operational data.',
-        nsurf2_t: 'Self-serve MCP', nsurf2_d: 'Query data and insights directly from your own AI tools.',
-        nsurf3_t: 'Agentic copilot', nsurf3_d: 'Goes beyond the numbers to add qualitative insight.',
-        svc_cta: 'Get in touch →',
-        proj5_badge: 'On the App Store',
-        proj5_cta: 'Get the app <span aria-hidden="true">&rarr;</span>',
-        proj3_cta: 'Get the app <span aria-hidden="true">&rarr;</span>',
-        proj1_cta: 'Get the app <span aria-hidden="true">&rarr;</span>',
-        proj5_desc: 'A flight-deal radar, not a search engine. You set your home airport, your budget ceiling and the windows you could travel in — a long weekend, Easter, any free Saturday. Every afternoon it sweeps fares and only pings you when something fits your number. The rest of the time, silence.',
-        proj4_badge: 'In beta · TestFlight',
-        proj4_desc: 'An AI copilot for the household. Capture anything about home life — typed text, voice, or a photo of a receipt — and it sorts everything into six drawers: groceries, money, health, family, house and paperwork. It tells records apart from tasks, asks before acting when unsure, learns from your corrections, and lets the whole family share the load. iOS beta on TestFlight, web app live.',
-        proj3_badge: 'Published',
-        proj3_desc: 'A mobile app to collect and care for your plants like Pokémon. Each plant gets its own Pokédex-style card. AI identifies the species from camera and gives personalised watering and light recommendations. Daily care is gamified — plants level up, you earn badges.',
-        proj2_badge: 'Netflix · Flagship',
-        proj2_desc: 'A GenAI Data & Insights platform I built autonomously at Netflix — transforming how data and insights are consumed at global scale. A data engine defines a clean abstraction layer on top of raw data tables; an agentic layer is trained on how to use it; and three surfaces put it in people\'s hands. Returns 850+ hours per quarter back to global teams.',
-        proj1_badge: 'Live · Real users',
-        proj1_desc: 'A B2C & B2B2C app I built from scratch, currently live with real users. Building FuelUp keeps me honest about what it actually takes to ship a product — from zero to production, end-to-end. It gives me a perspective most enterprise leaders simply don\'t have.',
-        story_label: 'My story',
-        story_p1: 'I started as an engineer — building live broadcast infrastructure for the Olympic Games and Grand Slams. Zero-failure environments, millions of viewers, real consequences. It taught me that the hardest problems are never purely technical.',
-        story_p2: 'I took that into six years at Netflix, where my scope kept growing. I started by partnering with flagship productions like La Casa de Papel — helping them work smarter and safer at global scale. Then I led six end-to-end M&A integrations of acquired studios. Today, I define the collaboration frameworks that align global ops teams — Games, Animation, VFX, Enterprise — with the centralized engineering teams that power them, driving alignment and scale across the business. Along the way, I kept moving closer to what interested me most: how AI was changing the way people actually work.',
-        story_p3: 'The work I\'m most proud of is the AI transformation. I autonomously built NSights — a production GenAI platform that lets teams query operational data in natural language and get answers within seconds. Democratizing data and insights, eliminating the manual bottlenecks that slow decisions. Beyond NSights, I lead AI communities and coach teams across all regions. <strong>People come to me because I build things, not just talk about them.</strong>',
-        story_p4: 'Outside of my day job, I build. I shipped FuelUp — a B2C product live with real users — and Folia Garden, an AI plant-care app now published. Right now I\'m building Mente, an AI copilot for the household. I train teams and individuals on how to use AI tools for real. That combination — builder, operator, teacher — is what I bring to every engagement.',
-        story_anchors_label: 'Built at scale at',
-        contact_title: 'Let\'s talk.',
-        contact_sub: 'Drop me a line or connect on LinkedIn. Or ask Nemo, my AI agent — it\'ll do its best.',
-        lead_gate: 'Happy to keep going — quick intro first: who am I talking to?',
-        lead_name: 'Your name',
-        lead_company: 'Company',
-        lead_btn: 'Continue',
-        lead_thanks: 'Thanks, {name} — go ahead, ask away.',
-        lead_missing: 'I just need both fields to continue.',
-      },
-      es: {
-        nav_work: 'Trabaja conmigo', nav_projects: 'Proyectos', nav_about: 'Sobre mí',
-        nav_cta: 'Contacta',
-        hero_eyebrow: 'Transformación con IA @ Netflix · Madrid, España',
-        hero_h1: 'Lidero transformación con IA<br />que de verdad cambia<br /><em>cómo trabajan los equipos.</em>',
-        hero_lead: 'Diez años dentro de operaciones globales, dando forma a los sistemas — y a cómo trabajan los equipos a su alrededor — a escala, en producción, cada día.',
-        hero_creds: '<strong>Spain\'s Top Talent 2025</strong> · MBA · Fundador @ FuelUp',
-        btn_work: 'Trabaja conmigo', btn_contact: 'Contacta', btn_nemo: 'Pregunta a Nemo',
-        stat1_t: 'Devueltas al negocio / año',
-        stat1_d: 'Construí NSights, una plataforma de IA en producción que democratiza datos e insights — liberando 850+ horas por trimestre para trabajo de alto impacto.',
-        stat2_t: 'Integraciones M&A lideradas', stat2_d: 'De principio a fin, sin downtime, con equipos distribuidos globalmente.',
-        stat3_t: 'Horas ahorradas/año', stat3_d: 'Frameworks que alinean las operaciones de Games, Animation, VFX y Enterprise con ingeniería centralizada — globalmente.',
-        stat4_t: 'Experiencia global', stat4_d: 'Tecnología, Broadcast y transformación con IA. Liderazgo multicultural global.',
-        svc_title: 'Tres formas en que puedo<br />ayudar a tu equipo ahora.',
-        svc_sub: 'Trabajo con un número reducido de organizaciones e individuos a la vez. Si te tomas en serio la transformación con IA, hablemos.',
-        svc1_title: 'Workshop de IA para Equipos',
-        svc1_desc: 'Una sesión intensiva de medio día o día completo para equipos de 8–15 personas. Pasamos de cero a usar IA realmente en vuestros flujos de trabajo — Claude, NotebookLM, agentes, automatización. Sin teoría. Herramientas reales, casos reales, vuestro contexto.',
-        svc1_tag: 'Medio día · Día completo · Presencial o remoto',
-        svc2_title: 'Programa de Aceleración con IA',
-        svc2_desc: 'Un cohort de 6–8 semanas para profesionales que quieren transformar de verdad cómo trabajan con IA. Sesiones en vivo semanales, soporte async e implementación práctica. Sales con sistemas que funcionan — no con slides que nunca volverás a abrir.',
-        svc2_tag: '6–8 semanas · Cohort pequeño · Sesiones semanales',
-        svc3_title: 'Consultoría de Implementación IA',
-        svc3_desc: 'Entro, diagnostico tus operaciones y construyo algo real. Dashboards, agentes, sistemas de inteligencia para decisiones — los que eliminan cuellos de botella y generan insight automáticamente. Lo he hecho a escala. Ahora lo hago para ti.',
-        svc3_tag: 'Por proyecto · A medida · End-to-end',
-        svc4_note: '<strong>¿Prefieres algo más personal?</strong> También hago mentoría 1:1 a profesionales que quieren crecer en su carrera con IA — práctica, honesta, sin humo. <a href="#contact">Hablemos</a>.',
-        proj_title: 'Lo que construyo.',
-        proj_sub: 'No me limito a asesorar sobre IA — lanzo productos. Una plataforma en producción a escala global, y productos que construyo por mi cuenta.',
-        proj_side_label: 'Por mi cuenta',
-        proj_side_sub: 'Productos que construyo fuera de mi trabajo principal — la prueba de que lanzo, no solo asesoro.',
-        nsurf1_t: 'Dashboard de analítica', nsurf1_d: 'Vistas avanzadas y autoexplicativas sobre datos operativos en vivo.',
-        nsurf2_t: 'MCP de autoservicio', nsurf2_d: 'Consulta datos e insights directamente desde tus propias herramientas de IA.',
-        nsurf3_t: 'Copiloto agéntico', nsurf3_d: 'Va más allá de los números para añadir insight cualitativo.',
-        svc_cta: 'Contacta →',
-        proj5_badge: 'En la App Store',
-        proj5_cta: 'Descargar <span aria-hidden="true">&rarr;</span>',
-        proj3_cta: 'Descargar <span aria-hidden="true">&rarr;</span>',
-        proj1_cta: 'Descargar <span aria-hidden="true">&rarr;</span>',
-        proj5_desc: 'Un radar de chollos de vuelo, no un buscador. Le dices desde qué aeropuerto sales, cuánto quieres gastar y cuándo podrías viajar — un puente, Semana Santa, cualquier finde libre. Cada tarde barre las tarifas y solo te avisa si algo cabe en tu número. El resto del tiempo, silencio.',
-        proj4_badge: 'En beta · TestFlight',
-        proj4_desc: 'Un copiloto de IA para el hogar. Capturas cualquier cosa de la vida doméstica — texto, voz o una foto de un recibo — y lo organiza todo en seis cajones: compra, dinero, salud, familia, casa y papeleo. Distingue registros de tareas, pregunta antes de actuar cuando duda, aprende de tus correcciones y permite repartir la carga entre toda la familia. Beta de iOS en TestFlight, web app en producción.',
-        proj3_badge: 'Publicada',
-        proj3_desc: 'Una app móvil para coleccionar y cuidar tus plantas como si fueran Pokémon. Cada planta tiene su propia ficha tipo Pokédex. La IA identifica la especie con la cámara y te da recomendaciones personalizadas de riego y luz. El cuidado diario es gamificado — tus plantas suben de nivel y ganas insignias.',
-        proj2_badge: 'Netflix · Insignia',
-        proj2_desc: 'Una plataforma de Datos e Insights con GenAI que construí de forma autónoma en Netflix — transformando cómo se consumen los datos y los insights a escala global. Un data engine define una capa de abstracción limpia sobre las tablas de datos en bruto; una capa agéntica está entrenada en cómo usarla; y tres superficies lo ponen en manos de la gente. Devuelve 850+ horas por trimestre a equipos globales.',
-        proj1_badge: 'En producción · Usuarios reales',
-        proj1_desc: 'Una app B2C y B2B2C que construí desde cero, actualmente en producción con usuarios reales. Construir FuelUp me mantiene honesto sobre lo que realmente cuesta lanzar un producto — de cero a producción, de principio a fin. Me da una perspectiva que la mayoría de líderes de empresa no tienen.',
-        story_label: 'Mi historia',
-        story_p1: 'Empecé como ingeniero — construyendo infraestructura de broadcast en vivo para los Juegos Olímpicos y los Grand Slams. Entornos de cero errores, millones de espectadores, consecuencias reales. Me enseñó que los problemas más difíciles nunca son puramente técnicos.',
-        story_p2: 'Lo apliqué durante seis años en Netflix, donde mi alcance no paró de crecer. Empecé colaborando con producciones insignia como La Casa de Papel — ayudándolas a trabajar de forma más inteligente y segura a escala global. Después lideré seis integraciones M&A end-to-end de estudios adquiridos. Hoy defino los frameworks de colaboración que alinean a los equipos de operaciones globales — Games, Animation, VFX, Enterprise — con los equipos de ingeniería centralizados que los soportan, impulsando alineación y escala en todo el negocio. Por el camino, fui acercándome cada vez más a lo que más me interesaba: cómo la IA estaba cambiando la forma en que la gente trabaja.',
-        story_p3: 'El trabajo del que más orgulloso estoy es la transformación con IA. Construí de forma autónoma NSights — una plataforma GenAI en producción que permite a los equipos consultar datos operativos en lenguaje natural y obtener respuestas en segundos. Democratizando datos e insights, eliminando los cuellos de botella manuales que ralentizan las decisiones. Más allá de NSights, lidero comunidades de IA y formo equipos en todas las regiones. <strong>La gente viene a mí porque construyo cosas, no solo las comento.</strong>',
-        story_p4: 'Fuera de mi trabajo principal, construyo. Lancé FuelUp — un producto B2C con usuarios reales — y Folia Garden, una app de cuidado de plantas con IA ya publicada. Ahora estoy construyendo Mente, un copiloto de IA para el hogar. Formo a equipos e individuos en cómo usar herramientas de IA de verdad. Esa combinación — constructor, operador, profesor — es lo que aporto en cada colaboración.',
-        story_anchors_label: 'Construido a escala en',
-        contact_title: 'Hablemos.',
-        contact_sub: 'Escríbeme o conéctate en LinkedIn. O pregunta a Nemo, mi agente de IA — hará lo que pueda.',
-        lead_gate: 'Encantado de seguir — antes, una presentación rápida: ¿con quién hablo?',
-        lead_name: 'Tu nombre',
-        lead_company: 'Empresa',
-        lead_btn: 'Continuar',
-        lead_thanks: 'Gracias, {name} — pregunta lo que quieras.',
-        lead_missing: 'Necesito ambos campos para continuar.',
-      }
-    };
-
-    let currentLang = localStorage.getItem('nemo_lang') || 'en';
-
-    function applyLang(lang) {
-      currentLang = lang;
-      localStorage.setItem('nemo_lang', lang);
-      document.getElementById('lang-btn').textContent = lang === 'en' ? 'ES' : 'EN';
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (T[lang][key] !== undefined) el.textContent = T[lang][key];
-      });
-      document.querySelectorAll('[data-i18n-html]').forEach(el => {
-        const key = el.getAttribute('data-i18n-html');
-        if (T[lang][key] !== undefined) el.innerHTML = T[lang][key];
-      });
-    }
-
-    function toggleLang() {
-      applyLang(currentLang === 'en' ? 'es' : 'en');
-      gtag('event', 'lang_toggle', { event_category: 'preferences', event_label: currentLang });
-    }
-
-    window.addEventListener('DOMContentLoaded', () => { applyLang(currentLang); });
+  // Medición para las capturas de página completa (sólo con ?measure=1)
+  if (q.get('measure')) window.addEventListener('load', () => { document.fonts.ready.then(() => { const f = ['900 16px Archivo','500 16px "IBM Plex Mono"','400 16px "IBM Plex Sans"'].map(x => document.fonts.check(x) ? 1 : 0).join(''); document.title = 'H=' + document.documentElement.scrollHeight + ' F=' + f + ' W=' + document.documentElement.scrollWidth; }); });
 
     // ── Rate limit (persisted per day so a refresh doesn't reset it) ──
     const QKEY = 'nemo_qcount';
@@ -1378,10 +1204,8 @@ STYLE: First person, warm but direct. Under 100 words unless more is clearly nee
         addMsg('ai', `Something went wrong: ${e.message}`);
       }
     }
-  </script>
 
-  <!-- Visual polish: reveal + count-up -->
-  <script>
+  // ── Reveal + count-up ──
     document.addEventListener('DOMContentLoaded', () => {
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -1421,13 +1245,8 @@ STYLE: First person, warm but direct. Under 100 words unless more is clearly nee
         }
       }
     });
-  </script>
 
-  <!-- Vercel Analytics -->
-  <script defer src="/_vercel/insights/script.js"></script>
-
-  <!-- GA4 Custom Event Tracking -->
-  <script>
+  // ── Eventos GA4 ──
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('a[href^="mailto:"]').forEach(el => {
         el.addEventListener('click', () => { gtag('event', 'contact_click', { event_category: 'engagement', event_label: 'Email', method: 'email' }); });
@@ -1450,7 +1269,7 @@ STYLE: First person, warm but direct. Under 100 words unless more is clearly nee
       }, { threshold: 0.3 });
       sections.forEach(id => { const el = document.getElementById(id); if (el) observer.observe(el); });
     });
-  </script>
-
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
