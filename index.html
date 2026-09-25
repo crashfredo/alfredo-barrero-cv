@@ -483,8 +483,17 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;co
        Todo va tras la clase .px que pone el JS: sin JS o con reduced-motion
        no se oculta ni se desplaza nada.                                  */
     .px-grid body { background-image: none; }
+    .px-grid body { position: relative; }
+    /* El envoltorio recorta: sin el, la capa al desplazarse hacia abajo
+       alarga el documento, lo que agranda el rango y la desplaza mas
+       todavia. overflow:clip recorta sin crear contenedor de scroll. */
+    .grid-wrap { position: absolute; inset: 0; overflow: clip; z-index: -1; pointer-events: none; }
     .grid-bg {
-      position: fixed; inset: -80px -80px; z-index: -1; pointer-events: none;
+      /* absoluta, no fija: una capa fija a pantalla completa cuesta relleno
+         en movil y baila cuando Safari esconde la barra de direcciones.
+         Al ir con el documento, para que parezca ir al 25% se desplaza el
+         75% en el mismo sentido. */
+      position: absolute; inset: 0; pointer-events: none;
       background-image: radial-gradient(var(--dot) 1.5px, transparent 1.5px);
       background-size: 48px 48px; will-change: transform;
     }
@@ -492,11 +501,15 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;co
     /* clip, NO hidden: overflow:hidden convertiria el marco en contenedor
        de scroll y view() se anclaria a el en vez de a la pagina. */
     .px .figure .ph { overflow: clip; }
-    .px .figure .ph img { --amp: 30px; --sc: 1.12; transform: scale(var(--sc)); will-change: transform; }
-    .px .app .icon { --amp: 8px; will-change: transform; }
+    /* La foto llena su marco exacto, asi que el escalado tiene que cubrir
+       el recorrido entero o asomaria el fondo: alto util 412/383 px. */
+    .px .figure .ph img { --amp: 30px; --sc: 1.16; transform: scale(var(--sc)); will-change: transform; }
+    .px .app .icon { --amp: 12px; will-change: transform; }
+    .px .stat-n { --amp: 10px; will-change: transform; }
     @media (max-width: 760px) {
-      .px .figure .ph img { --amp: 15px; --sc: 1.08; }
-      .px .app .icon { --amp: 4px; }
+      .px .figure .ph img { --amp: 45px; --sc: 1.25; }
+      .px .app .icon { --amp: 14px; }
+      .px .stat-n { --amp: 12px; }
     }
 
     /* Camino principal: animaciones ligadas al scroll, fuera del hilo
@@ -506,10 +519,10 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;co
       to   { transform: translate3d(0, calc(var(--amp) * -1), 0) scale(var(--sc, 1)); }
     }
     @keyframes pxDrift {
-      to { transform: translate3d(0, calc(var(--px-range, 0px) * -0.25), 0); }
+      to { transform: translate3d(0, calc(var(--px-range, 0px) * 0.75), 0); }
     }
     @supports (animation-timeline: view()) {
-      .px .figure .ph img, .px .app .icon {
+      .px .figure .ph img, .px .app .icon, .px .stat-n {
         animation: pxRise linear both;
         animation-timeline: view();
         animation-range: cover 0% cover 100%;
@@ -521,7 +534,7 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;co
     }
 
     /* Entradas escalonadas: opacidad y 10 px, nada elástico */
-    .px .spec { opacity: 0; transform: translate3d(0,10px,0);
+    .px .spec { opacity: 0; transform: translate3d(0,24px,0);
       transition: opacity .55s cubic-bezier(.4,0,.2,1), transform .55s cubic-bezier(.4,0,.2,1);
       transition-delay: var(--d, 0ms); }
     .px .spec.in { opacity: 1; transform: none; }
@@ -1359,20 +1372,23 @@ STYLE: First person, warm but direct. Under 100 words unless more is clearly nee
     // La retícula sólo se despega en escritorio: en móvil una capa fija a
     // pantalla completa cuesta relleno y baila con la barra de Safari.
     function syncGrid() {
-      if (mWide.matches && active) {
+      if (active) {
         if (!grid) {
+          var wrap = document.createElement('div');
+          wrap.className = 'grid-wrap';
           grid = document.createElement('div');
           grid.className = 'grid-bg';
-          document.body.appendChild(grid);
+          wrap.appendChild(grid);
+          document.body.appendChild(wrap);
           root.classList.add('px-grid');
         }
         setRange();
       } else if (grid) {
-        grid.remove(); grid = null; root.classList.remove('px-grid');
+        grid.parentNode.remove(); grid = null; root.classList.remove('px-grid');
       }
     }
 
-    function layers() { return document.querySelectorAll('.figure .ph img, .app .icon'); }
+    function layers() { return document.querySelectorAll('.figure .ph img, .app .icon, .stat-n'); }
 
     function draw() {
       ticking = false;
