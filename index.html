@@ -162,7 +162,7 @@ html{scroll-behavior:smooth;overflow-x:hidden}
 body{
   background:var(--bg) radial-gradient(var(--dot) 1.5px,transparent 1.5px);background-size:48px 48px;
   color:var(--fg);font-family:var(--sans);font-weight:400;font-size:16px;line-height:1.5;
-  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
 }
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
@@ -475,6 +475,61 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;co
     #chat-in { border-radius: 14px; }
     #chat-go { border-radius: 12px; }
     .sugg { border-radius: 999px; }
+
+
+    /* ── Parallax del taller ─────────────────────────────────────────────
+       Se mueven sólo las capas técnicas: la retícula, la foto dentro de su
+       marco y los iconos de las apps. Los titulares y el texto largo NO.
+       Todo va tras la clase .px que pone el JS: sin JS o con reduced-motion
+       no se oculta ni se desplaza nada.                                  */
+    .px-grid body { background-image: none; }
+    .grid-bg {
+      position: fixed; inset: -80px -80px; z-index: -1; pointer-events: none;
+      background-image: radial-gradient(var(--dot) 1.5px, transparent 1.5px);
+      background-size: 48px 48px; will-change: transform;
+    }
+    /* recorridos: la mitad en móvil */
+    /* clip, NO hidden: overflow:hidden convertiria el marco en contenedor
+       de scroll y view() se anclaria a el en vez de a la pagina. */
+    .px .figure .ph { overflow: clip; }
+    .px .figure .ph img { --amp: 30px; --sc: 1.12; transform: scale(var(--sc)); will-change: transform; }
+    .px .app .icon { --amp: 8px; will-change: transform; }
+    @media (max-width: 760px) {
+      .px .figure .ph img { --amp: 15px; --sc: 1.08; }
+      .px .app .icon { --amp: 4px; }
+    }
+
+    /* Camino principal: animaciones ligadas al scroll, fuera del hilo
+       principal. Sin handlers de scroll y sin capas fijas en móvil.     */
+    @keyframes pxRise {
+      from { transform: translate3d(0, var(--amp), 0) scale(var(--sc, 1)); }
+      to   { transform: translate3d(0, calc(var(--amp) * -1), 0) scale(var(--sc, 1)); }
+    }
+    @keyframes pxDrift {
+      to { transform: translate3d(0, calc(var(--px-range, 0px) * -0.25), 0); }
+    }
+    @supports (animation-timeline: view()) {
+      .px .figure .ph img, .px .app .icon {
+        animation: pxRise linear both;
+        animation-timeline: view();
+        animation-range: cover 0% cover 100%;
+      }
+      .px-grid .grid-bg {
+        animation: pxDrift linear both;
+        animation-timeline: scroll(root block);
+      }
+    }
+
+    /* Entradas escalonadas: opacidad y 10 px, nada elástico */
+    .px .spec { opacity: 0; transform: translate3d(0,10px,0);
+      transition: opacity .55s cubic-bezier(.4,0,.2,1), transform .55s cubic-bezier(.4,0,.2,1);
+      transition-delay: var(--d, 0ms); }
+    .px .spec.in { opacity: 1; transform: none; }
+    .px .reg::before, .px .reg::after,
+    .px .reg > .rg::before, .px .reg > .rg::after {
+      opacity: 0; transition: opacity .5s ease; transition-delay: var(--d, 0ms); }
+    .px .reg.in::before, .px .reg.in::after,
+    .px .reg.in > .rg::before, .px .reg.in > .rg::after { opacity: 1; }
 
 </style>
 </head>
@@ -1281,6 +1336,123 @@ STYLE: First person, warm but direct. Under 100 words unless more is clearly nee
       }, { threshold: 0.3 });
       sections.forEach(id => { const el = document.getElementById(id); if (el) observer.observe(el); });
     });
+
+  // ── Parallax del taller ───────────────────────────────────────────────
+  // Camino principal: CSS scroll-driven animations, que el compositor
+  // ejecuta fuera del hilo principal (Chrome y WebKit 26 las soportan).
+  // Respaldo para navegadores sin soporte: un único rAF que sólo toca los
+  // elementos que un IntersectionObserver marca como visibles. En ningún
+  // caso se escribe estilo dentro del handler de scroll.
+  (function () {
+    var root = document.documentElement;
+    var mReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var mWide = window.matchMedia('(min-width: 761px)');
+    var native = window.CSS && CSS.supports && CSS.supports('animation-timeline', 'view()');
+    var grid = null, io = null, ioRevealed = null, visible = new Set(), ticking = false, active = false;
+
+    function setRange() {
+      // distancia total desplazable, para que la retícula avance al 25%
+      var d = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      root.style.setProperty('--px-range', d + 'px');
+    }
+
+    // La retícula sólo se despega en escritorio: en móvil una capa fija a
+    // pantalla completa cuesta relleno y baila con la barra de Safari.
+    function syncGrid() {
+      if (mWide.matches && active) {
+        if (!grid) {
+          grid = document.createElement('div');
+          grid.className = 'grid-bg';
+          document.body.appendChild(grid);
+          root.classList.add('px-grid');
+        }
+        setRange();
+      } else if (grid) {
+        grid.remove(); grid = null; root.classList.remove('px-grid');
+      }
+    }
+
+    function layers() { return document.querySelectorAll('.figure .ph img, .app .icon'); }
+
+    function draw() {
+      ticking = false;
+      var vh = window.innerHeight, mid = window.scrollY + vh / 2;
+      visible.forEach(function (el) {
+        var amp = parseFloat(getComputedStyle(el).getPropertyValue('--amp')) || 0;
+        var sc = getComputedStyle(el).getPropertyValue('--sc').trim();
+        var p = (el._pxMid - mid) / vh;
+        var t = (p * amp).toFixed(2);
+        el.style.transform = 'translate3d(0,' + t + 'px,0)' + (sc ? ' scale(' + sc + ')' : '');
+      });
+    }
+    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(draw); } }
+
+    function startFallback() {
+      io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (e.isIntersecting) {
+            var r = e.target.getBoundingClientRect();
+            e.target._pxMid = r.top + window.scrollY + r.height / 2;
+            visible.add(e.target);
+          } else {
+            visible.delete(e.target);
+          }
+        });
+        draw();
+      }, { rootMargin: '20% 0px' });
+      layers().forEach(function (el) { io.observe(el); });
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+    }
+
+    function reveal() {
+      ioRevealed = new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); ioRevealed.unobserve(e.target); }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+      [document.querySelectorAll('.spec'), document.querySelectorAll('.reg')].forEach(function (list) {
+        list.forEach(function (el, i) {
+          el.style.setProperty('--d', (i % 4) * 70 + 'ms');
+          ioRevealed.observe(el);
+        });
+      });
+    }
+
+    function enable() {
+      if (active) return; active = true;
+      root.classList.add('px');
+      reveal(); syncGrid();
+      if (!native) startFallback();
+      window.addEventListener('resize', syncGrid);
+      if (native) {
+        window.addEventListener('resize', setRange);
+        // El alto desplazable cambia al cargar fuentes e imagenes: si el
+        // rango se mide una sola vez al arrancar, la reticula se queda
+        // corta. Un ResizeObserver lo mantiene al dia sin coste por scroll.
+        window.addEventListener('load', setRange);
+        if (window.ResizeObserver) new ResizeObserver(setRange).observe(document.body);
+      }
+    }
+
+    function disable() {
+      if (!active) return; active = false;
+      root.classList.remove('px');
+      if (grid) { grid.remove(); grid = null; root.classList.remove('px-grid'); }
+      if (io) { io.disconnect(); io = null; }
+      if (ioRevealed) { ioRevealed.disconnect(); ioRevealed = null; }
+      visible.clear();
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', syncGrid);
+      layers().forEach(function (el) { el.style.transform = ''; });
+      document.querySelectorAll('.spec.in, .reg.in').forEach(function (e) { e.classList.remove('in'); });
+    }
+
+    function sync() { mReduce.matches ? disable() : enable(); }
+    (mReduce.addEventListener ? mReduce.addEventListener('change', sync) : mReduce.addListener(sync));
+    (mWide.addEventListener ? mWide.addEventListener('change', syncGrid) : mWide.addListener(syncGrid));
+    sync();
+  })();
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
