@@ -461,6 +461,22 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;co
     }
     @media (max-width: 480px) { .nav-in { gap: 8px; } .links { gap: 8px; } .ibtn { width: 30px; height: 30px; } }
 
+
+    /* ── Apex de CrashFredo en Nemo ── */
+    .apex-nemo { width: 100%; height: 100%; }
+    .apex-nemo .chip { fill: var(--naranja); }
+    .chat-av { padding: 5px; }
+    #chat-btn { padding: 13px; }
+
+    /* ── Esquinas redondeadas sólo dentro del chat ── */
+    .msg, .msg-t { border-radius: 16px; }
+    .msg-ai, .msg-t { border-bottom-left-radius: 5px; }   /* esquina del emisor */
+    .msg-user { border-bottom-right-radius: 5px; }
+    .lead-form input, .lead-form button { border-radius: 12px; }
+    #chat-in { border-radius: 14px; }
+    #chat-go { border-radius: 12px; }
+    .sugg { border-radius: 999px; }
+
 </style>
 </head>
 <body id="top">
@@ -790,18 +806,13 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;co
   </div>
 </footer>
 
-<button id="chat-btn" onclick="toggleChat()" title="Ask Alfredo's AI" aria-label="Ask Nemo">N</button>
 
-  <button id="chat-btn" onclick="toggleChat()" title="Ask Alfredo's AI">
-    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z" />
-    </svg>
-  </button>
+  <button id="chat-btn" onclick="toggleChat()" title="Ask Alfredo's AI" aria-label="Ask Nemo"><svg class="apex apex-nemo" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M15 92V50A30 30 0 0 1 45 20H97" fill="none" stroke="currentColor" stroke-width="24" stroke-linecap="butt"/><path class="chip" d="M45 36H51V56H31V50A14 14 0 0 1 45 36Z"/></svg></button>
 
   <div id="chat-window">
     <div class="chat-header">
       <div class="chat-left">
-        <div class="chat-av">N</div>
+        <div class="chat-av"><svg class="apex apex-nemo" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M15 92V50A30 30 0 0 1 45 20H97" fill="none" stroke="currentColor" stroke-width="24" stroke-linecap="butt"/><path class="chip" d="M45 36H51V56H31V50A14 14 0 0 1 45 36Z"/></svg></div>
         <div>
           <div class="chat-hname">Nemo <span style="font-size:10px;opacity:.5;font-weight:400">Beta v1</span></div>
           <div class="chat-hsub">Ask me anything about Alfredo</div>
@@ -908,7 +919,13 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;co
       story_p3: 'The work I\'m most proud of is the AI transformation. I autonomously built NSights — a production GenAI platform that lets teams query operational data in natural language and get answers within seconds. Democratizing data and insights, eliminating the manual bottlenecks that slow decisions. Beyond NSights, I lead AI communities and coach teams across all regions. <strong>People come to me because I build things, not just talk about them.</strong>',
       story_p4: 'Outside of my day job, I build. I shipped FuelUp — a B2C product live with real users —, Volanda — a flight-deal radar on the App Store — and Folia Garden, an AI plant-care app now published. Right now I\'m building Mente, an AI copilot for the household. I train teams and individuals on how to use AI tools for real. That combination — builder, operator, teacher — is what I bring to every engagement.',
       contact_title: 'Let\'s talk.',
-      contact_sub: 'Drop me a line or connect on LinkedIn. Or ask Nemo, my AI agent — it\'ll do its best.'
+      contact_sub: 'Drop me a line or connect on LinkedIn. Or ask Nemo, my AI agent — it\'ll do its best.',
+      lead_gate: 'Happy to keep going — quick intro first: who am I talking to?',
+      lead_name: 'Your name',
+      lead_company: 'Company',
+      lead_btn: 'Continue',
+      lead_thanks: 'Thanks, {name} — go ahead, ask away.',
+      lead_missing: 'I just need both fields to continue.'
     },
     es: {
       nav_work: 'Trabaja conmigo', nav_projects: 'Proyectos', nav_about: 'Sobre mí', nav_cta: 'Contacta',
@@ -960,7 +977,13 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;co
       story_p3: 'El trabajo del que más orgulloso estoy es la transformación con IA. Construí de forma autónoma NSights — una plataforma GenAI en producción que permite a los equipos consultar datos operativos en lenguaje natural y obtener respuestas en segundos. Democratizando datos e insights, eliminando los cuellos de botella manuales que ralentizan las decisiones. Más allá de NSights, lidero comunidades de IA y formo equipos en todas las regiones. <strong>La gente viene a mí porque construyo cosas, no solo las comento.</strong>',
       story_p4: 'Fuera de mi trabajo principal, construyo. Lancé FuelUp — un producto B2C con usuarios reales —, Volanda — un radar de chollos de vuelos en el App Store — y Folia Garden, una app de cuidado de plantas con IA ya publicada. Ahora estoy construyendo Mente, un copiloto de IA para el hogar. Formo a equipos e individuos en cómo usar herramientas de IA de verdad. Esa combinación — constructor, operador, profesor — es lo que aporto en cada colaboración.',
       contact_title: 'Hablemos.',
-      contact_sub: 'Escríbeme o conéctate en LinkedIn. O pregunta a Nemo, mi agente de IA — hará lo que pueda.'
+      contact_sub: 'Escríbeme o conéctate en LinkedIn. O pregunta a Nemo, mi agente de IA — hará lo que pueda.',
+      lead_gate: 'Encantado de seguir — antes, una presentación rápida: ¿con quién hablo?',
+      lead_name: 'Tu nombre',
+      lead_company: 'Empresa',
+      lead_btn: 'Continuar',
+      lead_thanks: 'Gracias, {name} — pregunta lo que quieras.',
+      lead_missing: 'Necesito ambos campos para continuar.'
     }
   };
   let currentLang = 'en';
