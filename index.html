@@ -544,6 +544,81 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;co
     .px .reg.in::before, .px .reg.in::after,
     .px .reg.in > .rg::before, .px .reg.in > .rg::after { opacity: 1; }
 
+
+    /* ── Parallax v3: capas de plano ──────────────────────────────────────
+       El marcado va estático en el HTML (nada inyectado por JS) para que no
+       haya desplazamiento de layout. La clase .px sólo enciende el
+       movimiento, así que reduced-motion lo deja todo quieto y visible.   */
+
+    /* 1. Números de sección gigantes, sólo contorno */
+    .sec-rel { position: relative; }
+    .pxnum-wrap { position: absolute; inset: 0; overflow: clip; z-index: 0; pointer-events: none; }
+    .pxnum {
+      position: absolute; top: 4%; right: -.04em; line-height: .78;
+      font-family: var(--archivo); font-weight: 900; font-stretch: 125%;
+      font-size: clamp(170px, 28vw, 400px);
+      color: transparent; -webkit-text-stroke: 2px var(--fg); opacity: .07;
+      user-select: none;
+    }
+    .sec-rel > .wrap { position: relative; z-index: 1; }
+
+    /* 2. Apex como marca de agua del hero */
+    .pxapex-wrap { position: absolute; inset: 0; overflow: clip; z-index: 0; pointer-events: none; }
+    .pxapex { position: absolute; left: -6%; top: 2%; width: clamp(340px, 46vw, 680px); opacity: .055; color: var(--fg); }
+    .pxapex g { transform-box: fill-box; transform-origin: 50% 50%; }
+    .pxapex .chip { fill: var(--naranja); }
+
+    /* 3. Cotas de plano que se trazan */
+    .pxcota { display: block; width: 100%; max-width: 220px; height: 12px; margin-bottom: 14px; color: var(--naranja); opacity: .85; }
+    .pxcota path { stroke: currentColor; stroke-width: 1.5; fill: none; }
+
+    /* 4. Cinta de spec tags */
+    .pxribbon { overflow: clip; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      margin-top: clamp(40px, 6vw, 86px); padding: 12px 0; }
+    .pxribbon .track { display: inline-block; white-space: nowrap;
+      font-family: var(--mono); font-weight: 500; font-size: 11px; letter-spacing: .28em;
+      text-transform: uppercase; color: var(--naranja); opacity: .55; }
+
+
+    /* ── Movimiento: sólo con .px, sólo por el compositor ── */
+    .px .pxnum { --amp: 70px; will-change: transform; }
+    .px .pxapex .stroke { --amp: 46px; --rot: 3deg; will-change: transform; }
+    .px .pxapex .chip { --amp: 92px; --rot: -5deg; will-change: transform; }
+    @media (max-width: 760px) {
+      .px .pxnum { --amp: 40px; }
+      .px .pxapex .stroke { --amp: 26px; }
+      .px .pxapex .chip { --amp: 52px; }
+    }
+    @keyframes pxDrift2 {
+      from { transform: translate3d(0, var(--amp), 0); }
+      to   { transform: translate3d(0, calc(var(--amp) * -1), 0); }
+    }
+    @keyframes pxDriftRot {
+      from { transform: translate3d(0, var(--amp), 0) rotate(calc(var(--rot) * -1)); }
+      to   { transform: translate3d(0, calc(var(--amp) * -1), 0) rotate(var(--rot)); }
+    }
+    @keyframes pxDraw { from { stroke-dashoffset: var(--len); } to { stroke-dashoffset: 0; } }
+    @keyframes pxSlide { from { transform: translate3d(0,0,0); } to { transform: translate3d(calc(var(--slide) * -1), 0, 0); } }
+    @supports (animation-timeline: view()) {
+      .px .pxnum {
+        animation: pxDrift2 linear both; animation-timeline: view(); animation-range: cover 0% cover 100%;
+      }
+      /* Las dos piezas comparten la linea de tiempo del SVG. Con view()
+         propio, la caja del chip (20x20 unidades) agota su rango en los
+         primeros pixeles y se queda clavado al 100%. */
+      .px .pxapex { view-timeline-name: --pxapex; view-timeline-axis: block; }
+      .px .pxapex .stroke, .px .pxapex .chip {
+        animation: pxDriftRot linear both; animation-timeline: --pxapex; animation-range: cover 0% cover 100%;
+      }
+      .px .pxcota .line {
+        stroke-dasharray: var(--len); animation: pxDraw linear both;
+        animation-timeline: view(); animation-range: entry 0% cover 34%;
+      }
+      .px .pxribbon .track {
+        --slide: 420px; animation: pxSlide linear both; animation-timeline: scroll(root block);
+      }
+    }
+
 </style>
 </head>
 <body id="top">
@@ -577,7 +652,13 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;co
 </nav>
 
 <!-- HERO -->
-<header class="hero">
+<header class="hero sec-rel">
+  <div class="pxapex-wrap" aria-hidden="true">
+    <svg class="pxapex" viewBox="-2 -2 104 104">
+      <g class="stroke"><path d="M15 92V50A30 30 0 0 1 45 20H97" fill="none" stroke="currentColor" stroke-width="24" stroke-linecap="butt"/></g>
+      <g class="chip"><path d="M45 36H51V56H31V50A14 14 0 0 1 45 36Z"/></g>
+    </svg>
+  </div>
   <div class="wrap">
     <div class="hero-frame reg"><span class="rg"></span>
       <div class="hero-grid">
@@ -624,10 +705,11 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;co
 </header>
 
 <!-- 01 WORK WITH ME -->
-<section class="sec" id="services">
+<section class="sec sec-rel" id="services">
+  <div class="pxnum-wrap" aria-hidden="true"><span class="pxnum archivo">01</span></div>
   <div class="wrap">
     <div class="sec-head">
-      <div class="idx"><span class="spec">01 · <span data-i18n="nav_work">Work with me</span></span><span class="mono cnt">01 /</span></div>
+      <div class="idx"><svg class="pxcota" viewBox="0 0 220 12" aria-hidden="true"><path d="M1 1V11"/><path d="M219 1V11"/><path class="line" style="--len:218" d="M1 6H219"/></svg><span class="spec">01 · <span data-i18n="nav_work">Work with me</span></span><span class="mono cnt">01 /</span></div>
       <div>
         <h2 class="archivo" data-i18n-html="svc_title">Three ways I can help<br />your team right now<span class="dot">.</span></h2>
         <p class="sub" data-i18n="svc_sub">I work with a small number of organisations and individuals at a time. If you're serious about AI transformation, let's talk.</p>
@@ -665,10 +747,12 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;co
 </section>
 
 <!-- 02 WHAT I BUILD -->
-<section class="sec" id="projects">
+<div class="pxribbon" aria-hidden="true"><div class="track mono">AI TRANSFORMATION · MADRID · ONE FOUNDER, ONE PHONE · BUILT IN PRODUCTION · AI TRANSFORMATION · MADRID · ONE FOUNDER, ONE PHONE · BUILT IN PRODUCTION · AI TRANSFORMATION · MADRID · ONE FOUNDER, ONE PHONE · BUILT IN PRODUCTION · AI TRANSFORMATION · MADRID · ONE FOUNDER, ONE PHONE · BUILT IN PRODUCTION · AI TRANSFORMATION · MADRID · ONE FOUNDER, ONE PHONE · BUILT IN PRODUCTION · AI TRANSFORMATION · MADRID · ONE FOUNDER, ONE PHONE · BUILT IN PRODUCTION · </div></div>
+<section class="sec sec-rel" id="projects">
+  <div class="pxnum-wrap" aria-hidden="true"><span class="pxnum archivo">02</span></div>
   <div class="wrap">
     <div class="sec-head">
-      <div class="idx"><span class="spec">02 · <span data-i18n="nav_projects">Projects</span></span><span class="mono cnt">02 /</span></div>
+      <div class="idx"><svg class="pxcota" viewBox="0 0 220 12" aria-hidden="true"><path d="M1 1V11"/><path d="M219 1V11"/><path class="line" style="--len:218" d="M1 6H219"/></svg><span class="spec">02 · <span data-i18n="nav_projects">Projects</span></span><span class="mono cnt">02 /</span></div>
       <div>
         <h2 class="archivo" data-i18n="proj_title">What I build.</h2>
         <p class="sub" data-i18n="proj_sub">I don't just advise on AI — I ship. A production platform at global scale, and products I build on the side.</p>
@@ -746,10 +830,12 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;co
 </section>
 
 <!-- 03 ABOUT -->
-<section class="sec" id="story">
+<div class="pxribbon" aria-hidden="true"><div class="track mono">AI TRANSFORMATION · MADRID · ONE FOUNDER, ONE PHONE · BUILT IN PRODUCTION · AI TRANSFORMATION · MADRID · ONE FOUNDER, ONE PHONE · BUILT IN PRODUCTION · AI TRANSFORMATION · MADRID · ONE FOUNDER, ONE PHONE · BUILT IN PRODUCTION · AI TRANSFORMATION · MADRID · ONE FOUNDER, ONE PHONE · BUILT IN PRODUCTION · AI TRANSFORMATION · MADRID · ONE FOUNDER, ONE PHONE · BUILT IN PRODUCTION · AI TRANSFORMATION · MADRID · ONE FOUNDER, ONE PHONE · BUILT IN PRODUCTION · </div></div>
+<section class="sec sec-rel" id="story">
+  <div class="pxnum-wrap" aria-hidden="true"><span class="pxnum archivo">03</span></div>
   <div class="wrap">
     <div class="sec-head">
-      <div class="idx"><span class="spec">03 · <span data-i18n="nav_about">About</span></span><span class="mono cnt">03 /</span></div>
+      <div class="idx"><svg class="pxcota" viewBox="0 0 220 12" aria-hidden="true"><path d="M1 1V11"/><path d="M219 1V11"/><path class="line" style="--len:218" d="M1 6H219"/></svg><span class="spec">03 · <span data-i18n="nav_about">About</span></span><span class="mono cnt">03 /</span></div>
       <div><h2 class="archivo" data-i18n="story_label">My story</h2></div>
     </div>
     <div class="story">
