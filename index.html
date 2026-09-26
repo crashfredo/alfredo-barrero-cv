@@ -357,6 +357,10 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;co
   .nav-in{height:58px}
   .row{grid-template-columns:48px minmax(0,1fr) 32px;gap:14px}
   .app{grid-template-columns:minmax(0,1fr);padding-left:18px;gap:18px}
+  /* A una sola columna hay que soltar el CTA: si conserva el grid-column:2
+     del breakpoint anterior, crea una columna implicita que se queda con
+     todo el ancho y colapsa la primera a 0, que es donde va el icono. */
+  .app .cta{grid-column:1;justify-self:start}
   .app .icon{width:64px;height:64px}
   .hero-frame{padding:20px 16px 24px}
   .figure{max-width:100%}
