@@ -8,7 +8,6 @@ MY CURRENT ROLE (Global Program Lead, 2020–present):
 - Recognised as a global reference in AI adoption: leading AI communities, coaching teams and individuals on how to use AI to elevate their work.
 - Led end-to-end integration of 6 acquired companies, zero downtime, managing both technical and human change at scale.
 - Strategic Business Partner to Directors and VPs globally; sole international voice on an otherwise US-based team.
-- Built operational frameworks saving 10,000+ hours/year.
 
 EARLIER: IOC/Olympic Channel (2016–2020), Telefónica & Optiva Media/StarHub Singapore (2013–2016).
 EDUCATION: Telecom Engineering degree, PMP (2023), MBA (completed 2026).
