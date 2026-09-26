@@ -231,7 +231,7 @@ h1.hero-h1 em{font-style:normal;color:var(--naranja)}
 .figure figcaption{margin-top:14px}
 
 /* ── Ledger de cifras ── */
-.ledger{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:clamp(40px,6vw,80px)}
+.ledger{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:clamp(40px,6vw,80px)}
 .stat{padding:28px 24px 30px 0;border-left:1px solid var(--line);padding-left:24px}
 .stat:first-child{border-left:0;padding-left:0}
 .stat-n{font-size:clamp(30px,3.2vw,46px);color:var(--fg);white-space:nowrap}
@@ -536,6 +536,11 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;co
         <div class="stat-n archivo">6+</div>
         <div class="stat-t mono" data-i18n="stat2_t">M&amp;A integrations led</div>
         <p class="stat-d" data-i18n="stat2_d">End-to-end, zero downtime, globally distributed teams.</p>
+      </div>
+      <div class="stat">
+        <div class="stat-n archivo">10K+</div>
+        <div class="stat-t mono" data-i18n="stat3_t">Hours saved/year</div>
+        <p class="stat-d" data-i18n="stat3_d">Frameworks that align global operations teams with the centralized engineering that powers them — at scale.</p>
       </div>
       <div class="stat">
         <div class="stat-n archivo">10+ yrs</div>
@@ -863,6 +868,7 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;co
       stat1_t: 'Returned to the business / year',
       stat1_d: 'Time given back to global teams by the AI systems and ways of working I put into production.',
       stat2_t: 'M&A integrations led', stat2_d: 'End-to-end, zero downtime, globally distributed teams.',
+      stat3_t: 'Hours saved/year', stat3_d: 'Frameworks that align global operations teams with the centralized engineering that powers them — at scale.',
       stat4_t: 'Global experience', stat4_d: 'Tech, Broadcast & AI transformation. Cross-cultural global leadership.',
       svc_title: 'Three ways I can help<br />your team right now<span class="dot">.</span>',
       svc_sub: 'I work with a small number of organisations and individuals at a time. If you\'re serious about AI transformation, let\'s talk.',
@@ -918,6 +924,7 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;co
       stat1_t: 'Devueltas al negocio / año',
       stat1_d: 'Tiempo devuelto a los equipos globales por los sistemas de IA y formas de trabajar que puse en producción.',
       stat2_t: 'Integraciones M&A lideradas', stat2_d: 'De principio a fin, sin downtime, con equipos distribuidos globalmente.',
+      stat3_t: 'Horas ahorradas/año', stat3_d: 'Frameworks que alinean a los equipos de operaciones globales con la ingeniería centralizada que los soporta, a escala.',
       stat4_t: 'Experiencia global', stat4_d: 'Tecnología, Broadcast y transformación con IA. Liderazgo multicultural global.',
       svc_title: 'Tres formas en que puedo<br />ayudar a tu equipo ahora<span class="dot">.</span>',
       svc_sub: 'Trabajo con un número reducido de organizaciones e individuos a la vez. Si te tomas en serio la transformación con IA, hablemos.',
@@ -1218,7 +1225,7 @@ STYLE: First person, warm but direct. Under 100 words unless more is clearly nee
       }, { threshold: 0.12 });
       revealEls.forEach(el => ro.observe(el));
 
-      // Stat count-up — preserves prefix/suffix ("+3,400h", "6+", "10+ yrs")
+      // Stat count-up — preserves prefix/suffix ("+3,400h", "10K+", "10+ yrs")
       function animateStat(el) {
         const m = el.textContent.match(/^([^\d]*)([\d,.]+)(.*)$/);
         if (!m) return;
