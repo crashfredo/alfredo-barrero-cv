@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Privacidad y cookies — Alfredo Barrero</title>
+<meta name="description" content="Qué datos recoge alfredobarrero.com, con qué herramientas y cómo retirar el consentimiento." />
+<meta name="robots" content="noindex, follow" />
+<link rel="icon" href="/favicon.ico" sizes="32x32" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<style>
+@font-face{font-family:'Archivo';font-style:normal;font-weight:900;font-stretch:125%;font-display:swap;src:url(fonts/archivo-900.woff2) format('woff2')}
+@font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/plex-mono-500.woff2) format('woff2')}
+@font-face{font-family:'IBM Plex Sans';font-style:normal;font-weight:400 500;font-display:swap;src:url(fonts/plex-sans.woff2) format('woff2')}
+:root{--bg:#1E1B16;--fg:#F6F1E8;--muted:#A89E8F;--line:#3A352C;--naranja:#E3521A;--card:#26221B}
+:root[data-theme="light"]{--bg:#F6F1E8;--fg:#1E1B16;--muted:#6F675B;--line:#D9D0C1;--card:#EFE8DB}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--fg);font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:clamp(32px,6vw,72px) clamp(18px,5vw,32px) 96px}
+a{color:inherit}
+h1{font-family:'Archivo',Impact,sans-serif;font-weight:900;font-stretch:125%;text-transform:uppercase;letter-spacing:-.03em;line-height:.95;font-size:clamp(34px,6vw,58px);margin:18px 0 10px}
+h2{font-family:'Archivo',Impact,sans-serif;font-weight:900;font-stretch:125%;text-transform:uppercase;letter-spacing:-.02em;font-size:clamp(19px,2.4vw,24px);margin:40px 0 12px}
+.eyebrow{display:inline-block;background:var(--naranja);color:#1E1B16;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:7px 12px 6px}
+.fecha{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:26px}
+p{margin:0 0 14px;color:var(--muted)}
+p strong,li strong{color:var(--fg);font-weight:600}
+ul{margin:0 0 16px;padding-left:20px;color:var(--muted)}
+li{margin-bottom:9px}
+table{width:100%;border-collapse:collapse;margin:0 0 18px;font-size:14.5px}
+th,td{text-align:left;padding:11px 12px 11px 0;border-bottom:1px solid var(--line);vertical-align:top;color:var(--muted)}
+th{font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg)}
+.volver{display:inline-block;margin-top:40px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;border-bottom:1.5px solid var(--naranja);padding-bottom:3px;text-decoration:none}
+.btn-retirar{margin-top:10px;background:none;border:1px solid var(--line);color:var(--fg);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:11px 16px;cursor:pointer}
+.btn-retirar:hover{border-color:var(--naranja);color:var(--naranja)}
+.en{border-top:1px solid var(--line);margin-top:56px;padding-top:36px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="eyebrow">Privacidad y cookies</span>
+  <h1>Qué recojo<br />y qué no</h1>
+  <p class="fecha">Última actualización: 22 de octubre de 2026</p>
+
+  <p>Esta web es el sitio personal de <strong>Alfredo Barrero</strong> (Madrid, España). Para cualquier asunto relacionado con tus datos, escribe a <a href="mailto:abarrerolabajos@gmail.com">abarrerolabajos@gmail.com</a>.</p>
+  <p>No vendo datos a nadie, no hago publicidad segmentada y no creo perfiles para venderlos.</p>
+
+  <h2>Sin tu permiso no se mide nada</h2>
+  <p>Al entrar verás un aviso. Hasta que aceptes, <strong>no se carga ninguna herramienta de medición</strong>. Si rechazas, no se carga y no se vuelve a preguntar. Puedes cambiar de opinión cuando quieras:</p>
+  <button class="btn-retirar" id="retirar">Cambiar mi elección</button>
+
+  <h2>Qué se usa si aceptas</h2>
+  <table>
+    <tr><th>Herramienta</th><th>Para qué</th><th>Quién</th></tr>
+    <tr><td>Google Analytics 4</td><td>Cuántas visitas hay y qué secciones se leen</td><td>Google</td></tr>
+    <tr><td>PostHog</td><td>Lo mismo, con los servidores en la Unión Europea</td><td>PostHog</td></tr>
+    <tr><td>Vercel Analytics</td><td>Medición básica de visitas del alojamiento</td><td>Vercel</td></tr>
+  </table>
+  <p>Ninguna de las tres recibe lo que escribes en el chat, ni tu nombre, ni tu empresa, ni tu correo. Solo registran páginas vistas y qué enlaces se pulsan.</p>
+
+  <h2>Lo que funciona siempre</h2>
+  <ul>
+    <li><strong>Tus preferencias.</strong> El idioma y el tema claro u oscuro se guardan en tu navegador. No salen de tu dispositivo.</li>
+    <li><strong>reCAPTCHA de Google.</strong> Protege el chat del abuso automático. Se carga al usar el chat.</li>
+  </ul>
+
+  <h2>El chat (Nemo)</h2>
+  <p>Si usas el chat, <strong>lo que escribes se envía a Anthropic</strong> para generar la respuesta. Si rellenas la presentación inicial, tu <strong>nombre y empresa</strong> se guardan en tu navegador y me llegan por correo, para saber con quién hablo. Nada de eso se envía a las herramientas de medición.</p>
+  <p>Si no quieres que conserve esos datos, pídemelo por correo y los borro.</p>
+
+  <h2>Tus derechos</h2>
+  <p>Puedes pedirme acceso a tus datos, su corrección o su borrado, y retirar el consentimiento en cualquier momento. Escríbeme y te contesto. Si crees que no lo he hecho bien, puedes reclamar ante la Agencia Española de Protección de Datos.</p>
+
+  <a class="volver" href="/">Volver a la web →</a>
+
+  <div class="en">
+    <h2>In English</h2>
+    <p>This is the personal site of <strong>Alfredo Barrero</strong> (Madrid, Spain). Contact: <a href="mailto:abarrerolabajos@gmail.com">abarrerolabajos@gmail.com</a>. I don't sell data, run ad targeting or build profiles for resale.</p>
+    <p><strong>Nothing is measured without your consent.</strong> No measurement tool loads until you accept; if you decline, none loads. If you accept, the site uses Google Analytics 4, PostHog (EU servers) and Vercel Analytics to count visits and which links are clicked. None of them receives what you type in the chat, your name, your company or your email.</p>
+    <p>Your language and theme preferences stay in your browser. Google reCAPTCHA protects the chat from automated abuse.</p>
+    <p>If you use the chat, <strong>what you write is sent to Anthropic</strong> to generate the reply. If you fill in the short intro form, your name and company are stored in your browser and emailed to me. Ask me and I'll delete them.</p>
+    <p>You can request access, correction or deletion of your data, and withdraw consent at any time.</p>
+  </div>
+</div>
+<script>
+  document.getElementById('retirar').addEventListener('click', function () {
+    try { localStorage.removeItem('ab_consent'); } catch (e) {}
+    location.href = '/';
+  });
+</script>
+</body>
+</html>

@@ -133,48 +133,51 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
   <meta name="theme-color" content="#1E1B16" />
-  <!-- PostHog -->
+  <!-- Medición, solo con consentimiento -->
   <script>
-    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],Object.defineProperty(u,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e}}),Object.defineProperty(u.people,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(){return u.toString(1)+".people (stub)"}}),o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-    posthog.init('phc_ztxx5jtGTq9AgBJoUJWEVegwyJkLEviv6tXCeEmAyjRc', {
-      api_host: 'https://eu.i.posthog.com',
-      defaults: '2026-08-30',
-      capture_pageview: true,
-      autocapture: false,              // solo eventos explicitos: asi no se
-      disable_session_recording: true, // tocan los campos del formulario de
-      capture_performance: false,      // Nemo ni se graba la pantalla
-      person_profiles: 'identified_only'
-    });
-    posthog.register({ app: 'portfolio' });   // propiedad super
+    (function () {
+      // Hasta que el visitante acepta no se carga NADA de medición. Si
+      // rechaza, no se carga y no se le vuelve a preguntar.
+      var KEY = 'ab_consent';
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { dataLayer.push(arguments); };   // sin consentimiento, cae en el vacío
+      function leer() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+      function guardar(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
 
-    // Ningun evento lleva texto escrito por el visitante ni los datos del
-    // formulario de Nemo: solo que se abrio el chat y que se pulso tal enlace.
-    document.addEventListener('DOMContentLoaded', function () {
-      function on(sel, fn) {
-        document.querySelectorAll(sel).forEach(function (el) {
-          el.addEventListener('click', function () { try { fn(el); } catch (e) {} });
+      function cargar() {
+        if (window.__medicionCargada) return; window.__medicionCargada = true;
+        var g = document.createElement('script');
+        g.async = true; g.src = 'https://www.googletagmanager.com/gtag/js?id=G-MEF17T9Q13';
+        document.head.appendChild(g);
+        gtag('js', new Date());
+        gtag('config', 'G-MEF17T9Q13');
+        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],Object.defineProperty(u,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e}}),Object.defineProperty(u.people,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(){return u.toString(1)+".people (stub)"}}),o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+        posthog.init('phc_ztxx5jtGTq9AgBJoUJWEVegwyJkLEviv6tXCeEmAyjRc', {
+          api_host: 'https://eu.i.posthog.com',
+          defaults: '2026-08-30',
+          capture_pageview: true,
+          autocapture: false,              // solo eventos explicitos: asi no se
+          disable_session_recording: true, // tocan los campos del formulario de
+          capture_performance: false,      // Nemo ni se graba la pantalla
+          person_profiles: 'identified_only'
         });
+        posthog.register({ app: 'portfolio' });
+        var v = document.createElement('script');
+        v.defer = true; v.src = '/_vercel/insights/script.js';
+        document.head.appendChild(v);
       }
-      on('.btn', function (el) {
-        posthog.capture('cta_click', { cta: (el.getAttribute('href') || '').replace('#', '') || 'desconocido' });
+
+      if (leer() === 'si') cargar();
+
+      document.addEventListener('DOMContentLoaded', function () {
+        var el = document.getElementById('consent');
+        if (!el) return;
+        if (leer()) return;                     // ya eligió: ni se muestra
+        el.hidden = false;
+        el.querySelector('[data-si]').addEventListener('click', function () { guardar('si'); el.hidden = true; cargar(); });
+        el.querySelector('[data-no]').addEventListener('click', function () { guardar('no'); el.hidden = true; });
       });
-      on('a[href^="mailto:"]', function () { posthog.capture('contact_click', { metodo: 'email' }); });
-      on('a[href*="linkedin.com"]', function () { posthog.capture('contact_click', { metodo: 'linkedin' }); });
-      on('a[href*="instagram.com"]', function () { posthog.capture('social_click', { red: 'instagram' }); });
-      on('.app .cta', function (el) {
-        var h = ''; try { h = new URL(el.href).hostname.replace('www.', ''); } catch (e) {}
-        posthog.capture('app_link_click', { app: h });
-      });
-      on('#chat-btn', function () { posthog.capture('chat_opened', {}); });
-    });
-  </script>
-  <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MEF17T9Q13"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-MEF17T9Q13');
+    })();
   </script>
 <style>
 /* ── Tipografías reales del sistema CrashFredo (embebidas) ── */
@@ -654,6 +657,35 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;co
       }
     }
 
+
+    /* ── Aviso de cookies ── */
+    .consent {
+      position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 400;
+      max-width: 640px; margin: 0 auto; background: var(--card);
+      border: 1px solid var(--line); border-top: 2px solid var(--naranja);
+      padding: 18px 20px; display: flex; flex-direction: column; gap: 14px;
+      box-shadow: 0 18px 50px -24px rgba(0,0,0,.9);
+    }
+    .consent[hidden] { display: none; }
+    .consent p { font-size: 14.5px; line-height: 1.5; color: var(--fg); margin: 0; }
+    .consent-b { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    /* Aceptar y rechazar, exactamente el mismo peso visual */
+    .consent-btn {
+      font-family: var(--mono); font-weight: 500; font-size: 12px; letter-spacing: .12em;
+      text-transform: uppercase; padding: 11px 20px; cursor: pointer;
+      background: transparent; color: var(--fg); border: 1px solid var(--fg);
+      transition: background .15s, color .15s;
+    }
+    .consent-btn:hover { background: var(--fg); color: var(--bg); }
+    .consent-btn:focus-visible { outline: 2px solid var(--naranja); outline-offset: 2px; }
+    .consent a {
+      margin-left: auto; font-family: var(--mono); font-size: 11.5px; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--muted); text-decoration: none;
+      border-bottom: 1px solid var(--line); padding-bottom: 2px;
+    }
+    .consent a:hover { color: var(--naranja); border-color: var(--naranja); }
+    @media (max-width: 560px) { .consent a { margin-left: 0; } }
+
 </style>
 </head>
 <body id="top">
@@ -989,6 +1021,15 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;co
 </footer>
 
 
+  <div class="consent" id="consent" hidden role="region" aria-label="Cookies">
+    <p data-i18n="consent_text">I use cookies to understand how this site is used. Your call.</p>
+    <div class="consent-b">
+      <button class="consent-btn" type="button" data-si data-i18n="consent_yes">Accept</button>
+      <button class="consent-btn" type="button" data-no data-i18n="consent_no">Decline</button>
+      <a href="/privacidad.html" data-i18n="consent_more">Privacy &amp; cookies</a>
+    </div>
+  </div>
+
   <button id="chat-btn" onclick="toggleChat()" title="Ask Alfredo's AI" aria-label="Ask Nemo"><svg class="apex apex-nemo" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M15 92V50A30 30 0 0 1 45 20H97" fill="none" stroke="currentColor" stroke-width="24" stroke-linecap="butt"/><path class="chip" d="M45 36H51V56H31V50A14 14 0 0 1 45 36Z"/></svg></button>
 
   <div id="chat-window">
@@ -1099,6 +1140,8 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;co
       story_p3: 'The work I\'m most proud of is the AI transformation. I built an internal GenAI platform that lets global teams get answers from their operational data in natural language. Democratizing data and insights, eliminating the manual bottlenecks that slow decisions. Beyond that platform, I lead AI communities and coach teams across all regions. <strong>People come to me because I build things, not just talk about them.</strong>',
       story_p4: 'Outside of my day job, I build. I shipped FuelUp — a B2C product live with real users —, Volanda — a flight-deal radar on the App Store — and Folia Garden, an AI plant-care app now published. Right now I\'m building Mente, an AI copilot for the household. I train teams and individuals on how to use AI tools for real. That combination — builder, operator, teacher — is what I bring to every engagement.',
       contact_title: 'Let\'s talk.',
+      consent_text: 'I use cookies to understand how this site is used. Your call.',
+      consent_yes: 'Accept', consent_no: 'Decline', consent_more: 'Privacy & cookies',
       contact_sub: 'Drop me a line or connect on LinkedIn. Or ask Nemo, my AI agent — it\'ll do its best.',
       lead_gate: 'Happy to keep going — quick intro first: who am I talking to?',
       lead_name: 'Your name',
@@ -1155,6 +1198,8 @@ footer .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;co
       story_p3: 'El trabajo del que más orgulloso estoy es la transformación con IA. Construí una plataforma interna de GenAI que permite a los equipos globales obtener respuestas de sus datos operativos en lenguaje natural. Democratizando datos e insights, eliminando los cuellos de botella manuales que ralentizan las decisiones. Más allá de esa plataforma, lidero comunidades de IA y formo equipos en todas las regiones. <strong>La gente viene a mí porque construyo cosas, no solo las comento.</strong>',
       story_p4: 'Fuera de mi trabajo principal, construyo. Lancé FuelUp — un producto B2C con usuarios reales —, Volanda — un radar de chollos de vuelos en el App Store — y Folia Garden, una app de cuidado de plantas con IA ya publicada. Ahora estoy construyendo Mente, un copiloto de IA para el hogar. Formo a equipos e individuos en cómo usar herramientas de IA de verdad. Esa combinación — constructor, operador, profesor — es lo que aporto en cada colaboración.',
       contact_title: 'Hablemos.',
+      consent_text: 'Uso cookies para entender cómo se usa esta web. Tú decides.',
+      consent_yes: 'Aceptar', consent_no: 'Rechazar', consent_more: 'Privacidad y cookies',
       contact_sub: 'Escríbeme o conéctate en LinkedIn. O pregunta a Nemo, mi agente de IA — hará lo que pueda.',
       lead_gate: 'Encantado de seguir — antes, una presentación rápida: ¿con quién hablo?',
       lead_name: 'Tu nombre',
@@ -1323,7 +1368,7 @@ STYLE: First person, warm but direct. Under 100 words unless more is clearly nee
       setChatEnabled(true);
       addMsg('ai', L.lead_thanks.replace('{name}', name));
       document.getElementById('chat-in').focus();
-      gtag('event', 'lead_captured', { event_category: 'engagement', event_label: company });
+      gtag('event', 'lead_captured', { event_category: 'engagement' });
       try {
         const recaptchaToken = await getRecaptchaToken();
         await fetch('/api/chat', {
@@ -1360,7 +1405,7 @@ STYLE: First person, warm but direct. Under 100 words unless more is clearly nee
       document.getElementById('suggs').style.display = 'none';
       addMsg('user', text);
       msgs.push({ role: 'user', content: text });
-      gtag('event', 'chat_message_sent', { event_category: 'engagement', event_label: text.substring(0,100), value: msgs.length });
+      gtag('event', 'chat_message_sent', { event_category: 'engagement', value: msgs.length });
 
       const t = document.createElement('div');
       t.className = 'msg-t'; t.id = 'typ'; t.textContent = 'Thinking…';
@@ -1590,7 +1635,27 @@ STYLE: First person, warm but direct. Under 100 words unless more is clearly nee
     (mWide.addEventListener ? mWide.addEventListener('change', syncGrid) : mWide.addListener(syncGrid));
     sync();
   })();
+
+  // Ningun evento lleva texto escrito por el visitante ni los datos del
+    // formulario de Nemo: solo que se abrio el chat y que se pulso tal enlace.
+    document.addEventListener('DOMContentLoaded', function () {
+      function on(sel, fn) {
+        document.querySelectorAll(sel).forEach(function (el) {
+          el.addEventListener('click', function () { try { fn(el); } catch (e) {} });
+        });
+      }
+      on('.btn', function (el) {
+        posthog.capture('cta_click', { cta: (el.getAttribute('href') || '').replace('#', '') || 'desconocido' });
+      });
+      on('a[href^="mailto:"]', function () { posthog.capture('contact_click', { metodo: 'email' }); });
+      on('a[href*="linkedin.com"]', function () { posthog.capture('contact_click', { metodo: 'linkedin' }); });
+      on('a[href*="instagram.com"]', function () { posthog.capture('social_click', { red: 'instagram' }); });
+      on('.app .cta', function (el) {
+        var h = ''; try { h = new URL(el.href).hostname.replace('www.', ''); } catch (e) {}
+        posthog.capture('app_link_click', { app: h });
+      });
+      on('#chat-btn', function () { posthog.capture('chat_opened', {}); });
+    });
 </script>
-<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
